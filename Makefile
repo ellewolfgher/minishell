@@ -25,7 +25,7 @@ IFLAGS = -I $(PATH_INCS)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJS) -lreadline
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)

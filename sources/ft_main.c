@@ -6,18 +6,18 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/14 14:44:22 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:55:16 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int main (void)
-{
-    int i = 0;
-    while (1)
+int main() {
+    char *input;
+    while ((input = readline("\033[1;32m$ \033[0m"))) 
     {
-        printf("%d\n", i++);
-        usleep(1000000);
+        printf("You entered: %s\n", input);
+        free(input);
     }
+    return 0;
 }
