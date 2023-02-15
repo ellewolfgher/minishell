@@ -45,6 +45,7 @@ fclean: clean
 re: fclean all
 
 r: all
+	@clear
 	@./minishell
 n:
 	@clear
