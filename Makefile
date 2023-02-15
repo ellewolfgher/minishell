@@ -44,8 +44,10 @@ fclean: clean
 
 re: fclean all
 
+r: all
+	@./minishell
 n:
 	@clear
 	@norminette ./sources ./includes
 
-PHONY: all clean fclean re n
+PHONY: all clean fclean re n r
