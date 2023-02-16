@@ -7,6 +7,7 @@ PATH_SRCS = ./sources/
 PATH_EXEC = $(PATH_SRCS)execution/
 PATH_PARS = $(PATH_SRCS)parser/
 PATH_INTR = $(PATH_SRCS)interactive/
+PATH_INIT = $(PATH_SRCS)init/
 
 SRCS = $(addprefix $(PATH_SRCS),\
 		ft_main.c)\
@@ -14,10 +15,12 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_execution.c)\
 		$(addprefix $(PATH_PARS),\
 		ft_parser.c)\
+		$(addprefix $(PATH_INIT),\
+		ft_global_init.c\
+		ft_minishell_init.c)\
 		$(addprefix $(PATH_INTR),\
-		ft_handle_interactive_signal.c\
-		ft_initiate_interactive_signals.c\
-		ft_minishell_init.c)
+		ft_handle_interactive_signals.c\
+		ft_initiate_interactive_signals.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
@@ -37,6 +40,7 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)execution/
 	@mkdir -p $(PATH_OBJS)parser/
 	@mkdir -p $(PATH_OBJS)interactive/
+	@mkdir -p $(PATH_OBJS)init/
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 # $(LIBFT):
