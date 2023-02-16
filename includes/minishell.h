@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/16 09:53:23 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:28:46 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,24 @@
 # include <unistd.h>
 # include <signal.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_data
 {
-	int	flag;
+	char				*input;
+	struct sigaction	sa_ctrlc;
+	struct sigaction	sa_backslash;
 }	t_data;
 
-t_data	*g_data;
+typedef struct s_interactions
+{
+	int	flag;
+}	t_interactions;
+
+t_interactions	*g_interactions;
+
+void	ft_handle_interactive_signal(int signal_num);
+t_data	*ft_minishell_init(void);
+void	ft_initiate_interactive_signals(t_data *data);
 
 #endif

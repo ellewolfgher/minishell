@@ -6,42 +6,43 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/16 10:12:44 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:29:56 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	handle_signal(int signal_num)
+//this is here just to test ctrl+c, ctrl+backslash and ctrl+d
+void	ft_ongoing_process(void)
 {
-	if (signal_num == SIGINT)
-		g_data->flag = 1;
+	int	i;
+
+	i = 0;
+	while (i < 50 && !g_interactions->flag)
+	{
+		printf("g_interactions->flag: %d\n", g_interactions->flag);
+		usleep(100000);
+		i++;
+	}
 }
 
+//ft_minishell_init instantiates all data needed(we can alter the struct later)
+//the while loop indicates the prompt
 int	main(void)
 {
-	char				*input;
-	struct sigaction	sa;
+	t_data	*data;
 
-	g_data = malloc(sizeof(t_data));
-	if (g_data == NULL)
+	data = ft_minishell_init();
+	while (data->input)
 	{
-		perror("Error: failed to allocate memory for g_data\n");
-		exit(EXIT_FAILURE);
-	}
-	sa.sa_handler = handle_signal;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &sa, NULL);
-	input = readline("\033[1;32m$ \033[0m");
-	while (input && !g_data->flag)
-	{
-		printf("You entered: %s\nPID:%d\n", input, getpid());
-		free(input);
+		printf("You entered: %s\n", data->input);
+		ft_ongoing_process();
+		free(data->input);
 		printf("\n");
-		input = readline("\033[1;32m$ \033[0m");
-		g_data->flag = 0;
+		data->input = readline("\033[1;32m$ \033[0m");
+		g_interactions->flag = 0;
 	}
-	free(g_data);
+	free(data);
+	free(g_interactions);
 	return (0);
 }
