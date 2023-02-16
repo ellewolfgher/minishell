@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_signal.c                                 :+:      :+:    :+:   */
+/*   ft_minishell_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 19:15:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/16 19:26:56 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/02/16 19:22:42 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/02/16 19:52:46 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_handle_interactive_signal(int signal_num)
+t_data	*ft_minishell_init(void)
 {
-	if (signal_num == SIGINT)
-		g_interactions->flag = 1;
-	else if (signal_num == SIGQUIT)
-		g_interactions->flag = 0;
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	if (data == NULL)
+	{
+		perror("Error: failed to allocate memory for data\n");
+		exit(EXIT_FAILURE);
+	}
+	ft_global_init();
+	ft_initiate_interactive_signals(data);
+	return (data);
 }

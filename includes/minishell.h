@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/16 19:28:46 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:54:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ typedef struct s_interactions
 
 t_interactions	*g_interactions;
 
-void	ft_handle_interactive_signal(int signal_num);
+void	ft_global_init(void);
 t_data	*ft_minishell_init(void);
+
+void	ft_handle_interactive_signals(int signal_num);
 void	ft_initiate_interactive_signals(t_data *data);
 
 #endif
