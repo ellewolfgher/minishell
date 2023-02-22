@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <readline/readline.h>
-#include <readline/history.h> */
+#include <readline/history.h> 
 
 void	execute_command(char *command)
 {
@@ -67,7 +67,7 @@ void	execute_command(char *command)
         // Exit the shell
         exit(0);
     }
-}
+}*/
 
 /* int main() {
     char *command;
