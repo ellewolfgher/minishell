@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:44:22 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:26:42 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@
 
 typedef struct s_parsing
 {
-	int		token_index;
-	int		current_token_index;
 	int		in_quotes;
+	char	**tokens;
+	char	*current_token;
 }	t_parsing;
+
+typedef struct s_parsing_index
+{
+	int			index;
+	char		charac;
+	int			t_index;
+	int			current_token_index;
+}	t_parsing_index;
 
 typedef struct s_data
 {

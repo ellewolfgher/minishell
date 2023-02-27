@@ -6,57 +6,77 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:49:18 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:41:17 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	**ft_parser(char *input)
+// End current token, deals with escapes
+static void	double_commas(t_parsing *parsing, t_parsing_index *i)
 {
-	t_parsing	*parsing;
-	int			i;
-	char		c;
-	char		**tokens;
-	char		*current_token;
-
-	i = 0;
-	parsing = ft_calloc(1, sizeof(t_parsing));
-	tokens = (char **)malloc(MAX_TOKENS * sizeof(char *));
-	current_token = (char *)malloc(MAX_TOKEN_LEN * sizeof(char));
-	while (i < (int)strlen(input))
+	if (i->current_token_index > 0)
 	{
-		c = input[i];
-		if (c == '"')
-			parsing->in_quotes = !parsing->in_quotes;
-		else if (c == ' ' && !parsing->in_quotes)
+		parsing->current_token[i->current_token_index] = '\0';
+		if (parsing->in_quotes)
 		{
-			// End of current token
-			if (parsing->current_token_index > 0)
-			{
-				current_token[parsing->current_token_index] = '\0';
-				tokens[parsing->token_index] = current_token;
-				parsing->token_index++;
-				current_token = (char *)malloc(MAX_TOKEN_LEN * sizeof(char));
-				parsing->current_token_index = 0;
-			}
+			parsing->tokens[i->t_index] = parsing->current_token + 1;
+			parsing->current_token[i->current_token_index - 2] = '\0';
 		}
 		else
-		{
-			// Add character to current token
-			current_token[parsing->current_token_index] = c;
-			parsing->current_token_index++;
-		}
-		i++;
+			parsing->tokens[i->t_index] = parsing->current_token;
+		i->t_index++;
+		parsing->current_token = (char *)malloc(MAX_TOKEN_LEN * sizeof(char));
+		i->current_token_index = 0;
 	}
-	// Add last token to token list
-	if (parsing->current_token_index > 0)
+	return ;
+}
+
+// Adds character to current token
+static void	add_char(t_parsing *parsing, t_parsing_index *i)
+{
+	if (i->charac != '"' || !parsing->in_quotes)
 	{
-		current_token[parsing->current_token_index] = '\0';
-		tokens[parsing->token_index] = current_token;
-		parsing->token_index++;
+		parsing->current_token[i->current_token_index] = i->charac;
+		i->current_token_index++;
 	}
-	// Add NULL as last token to indicate end of token list
-	tokens[parsing->token_index] = NULL;
-	return (tokens);
+	return ;
+}
+
+// Adds last token to token list
+static void	last_token(t_parsing *parsing, t_parsing_index *i)
+{
+	if (i->current_token_index > 0)
+	{
+		parsing->current_token[i->current_token_index] = '\0';
+		parsing->tokens[i->t_index] = parsing->current_token;
+		i->t_index++;
+	}
+	return ;
+}
+
+char	**ft_parser(char *input)
+{
+	t_parsing				*parsing;
+	t_parsing_index			*i;
+
+	i = ft_calloc(1, sizeof(t_parsing_index));
+	parsing = ft_calloc(1, sizeof(t_parsing));
+	parsing->tokens = (char **)malloc(MAX_TOKENS * sizeof(char *));
+	parsing->current_token = (char *)malloc(MAX_TOKEN_LEN * sizeof(char));
+	while (i->index < (int)strlen(input))
+	{
+		i->charac = input[i->index];
+		if (i->charac == '"')
+			parsing->in_quotes = !parsing->in_quotes;
+		else if (i->charac == ' ' && !parsing->in_quotes)
+			double_commas(parsing, i);
+		else
+			add_char(parsing, i);
+		i->index++;
+	}
+	last_token(parsing, i);
+	parsing->tokens[i->t_index] = NULL;
+	free(i);
+	return (parsing->tokens);
 }
