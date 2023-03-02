@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/02 13:37:17 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:55:41 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,13 @@ void	ft_initiate_interactive_signals(t_data *data);
 char	**ft_parser(char *input);
 
 void	ft_executioner(char **tokens);
-void	command_cd(char **tokens);
-void	command_pwd(void);
+void	ft_command_cd(char **tokens);
+void	ft_command_pwd(void);
+void	ft_command_export(void);
+void	ft_command_unset(char **tokens);
+void	ft_command_env(char **tokens);
+void	ft_command_echo(char **tokens);
+
 
 void	ft_print_tokens(char **tokens);
 void	ft_ongoing_process(void);
