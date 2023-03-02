@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:18:07 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:31:53 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(void)
 		printf("You entered: %s\n", data->input);
 		data->tokens = ft_parser(data->input);
 		ft_print_tokens(data->tokens);
+		ft_executioner(data->tokens);
 		free(data->input);
 		printf("\n");
 		data->input = readline("\033[1;32m$ \033[0m");
