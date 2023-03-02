@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/27 13:55:19 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:37:17 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	ft_handle_interactive_signals(int signal_num);
 void	ft_initiate_interactive_signals(t_data *data);
 
 char	**ft_parser(char *input);
+
+void	ft_executioner(char **tokens);
+void	command_cd(char **tokens);
+void	command_pwd(void);
 
 void	ft_print_tokens(char **tokens);
 void	ft_ongoing_process(void);

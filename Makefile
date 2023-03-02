@@ -13,7 +13,8 @@ PATH_TOOL = $(PATH_SRCS)tools/
 SRCS = $(addprefix $(PATH_SRCS),\
 		ft_main.c)\
 		$(addprefix $(PATH_EXEC),\
-		ft_execution.c)\
+		ft_executioner.c\
+		ft_builtins.c)\
 		$(addprefix $(PATH_PARS),\
 		ft_parser.c)\
 		$(addprefix $(PATH_INIT),\
