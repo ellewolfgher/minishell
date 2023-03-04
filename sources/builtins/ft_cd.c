@@ -1,44 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_builtins2.c                                     :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 14:41:13 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/01 17:19:33 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/03/02 14:28:03 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/03/02 14:58:46 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "../../includes/minishell.h"
 
-void	command_echo(char *args[])
+void	ft_command_cd(char **tokens)
 {
-	int	skip_newline;
-	int	i;
+	char	*home_dir;
 
-	skip_newline = 0;
-	i = 1;
-	while (args[i] != NULL)
+	if (tokens[1] != NULL)
 	{
-		if (strcmp(args[i], "-n") == 0)
-		{
-			skip_newline = 1;
-			break ;
-		}
-		i++;
+		if (chdir(tokens[1]) == -1)
+			printf("cd: %s: %s\n", tokens[1], strerror(errno));
 	}
-	// Print the remaining arguments without a trailing newline if "-n" option is present
-	if (skip_newline)
-		i = 2;
 	else
-		i = 1;
-	while (args[i] != NULL)
 	{
-		printf("%s", args[i++]);
-		if (args[i] != NULL)
-			printf(" ");
+		home_dir = getenv("HOME");
+		if (home_dir != NULL)
+			chdir(home_dir);
 	}
 }
-*/
