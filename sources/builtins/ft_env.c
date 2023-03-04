@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:42 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/02 14:59:52 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:02:06 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	ft_command_env(char **tokens)
 {
 	// Print the value of an environment variable
-	extern char	**environ; //extern var that i need to fix
+	extern char	**__environ; //extern var that i need to fix
 	char		**env;
 	char		*value;
 
 	if (tokens[1] == NULL)
 	{
 		// Print all environment variables
-		env = environ;
+		env = __environ;
 		while (*env != NULL)
 			printf("%s\n", *env++);
 	}

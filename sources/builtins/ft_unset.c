@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:51 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/02 15:00:08 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:01:27 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_command_unset(char **tokens)
 	char	**ep;
 	char	**p; 
 
-	ep = environ;
+	ep = __environ;
 	while (*ep != NULL)
 	{
 		if (strncmp(tokens[1], *ep, strlen(tokens[1])) == 0 && (*ep)[strlen(tokens[1])] == '=')

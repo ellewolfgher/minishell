@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/02 14:59:29 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:01:54 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	ft_command_export(void)
 {
 	// Print all environment variables
-	extern char	**environ;
+	extern char	**__environ;
 	char		**env;
 
-	env = environ;
+	env = __environ;
 	while (*env != NULL)
 		printf("%s\n", *env++);
 }
