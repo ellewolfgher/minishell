@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/02 14:55:41 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:43:25 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_interactions
 	int	flag;
 }	t_interactions;
 
-t_interactions	*g_interactions;
+extern t_interactions	*g_interactions;
 
 void	ft_global_init(void);
 t_data	*ft_minishell_init(void);
