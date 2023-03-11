@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/02 14:55:31 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:37:45 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ void	ft_command_echo(char **tokens)
 		i = 1;
 	while (tokens[i] != NULL)
 	{
-		printf("%s", tokens[i++]);
+		if (i == 1)
+		{
+			printf("%s", tokens[i++]);
+			printf("\n");
+		}
+		else
+			printf("%s", tokens[i++]);
 		if (tokens[i] != NULL)
 			printf(" ");
 	}
