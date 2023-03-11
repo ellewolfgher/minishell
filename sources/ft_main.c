@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/04 15:43:37 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:28:16 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	main(void)
 	data = ft_minishell_init();
 	while (data->input)
 	{
-		printf("You entered: %s\n", data->input);
+		//printf("You entered: %s\n", data->input);
 		data->tokens = ft_parser(data->input);
-		ft_print_tokens(data->tokens);
+		//ft_print_tokens(data->tokens);
 		ft_executioner(data->tokens);
 		free(data->input);
-		printf("\n");
+		//printf("\n");
 		data->input = readline("\033[1;32m$ \033[0m");
 		g_interactions->flag = 0;
 	}
