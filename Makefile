@@ -26,12 +26,17 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_parser.c) \
 		$(addprefix $(PATH_INIT),\
 		ft_global_init.c \
-		ft_minishell_init.c) \
+		ft_init_env_vars.c \
+		ft_minishell_init.c \
+		ft_pretty_prompt.c) \
 		$(addprefix $(PATH_INTR),\
 		ft_handle_interactive_signals.c \
 		ft_initiate_interactive_signals.c)\
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
+		ft_clean_exit.c \
+		ft_strdup.c\
+		ft_strlen.c\
 		ft_test_tools.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
