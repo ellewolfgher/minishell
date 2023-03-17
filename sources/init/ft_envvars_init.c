@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_env_vars.c                                 :+:      :+:    :+:   */
+/*   ft_envvars_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:23:04 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 17:40:15 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/17 12:28:47 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //Gets all eviromental variables and saves them at ms->env_vars;
-int	ft_init_env_vars(t_data *ms, char **envp)
+int	ft_envvars_init(t_data *ms, char **envp)
 {
 	int			index;
 	t_env_vars	*temp;

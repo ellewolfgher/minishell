@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pretty_prompt.c                                 :+:      :+:    :+:   */
+/*   ft_signals_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 17:14:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 17:16:42 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/02/16 19:19:43 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/17 16:25:58 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Sets prompt appearence (because yes)
-//Returns 0 if successful and -1 if not
-int	ft_pretty_prompt(t_data *ms)
+static void	ctrlc_handler(int signo)
 {
-	ms->prompt = ft_strdup("\033[1;32m$ \033[0m");
-	if (!(ms->prompt))
-		return (-1);
-	return (0);
+	(void)signo;
+	write (1, "\n", 1);
+	// rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
+
+int	ft_signals_init(void)
+{
+	signal(SIGINT, ctrlc_handler);
+	signal(SIGQUIT, SIG_IGN);
+	return (1);
 }
