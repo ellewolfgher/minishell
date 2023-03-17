@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 17:39:52 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/17 12:30:14 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define MAX_TOKENS 100
 # define MAX_TOKEN_LEN 100
 
+//state definitions
 # define ERRSTATE		0
 # define INITSTATE		1
 # define PROMPTSTATE	2
@@ -61,8 +62,6 @@ typedef struct s_data
 	char				*input;
 	char				**tokens;
 	struct s_env_vars	*env_vars;
-	struct sigaction	sa_ctrlc;
-	struct sigaction	sa_backslash;
 }	t_data;
 
 typedef struct s_interactions
@@ -72,13 +71,10 @@ typedef struct s_interactions
 
 extern t_interactions	*g_interactions;
 
+int		ft_envvars_init(t_data *ms, char **envp);
 void	ft_global_init(void);
 int		ft_minishell_init(t_data	*ms, char **envp);
-int		ft_pretty_prompt(t_data *ms);
-int		ft_init_env_vars(t_data *ms, char **envp);
-
-void	ft_handle_interactive_signals(int signal_num);
-int		ft_initiate_interactive_signals(t_data *ms);
+int		ft_signals_init(void);
 
 char	**ft_parser(char *input);
 

@@ -1,13 +1,11 @@
 NAME = minishell
 
 PATH_INCS = ./includes/
-PATH_LIBS = ./libft/
 PATH_OBJS = ./objects/
 PATH_SRCS = ./sources/
 PATH_EXEC = $(PATH_SRCS)exec/
 PATH_BUIL = $(PATH_SRCS)builtins/
 PATH_PARS = $(PATH_SRCS)parser/
-PATH_INTR = $(PATH_SRCS)interactive/
 PATH_INIT = $(PATH_SRCS)init/
 PATH_TOOL = $(PATH_SRCS)tools/
 
@@ -26,12 +24,9 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_parser.c) \
 		$(addprefix $(PATH_INIT),\
 		ft_global_init.c \
-		ft_init_env_vars.c \
+		ft_envvars_init.c \
 		ft_minishell_init.c \
-		ft_pretty_prompt.c) \
-		$(addprefix $(PATH_INTR),\
-		ft_handle_interactive_signals.c \
-		ft_initiate_interactive_signals.c)\
+		ft_signals_init.c) \
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
 		ft_clean_exit.c \
@@ -41,8 +36,6 @@ SRCS = $(addprefix $(PATH_SRCS),\
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
-# LIBFT = $(PATH_LIBS)libft.a
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 IFLAGS = -I $(PATH_INCS)
@@ -50,20 +43,16 @@ IFLAGS = -I $(PATH_INCS)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJS) -lreadline
+	@$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJS) -L/usr/local/Cellar/readline/8.2.1/lib -lreadline
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
 	@mkdir -p $(PATH_OBJS)exec/
 	@mkdir -p $(PATH_OBJS)builtins/
 	@mkdir -p $(PATH_OBJS)parser/
-	@mkdir -p $(PATH_OBJS)interactive/
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)tools/
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-
-# $(LIBFT):
-# 	@make -C $(PATH_LIBS)
 
 clean:
 	@rm -rf $(PATH_OBJS)
