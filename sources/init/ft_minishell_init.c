@@ -6,23 +6,22 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:22:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/16 19:52:46 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:44:03 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_data	*ft_minishell_init(void)
+//Changes to be made to ft_initiate_interactive_signals, stopped here
+int	ft_minishell_init(t_data	*ms, char **envp)
 {
-	t_data	*data;
+	int	control;
 
-	data = malloc(sizeof(t_data));
-	if (data == NULL)
-	{
-		perror("Error: failed to allocate memory for data\n");
-		exit(EXIT_FAILURE);
-	}
-	ft_global_init();
-	ft_initiate_interactive_signals(data);
-	return (data);
+	control = ft_pretty_prompt(ms);
+	control = ft_init_env_vars(ms, envp);
+	control = ft_initiate_interactive_signals(ms);
+	ms->state = PROMPTSTATE;
+	if (control)
+		ms->state = ERRSTATE;
+	return (control);
 }

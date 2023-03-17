@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 18:46:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 16:39:05 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/16 17:02:56 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/16 17:13:48 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_calloc(size_t num_elements, size_t element_size)
+//Copies a string to a new string (allocates memory)
+char	*ft_strdup(const char *tobecopied)
 {
-	void	*block;
-	size_t	i;
+	char	*newstring;
+	int		i;
 
-	block = malloc(num_elements * element_size);
-	if (block == NULL)
+	if (!tobecopied)
+		return (NULL);
+	newstring = (char *) malloc(ft_strlen(tobecopied) + 1);
+	if (!newstring)
 		return (NULL);
 	i = 0;
-	while (i < num_elements * element_size)
+	while (tobecopied[i])
 	{
-		((char *)block)[i] = 0;
+		newstring[i] = tobecopied[i];
 		i++;
 	}
-	return (block);
+	newstring[i] = 0;
+	return (newstring);
 }

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_init_env_vars.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 18:46:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 16:39:05 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/16 17:23:04 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/16 17:40:15 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_calloc(size_t num_elements, size_t element_size)
+//Gets all eviromental variables and saves them at ms->env_vars;
+int	ft_init_env_vars(t_data *ms, char **envp)
 {
-	void	*block;
-	size_t	i;
+	int			index;
+	t_env_vars	*temp;
 
-	block = malloc(num_elements * element_size);
-	if (block == NULL)
-		return (NULL);
-	i = 0;
-	while (i < num_elements * element_size)
+	index = 0;
+	ms->env_vars = ft_calloc(1, sizeof(*ms->env_vars));
+	temp = ms->env_vars;
+	while (envp[index])
 	{
-		((char *)block)[i] = 0;
-		i++;
+		temp->content = ft_strdup(envp[index]);
+		if (envp[index + 1])
+			temp->next = ft_calloc(1, sizeof(*ms->env_vars));
+		temp = temp->next;
+		index++;
 	}
-	return (block);
+	return (0);
 }
