@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signals_init.c                                  :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 19:19:43 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 16:56:01 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/17 17:27:03 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/17 17:29:16 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ctrlc_handler(int signo)
+//Returns a pointer to the first occurence of c in s.
+char	*ft_strchr(const char *s, int c)
 {
-	(void)signo;
-	write (1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	char	*aux;
 
-int	ft_signals_init(void)
-{
-	signal(SIGINT, ctrlc_handler);
-	signal(SIGQUIT, SIG_IGN);
-	return (1);
+	if (c > 255)
+		return ((void *)s);
+	aux = (char *)s;
+	while (*aux)
+	{
+		if (*aux == c)
+			return (aux);
+		aux++;
+	}
+	if (*aux == c)
+		return (aux);
+	return (NULL);
 }

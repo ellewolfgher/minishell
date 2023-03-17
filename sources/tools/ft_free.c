@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_exit.c                                    :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:27:00 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 16:30:56 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/17 16:58:57 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/17 17:07:03 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//this function is called when the program is finished or has to exit
-int	ft_clean_exit(t_data *ms)
+//Frees the memory cleanly
+void	*ft_free(void *content)
 {
-	int	code;
-
-	code = ms->exit_code;
-	free(ms);
-	exit (code);
+	if (content != NULL)
+	{
+		free (content);
+		content = NULL;
+		return (NULL);
+	}
+	return (NULL);
 }

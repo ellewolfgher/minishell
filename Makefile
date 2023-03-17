@@ -7,6 +7,7 @@ PATH_EXEC = $(PATH_SRCS)exec/
 PATH_BUIL = $(PATH_SRCS)builtins/
 PATH_PARS = $(PATH_SRCS)parser/
 PATH_INIT = $(PATH_SRCS)init/
+PATH_PROM = $(PATH_SRCS)prompt/
 PATH_TOOL = $(PATH_SRCS)tools/
 
 SRCS = $(addprefix $(PATH_SRCS),\
@@ -27,29 +28,37 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_envvars_init.c \
 		ft_minishell_init.c \
 		ft_signals_init.c) \
+		$(addprefix $(PATH_PROM),\
+		ft_minishell_prompt.c \
+		ft_prompt_to_input.c) \
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
-		ft_clean_exit.c \
-		ft_strdup.c\
-		ft_strlen.c\
+		ft_minishell_exit.c \
+		ft_free.c \
+		ft_strchr.c \
+		ft_strdup.c \
+		ft_strlen.c \
+		ft_strtrim.c \
+		ft_substr.c \
 		ft_test_tools.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-IFLAGS = -I $(PATH_INCS)
+IFLAGS = -I $(PATH_INCS) -I /usr/local/Cellar/readline/8.2.1/include/
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJS) -L/usr/local/Cellar/readline/8.2.1/lib -lreadline
+	$(CC) $(CFLAGS) $(IFLAGS) -o $(NAME) $(OBJS) -L/usr/local/Cellar/readline/8.2.1/lib -lreadline
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
 	@mkdir -p $(PATH_OBJS)exec/
 	@mkdir -p $(PATH_OBJS)builtins/
 	@mkdir -p $(PATH_OBJS)parser/
+	@mkdir -p $(PATH_OBJS)prompt/
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)tools/
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@

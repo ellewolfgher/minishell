@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 12:30:14 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/17 17:40:11 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ extern t_interactions	*g_interactions;
 
 int		ft_envvars_init(t_data *ms, char **envp);
 void	ft_global_init(void);
-int		ft_minishell_init(t_data	*ms, char **envp);
+int		ft_minishell_init(t_data *ms, char **envp);
 int		ft_signals_init(void);
+
+int		ft_minishell_prompt(t_data *ms);
+int		ft_prompt_to_input(t_data *ms);
 
 char	**ft_parser(char *input);
 
@@ -86,12 +89,16 @@ void	ft_command_unset(char **tokens);
 void	ft_command_env(char **tokens);
 void	ft_command_echo(char **tokens);
 
-int		ft_clean_exit(t_data *ms);
+void	*ft_free(void *content);
+int		ft_minishell_exit(t_data *ms);
 void	ft_ongoing_process(void);
 void	ft_print_tokens(char **tokens);
 
 void	*ft_calloc(size_t num_elements, size_t element_size);
-int		ft_strlen(const char *str);
+char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *tobecopied);
+int		ft_strlen(const char *str);
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signals_init.c                                  :+:      :+:    :+:   */
+/*   ft_minishell_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 19:19:43 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 16:56:01 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/16 16:27:00 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/17 17:06:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ctrlc_handler(int signo)
+//Stablishes the exit state and frees the memory
+int	ft_minishell_exit(t_data *ms)
 {
-	(void)signo;
-	write (1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	int	code;
 
-int	ft_signals_init(void)
-{
-	signal(SIGINT, ctrlc_handler);
-	signal(SIGQUIT, SIG_IGN);
-	return (1);
+	code = ms->exit_code;
+	ft_free(ms);
+	exit (code);
 }

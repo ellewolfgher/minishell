@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signals_init.c                                  :+:      :+:    :+:   */
+/*   ft_prompt_to_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 19:19:43 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 16:56:01 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/17 17:32:48 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/17 17:32:51 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ctrlc_handler(int signo)
+//Stores the result from readline in ms->input
+//Returns 0 on sucess, 1 on error.
+int	ft_prompt_to_input(t_data *ms)
 {
-	(void)signo;
-	write (1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	char	*temp;
 
-int	ft_signals_init(void)
-{
-	signal(SIGINT, ctrlc_handler);
-	signal(SIGQUIT, SIG_IGN);
-	return (1);
+	ms->input = readline(ms->prompt);
+	if (ms->input)
+	{
+		temp = ms->input;
+		ms->input = ft_strtrim(temp, " ");
+		temp = ft_free(temp);
+		return (0);
+	}
+	else if (!(ms->input))
+		return (1);
+	return (0);
 }
