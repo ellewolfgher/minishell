@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_parser_tokenize.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 16:46:28 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:55:48 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	last_token(t_parsing *parsing, t_parsing_index *i)
 
 char	**ft_parser_tokenize(char *input)
 {
-	t_parsing				*parsing;
-	t_parsing_index			*i;
+	t_parsing		*parsing;
+	t_parsing_index	*i;
 
 	i = ft_calloc(1, sizeof(t_parsing_index));
 	parsing = ft_calloc(1, sizeof(t_parsing));
