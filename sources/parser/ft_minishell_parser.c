@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 16:49:25 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:55:32 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	ft_minishell_parser(t_data *ms)
 		return (1);
 	if (ft_parser_onlyspc(ms->input))
 	{
-		// ms->rl_spaced_buffer = NULL;
-		// ms->rl_split = NULL;
 		ms->state = CLEANSTATE;
 		return (0);
 	}
