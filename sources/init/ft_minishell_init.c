@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:22:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 12:29:57 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:46:01 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //Returns 0 if successful and -1 if not
 static int	ft_pretty_prompt(t_data *ms)
 {
-	ms->prompt = ft_strdup("\033[1;32m$ \033[0m");
+	ms->prompt = ft_strdup("\xf0\x9f\x90\x9a");
 	if (!(ms->prompt))
 		return (-1);
 	return (0);

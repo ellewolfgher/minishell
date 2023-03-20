@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_prompt.c                              :+:      :+:    :+:   */
+/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 16:53:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 12:51:29 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/20 16:49:25 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Stablishes the prompt state and saves the input
-//If the user inputs something, saves to the history
-int	ft_minishell_prompt(t_data *ms)
+//Parse the input and check for errors
+//If there are no errors, the input is split into tokens
+int	ft_minishell_parser(t_data *ms)
 {
-	int	control;
-
-	control = ft_prompt_to_input(ms);
-	if (ms->input && ms->input[0])
-		add_history (ms->input);
-	if (!control)
+	if (ft_parser_quotes(ms))
+		return (1);
+	if (ft_parser_onlyspc(ms->input))
 	{
-		ms->state = PARSESTATE;
+		// ms->rl_spaced_buffer = NULL;
+		// ms->rl_split = NULL;
+		ms->state = CLEANSTATE;
 		return (0);
 	}
-	if (control)
-	{
-		ms->state = ERRSTATE;
-		ms->exit_code = 0;
-	}
+	ms->tokens = ft_parser_tokenize(ms->input);
+	ft_print_tokens(ms->tokens);
+	ms->state = PROMPTSTATE;
 	return (0);
 }

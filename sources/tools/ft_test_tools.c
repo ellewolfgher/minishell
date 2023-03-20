@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 18:15:52 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:46:46 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:49:58 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_print_tokens(char **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		printf("Token %d: %s\n", i, tokens[i]);
+		printf("Token %d:%s\n", i, tokens[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 17:00:57 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:52:11 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[], char **envp)
 		if (ms->state == PROMPTSTATE)
 			ft_minishell_prompt(ms);
 		if (ms->state == PARSESTATE)
-			return (0);
+			ft_minishell_parser(ms);
 		if (ms->state == EXECSTATE)
 			return (0);
 		if (ms->state == CLEANSTATE)

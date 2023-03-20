@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_prompt.c                              :+:      :+:    :+:   */
+/*   ft_parser_onlyspc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 16:53:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 12:51:29 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/20 13:28:17 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/20 13:29:34 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Stablishes the prompt state and saves the input
-//If the user inputs something, saves to the history
-int	ft_minishell_prompt(t_data *ms)
+int	ft_parser_onlyspc(char *str)
 {
-	int	control;
-
-	control = ft_prompt_to_input(ms);
-	if (ms->input && ms->input[0])
-		add_history (ms->input);
-	if (!control)
+	while (str)
 	{
-		ms->state = PARSESTATE;
-		return (0);
+		if (!*str)
+			return (1);
+		if (*str != ' ')
+			return (0);
+		str++;
 	}
-	if (control)
-	{
-		ms->state = ERRSTATE;
-		ms->exit_code = 0;
-	}
-	return (0);
+	return (1);
 }
