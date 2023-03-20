@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 17:40:11 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:47:16 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int		ft_signals_init(void);
 int		ft_minishell_prompt(t_data *ms);
 int		ft_prompt_to_input(t_data *ms);
 
-char	**ft_parser(char *input);
+int		ft_parser_onlyspc(char *str);
+int		ft_parser_quotes(t_data *ms);
+char	**ft_parser_tokenize(char *input);
+int		ft_minishell_parser(t_data *ms);
 
 void	ft_executioner(char **tokens);
 void	ft_command_cd(char **tokens);

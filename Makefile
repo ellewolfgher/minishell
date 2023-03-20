@@ -22,7 +22,10 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_env.c \
 		ft_unset.c) \
 		$(addprefix $(PATH_PARS),\
-		ft_parser.c) \
+		ft_parser_quotes.c \
+		ft_parser_tokenize.c \
+		ft_parser_onlyspc.c \
+		ft_minishell_parser.c) \
 		$(addprefix $(PATH_INIT),\
 		ft_global_init.c \
 		ft_envvars_init.c \

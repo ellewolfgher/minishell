@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/02/23 19:41:17 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:46:28 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	last_token(t_parsing *parsing, t_parsing_index *i)
 	return ;
 }
 
-char	**ft_parser(char *input)
+char	**ft_parser_tokenize(char *input)
 {
 	t_parsing				*parsing;
 	t_parsing_index			*i;
