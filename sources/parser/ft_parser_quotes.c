@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:09:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 16:09:59 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:18:13 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ int	ft_parser_quotes(t_data *ms)
 {
 	int	control;
 	int	singular;
-	int	gemni;
+	int	twins;
 
 	control = 0;
 	singular = 0;
-	gemni = 0;
+	twins = 0;
 	while (ms->input[control])
 	{
-		if (ms->input[control] == '\'' && (gemni % 2 == 0))
+		if (ms->input[control] == '\'' && (twins % 2 == 0))
 			singular++;
 		if (ms->input[control] == '\"' && (singular % 2 == 0))
-			gemni++;
+			twins++;
 		control++;
 	}
-	control = ((singular % 2) + (gemni % 2));
+	control = ((singular % 2) + (twins % 2));
 	if (control)
 	{
 		ms->input = ft_free(ms->input);

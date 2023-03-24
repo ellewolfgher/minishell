@@ -24,6 +24,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_PARS),\
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
+		ft_parser_spacer.c \
 		ft_parser_onlyspc.c \
 		ft_minishell_parser.c) \
 		$(addprefix $(PATH_INIT),\
@@ -36,6 +37,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_prompt_to_input.c) \
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
+		ft_is_whitespace.c \
 		ft_minishell_exit.c \
 		ft_free.c \
 		ft_strchr.c \

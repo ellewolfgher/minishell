@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 16:47:16 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:13:48 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ typedef struct s_data
 {
 	int					state;
 	int					exit_code;
+	int					inputnull;
 	char				*prompt;
 	char				*input;
+	char				*spaced;
 	char				**tokens;
 	struct s_env_vars	*env_vars;
 }	t_data;
@@ -81,7 +83,8 @@ int		ft_prompt_to_input(t_data *ms);
 
 int		ft_parser_onlyspc(char *str);
 int		ft_parser_quotes(t_data *ms);
-char	**ft_parser_tokenize(char *input);
+void	ft_parser_tokenize(t_data *ms);
+char	*ft_parser_spacer(char *buffer, t_data *ms);
 int		ft_minishell_parser(t_data *ms);
 
 void	ft_executioner(char **tokens);
@@ -98,6 +101,7 @@ void	ft_ongoing_process(void);
 void	ft_print_tokens(char **tokens);
 
 void	*ft_calloc(size_t num_elements, size_t element_size);
+int		ft_is_whitespace(char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *tobecopied);
 int		ft_strlen(const char *str);
