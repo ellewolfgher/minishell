@@ -25,6 +25,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
 		ft_parser_spacer.c \
+		ft_parser_split.c \
 		ft_parser_onlyspc.c \
 		ft_minishell_parser.c) \
 		$(addprefix $(PATH_INIT),\
@@ -50,7 +51,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I $(PATH_INCS) -I /usr/local/Cellar/readline/8.2.1/include/
 
 all: $(NAME)
