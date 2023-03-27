@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prompt_to_input.c                               :+:      :+:    :+:   */
+/*   ft_free_tokens.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 17:32:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 17:58:11 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/27 17:10:53 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/27 17:15:08 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Stores the result from readline in ms->input
-//Returns 0 on sucess, 1 on error.
-int	ft_prompt_to_input(t_data *ms)
+void	*ft_free_tokens(t_data *ms)
 {
-	char	*temp;
+	t_tokens	*this;
 
-	ms->input = readline(ms->prompt);
-	if (ms->input)
+	if (!ms->tokens)
+		return (NULL);
+	while (ms->tokens)
 	{
-		temp = ms->input;
-		ms->input = ft_strtrim(temp, " ");
-		temp = ft_free(temp);
-		return (0);
+		this = ms->tokens;
+		ft_free(this->value);
+		this->value = NULL;
+		ms->tokens = ms->tokens->next;
+		ft_free(this);
+		this = NULL;
 	}
-	else if (!(ms->input))
-		return (1);
-	return (0);
+	return (NULL);
 }

@@ -9,11 +9,12 @@ PATH_PARS = $(PATH_SRCS)parser/
 PATH_INIT = $(PATH_SRCS)init/
 PATH_PROM = $(PATH_SRCS)prompt/
 PATH_TOOL = $(PATH_SRCS)tools/
+PATH_CLEA = $(PATH_SRCS)clean/
 
 SRCS = $(addprefix $(PATH_SRCS),\
 		ft_main.c) \
 		$(addprefix $(PATH_EXEC),\
-		ft_executioner.c) \
+		ft_minishell_executioner.c) \
 		$(addprefix $(PATH_BUIL),\
 		ft_cd.c \
 		ft_pwd.c \
@@ -28,8 +29,9 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_parser_split.c \
 		ft_parser_onlyspc.c \
 		ft_minishell_parser.c) \
+		$(addprefix $(PATH_CLEA),\
+		ft_minishell_cleaner.c) \
 		$(addprefix $(PATH_INIT),\
-		ft_global_init.c \
 		ft_envvars_init.c \
 		ft_minishell_init.c \
 		ft_signals_init.c) \
@@ -38,9 +40,12 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_prompt_to_input.c) \
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
+		ft_count_words.c \
 		ft_is_whitespace.c \
 		ft_minishell_exit.c \
 		ft_free.c \
+		ft_free_double.c \
+		ft_free_tokens.c \
 		ft_strchr.c \
 		ft_strdup.c \
 		ft_strlen.c \
@@ -67,6 +72,7 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)prompt/
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)tools/
+	@mkdir -p $(PATH_OBJS)clean/
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean:

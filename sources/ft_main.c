@@ -6,13 +6,12 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 12:52:11 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:01:19 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_interactions	*g_interactions;
 //ft_minishell_init instantiates all data needed(we can alter the struct later)
 //the while loop indicates the prompt
 // int	main(void)
@@ -35,7 +34,7 @@ t_interactions	*g_interactions;
 // 	free(g_interactions);
 // 	return (0);
 // }
-static void	check_args(int argc)
+static void	ft_check_args(int argc)
 {
 	if (argc > 1)
 	{
@@ -49,8 +48,7 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	*ms;
 
 	(void)argv;
-	(void)envp;
-	check_args(argc);
+	ft_check_args(argc);
 	ms = ft_calloc (1, sizeof(t_data));
 	ms->state = INITSTATE;
 	while (1)
@@ -64,9 +62,9 @@ int	main(int argc, char *argv[], char **envp)
 		if (ms->state == PARSESTATE)
 			ft_minishell_parser(ms);
 		if (ms->state == EXECSTATE)
-			return (0);
+			ft_minishell_executioner(ms);
 		if (ms->state == CLEANSTATE)
-			return (0);
+			ft_minishell_cleaner(ms);
 	}
 	return (0);
 }
