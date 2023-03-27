@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/24 20:12:03 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:38:00 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # define PARSESTATE		3
 # define EXECSTATE		4
 # define CLEANSTATE		5
+
+//tokentype definitions
+# define PIPE			1
+# define SEMICOLON		2
+# define REDIR_IN		3
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -64,6 +69,7 @@ typedef struct s_data
 {
 	int					state;
 	int					exit_code;
+	int					tracking;
 	int					inputnull;
 	char				*prompt;
 	char				*input;
@@ -73,47 +79,45 @@ typedef struct s_data
 	struct s_env_vars	*env_vars;
 }	t_data;
 
-typedef struct s_interactions
-{
-	int	flag;
-}	t_interactions;
+int		ft_envvars_init(t_data *ms, char **envp);
+void	ft_global_init(void);
+int		ft_minishell_init(t_data *ms, char **envp);
+int		ft_signals_init(void);
 
-extern t_interactions	*g_interactions;
+int		ft_minishell_prompt(t_data *ms);
+int		ft_prompt_to_input(t_data *ms);
 
-int			ft_envvars_init(t_data *ms, char **envp);
-void		ft_global_init(void);
-int			ft_minishell_init(t_data *ms, char **envp);
-int			ft_signals_init(void);
+int		ft_parser_onlyspc(char *str);
+int		ft_parser_quotes(t_data *ms);
+void	ft_parser_split(t_data *ms);
+void	ft_parser_tokenize(t_data *ms);
+char	*ft_parser_spacer(char *buffer, t_data *ms);
+int		ft_minishell_parser(t_data *ms);
 
-int			ft_minishell_prompt(t_data *ms);
-int			ft_prompt_to_input(t_data *ms);
+void	ft_minishell_executioner(t_data *ms);
+void	ft_command_cd(char **tokens);
+void	ft_command_pwd(void);
+void	ft_command_export(void);
+void	ft_command_unset(char **tokens);
+void	ft_command_env(char **tokens);
+void	ft_command_echo(char **tokens);
 
-int			ft_parser_onlyspc(char *str);
-int			ft_parser_quotes(t_data *ms);
-void		ft_parser_split(t_data *ms);
-t_tokens	*ft_parser_tokenize(t_data *ms);
-char		*ft_parser_spacer(char *buffer, t_data *ms);
-int			ft_minishell_parser(t_data *ms);
+int		ft_minishell_cleaner(t_data *ms);
 
-void		ft_executioner(char **tokens);
-void		ft_command_cd(char **tokens);
-void		ft_command_pwd(void);
-void		ft_command_export(void);
-void		ft_command_unset(char **tokens);
-void		ft_command_env(char **tokens);
-void		ft_command_echo(char **tokens);
+void	*ft_free(void *content);
+void	*ft_free_double(t_data *ms);
+void	*ft_free_tokens(t_data *ms);
+int		ft_minishell_exit(t_data *ms);
+void	ft_print_split(char **tokens);
+void	ft_print_tokens(t_tokens *tokens);
 
-void		*ft_free(void *content);
-int			ft_minishell_exit(t_data *ms);
-void		ft_ongoing_process(void);
-void		ft_print_tokens(char **tokens);
-
-void		*ft_calloc(size_t num_elements, size_t element_size);
-int			ft_is_whitespace(char c);
-char		*ft_strchr(const char *s, int c);
-char		*ft_strdup(const char *tobecopied);
-int			ft_strlen(const char *str);
-char		*ft_strtrim(char const *s1, char const *set);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+void	*ft_calloc(size_t num_elements, size_t element_size);
+int		ft_is_whitespace(char c);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *tobecopied);
+int		ft_strlen(const char *str);
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_count_words(char *string);
 
 #endif

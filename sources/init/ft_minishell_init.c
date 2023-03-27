@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:22:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 12:46:01 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:24:26 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ int	ft_minishell_init(t_data *ms, char **envp)
 {
 	int	control;
 
-	control = ft_pretty_prompt(ms);
-	control = ft_signals_init();
-	control = ft_envvars_init(ms, envp);
 	ms->state = PROMPTSTATE;
+	control = ft_pretty_prompt(ms);
+	if (control)
+		ms->state = ERRSTATE;
+	control = ft_signals_init();
+	if (control)
+		ms->state = ERRSTATE;
+	control = ft_envvars_init(ms, envp);
 	if (control)
 		ms->state = ERRSTATE;
 	return (control);

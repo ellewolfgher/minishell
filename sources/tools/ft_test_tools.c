@@ -6,35 +6,37 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 18:15:52 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 16:49:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:52:14 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//this is here just to test ctrl+c, ctrl+backslash and ctrl+d
-void	ft_ongoing_process(void)
+//Prints the tokens
+void	ft_print_tokens(t_tokens *tokens)
 {
-	int	i;
+	int			i;
+	t_tokens	*aux;
 
 	i = 0;
-	while (i < 50 && !g_interactions->flag)
+	aux = tokens;
+	while (aux)
 	{
-		printf("g_interactions->flag: %d\n", g_interactions->flag);
-		usleep(100000);
+		printf("Token %d:%s\n", i, aux->value);
+		aux = aux->next;
 		i++;
 	}
 }
 
-//this is here just to test the parser
-void	ft_print_tokens(char **tokens)
+//Prints the split
+void	ft_print_split(char **tokens)
 {
 	int	i;
 
 	i = 0;
 	while (tokens[i])
 	{
-		printf("Token %d:%s\n", i, tokens[i]);
+		printf("Split %d:%s\n", i, tokens[i]);
 		i++;
 	}
 }

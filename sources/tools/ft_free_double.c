@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prompt_to_input.c                               :+:      :+:    :+:   */
+/*   ft_free_double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 17:32:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 17:58:11 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/27 17:05:16 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/27 17:09:09 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Stores the result from readline in ms->input
-//Returns 0 on sucess, 1 on error.
-int	ft_prompt_to_input(t_data *ms)
+void	*ft_free_double(t_data *ms)
 {
-	char	*temp;
+	int	index;
 
-	ms->input = readline(ms->prompt);
-	if (ms->input)
+	index = 0;
+	if (!ms->split)
+		return (NULL);
+	while (ms->split[index])
 	{
-		temp = ms->input;
-		ms->input = ft_strtrim(temp, " ");
-		temp = ft_free(temp);
-		return (0);
+		ms->split[index] = ft_free(ms->split[index]);
+		index++;
 	}
-	else if (!(ms->input))
-		return (1);
-	return (0);
+	ms->split = ft_free(ms->split);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:19:43 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 16:56:01 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:32:10 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	ft_signals_init(void)
 {
 	signal(SIGINT, ctrlc_handler);
 	signal(SIGQUIT, SIG_IGN);
-	return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:04:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/23 17:05:47 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:13:28 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ char	*ft_parser_spacer(char *str, t_data *ms)
 			str = ft_need_space(str, index, ms);
 		index++;
 	}
+	ms->inputnull = 1;
 	return (str);
 }
