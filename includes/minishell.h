@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 17:38:00 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:21:31 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*ft_parser_spacer(char *buffer, t_data *ms);
 int		ft_minishell_parser(t_data *ms);
 
 void	ft_minishell_executioner(t_data *ms);
-void	ft_command_cd(char **tokens);
+void	ft_command_cd(t_data *ms);
 void	ft_command_pwd(void);
 void	ft_command_export(void);
 void	ft_command_unset(char **tokens);

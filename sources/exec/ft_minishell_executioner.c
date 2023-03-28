@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_executioner.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:23:21 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/27 18:19:43 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:23:05 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_minishell_executioner(t_data *ms)
 {
 	ft_print_tokens(ms->tokens);
 	if (strcmp(ms->tokens->value, "cd") == 0)
-		ft_command_cd(&(ms->tokens->value));
+		ft_command_cd(ms);
 	else if (strcmp(ms->tokens->value, "pwd") == 0)
 		ft_command_pwd();
 	else if (strcmp(ms->tokens->value, "exit") == 0)

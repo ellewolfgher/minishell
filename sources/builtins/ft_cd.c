@@ -6,20 +6,20 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:28:03 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/02 14:58:46 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:24:07 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_command_cd(char **tokens)
+void	ft_command_cd(t_data *ms)
 {
-	char	*home_dir;
+	char	*home_dir;	
 
-	if (tokens[1] != NULL)
+	if (ms->tokens->next->value != NULL)
 	{
-		if (chdir(tokens[1]) == -1)
-			printf("cd: %s: %s\n", tokens[1], strerror(errno));
+		if (chdir(ms->tokens->next->value) == -1)
+			printf("cd: %s: %s\n", ms->tokens->next->value, strerror(errno));
 	}
 	else
 	{
