@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 15:41:54 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:53:45 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ char		**ft_split(char const *s, char c);
 
 t_env_vars	*ft_env_var_new(char *content);
 void		ft_env_add_var(t_env_vars **env_vars, char *env_var);
-void		ft_env_back_add(t_env_vars **env_vars, t_env_var *new);
+void		ft_env_back_add(t_env_vars **env_vars, t_env_vars *new);
 
 #endif
