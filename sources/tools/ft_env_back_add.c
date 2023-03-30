@@ -6,15 +6,15 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:58:34 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 12:30:02 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:34:19 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_env_back_add(t_env_var **env_vars, t_env_var *new)
+void	ft_env_back_add(t_env_vars **env_vars, t_env_vars *new)
 {
-	t_env_var	*last;
+	t_env_vars	*last;
 
 	if (!*env_vars)
 	{
