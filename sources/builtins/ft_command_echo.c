@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/11 16:37:45 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:18:44 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,6 @@ void	ft_command_echo(char **tokens)
 			printf(" ");
 	}
 }
+
+//q:how do i make the echo command work with the -n option?
+//a:make a variable that is set to 0, if the -n option is present, set it to 1, then if it is 1, print the arguments without a trailing newline
