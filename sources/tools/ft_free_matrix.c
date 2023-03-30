@@ -6,24 +6,26 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:05:16 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 17:09:09 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:28:58 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_free_double(t_data *ms)
+void	ft_free_matrix(char **matrix)
 {
 	int	index;
 
 	index = 0;
-	if (!ms->split)
-		return (NULL);
-	while (ms->split[index])
+	if (!matrix)
+		return ;
+	while (matrix[index])
 	{
-		ms->split[index] = ft_free(ms->split[index]);
+		free(matrix[index]);
+		matrix[index] = NULL;
 		index++;
 	}
-	ms->split = ft_free(ms->split);
-	return (NULL);
+	free(matrix);
+	matrix = NULL;
+	return ;
 }

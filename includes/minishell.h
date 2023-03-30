@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/28 20:15:13 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:29:17 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
-typedef struct s_parsing
-{
-	int		in_quotes;
-	char	**tokens;
-	char	*current_token;
-}	t_parsing;
-
-typedef struct s_parsing_index
-{
-	int			index;
-	char		charac;
-	int			t_index;
-	int			current_token_index;
-}	t_parsing_index;
 
 typedef struct s_env_vars
 {
@@ -104,9 +89,9 @@ void	ft_command_echo(char **tokens);
 
 int		ft_minishell_cleaner(t_data *ms);
 
-void	*ft_free(void *content);
-void	*ft_free_double(t_data *ms);
-void	*ft_free_tokens(t_data *ms);
+void	ft_free(void *pointer);
+void	ft_free_matrix(char **matrix);
+void	ft_free_tokens(t_tokens *tokens);
 int		ft_minishell_exit(t_data *ms);
 void	ft_print_split(char **tokens);
 void	ft_print_tokens(t_tokens *tokens);

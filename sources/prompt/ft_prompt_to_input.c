@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 17:32:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 17:58:11 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:23:07 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 //Returns 0 on sucess, 1 on error.
 int	ft_prompt_to_input(t_data *ms)
 {
-	char	*temp;
+	char	*temporary;
 
 	ms->input = readline(ms->prompt);
 	if (ms->input)
 	{
-		temp = ms->input;
-		ms->input = ft_strtrim(temp, " ");
-		temp = ft_free(temp);
+		temporary = ms->input;
+		ms->input = ft_strtrim(temporary, " ");
+		ft_free(temporary);
 		return (0);
 	}
 	else if (!(ms->input))

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:04:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 18:13:28 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:22:19 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static char	*ft_need_space(char *str, int index, t_data *ms)
 	if (ft_check_before(str, index, str[index]))
 	{
 		temporary = ft_create_space(str, index);
-		str = ft_free(str);
+		ft_free(str);
 		str = temporary;
 		temporary = NULL;
 		return (ft_parser_spacer(str, ms));
@@ -108,7 +108,7 @@ static char	*ft_need_space(char *str, int index, t_data *ms)
 	if (ft_check_after(str, index, str[index]))
 	{
 		temporary = ft_create_space(str, index + 1);
-		str = ft_free(str);
+		ft_free(str);
 		str = temporary;
 		temporary = NULL;
 		return (ft_parser_spacer(str, ms));

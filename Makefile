@@ -44,7 +44,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_is_whitespace.c \
 		ft_minishell_exit.c \
 		ft_free.c \
-		ft_free_double.c \
+		ft_free_matrix.c \
 		ft_free_tokens.c \
 		ft_strchr.c \
 		ft_strdup.c \
