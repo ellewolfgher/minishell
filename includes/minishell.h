@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:41:23 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:41:54 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@
 # define PARSESTATE		3
 # define EXECSTATE		4
 # define CLEANSTATE		5
-
-//tokentype definitions
-# define PIPE			1
-# define SEMICOLON		2
-# define REDIR_IN		3
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -88,9 +83,12 @@ void		ft_command_echo(char **tokens);
 
 int			ft_minishell_cleaner(t_data *ms);
 
-void		ft_free(void *pointer);
-void		ft_free_matrix(char **matrix);
-void		ft_free_tokens(t_tokens *tokens);
+void		ft_free(void **pointer);
+void		ft_free_matrix(void ***matrix);
+void		ft_free_tokens(t_tokens **tokens);
+int			ft_minishell_exit(t_data *ms);
+void		ft_print_split(char **tokens);
+void		ft_print_tokens(t_tokens *tokens);
 void		ft_free_split(char **array);
 int			ft_minishell_exit(t_data *ms);
 void		ft_print_split(char **tokens);
@@ -107,8 +105,8 @@ char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_split(char const *s, char c);
 
-t_env_var	*ft_env_var_new(char *content);
+t_env_vars	*ft_env_var_new(char *content);
 void		ft_env_add_var(t_env_vars **env_vars, char *env_var);
-void		ft_env_back_add(t_env_var **env_vars, t_env_var *new);
+void		ft_env_back_add(t_env_vars **env_vars, t_env_var *new);
 
 #endif

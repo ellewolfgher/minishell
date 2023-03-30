@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 11:48:55 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:40:06 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	ft_parser_split(t_data *ms)
 		string += size;
 		index++;
 	}
+	ms->split[index] = NULL;
 }
