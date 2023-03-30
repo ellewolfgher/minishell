@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:04:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 11:22:19 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:42:34 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,55 +93,51 @@ static char	*ft_create_space(char *buffer, int num)
 }
 
 //Checks if there is a need for a space before or after the operator
-static char	*ft_need_space(char *str, int index, t_data *ms)
+static void ft_need_space(int index, t_data *ms)
 {
-	char	*temporary;
+	char *temporary;
 
-	if (ft_check_before(str, index, str[index]))
+	if (ft_check_before(ms->input, index, ms->input[index]))
 	{
-		temporary = ft_create_space(str, index);
-		ft_free(str);
-		str = temporary;
+		temporary = ft_create_space(ms->input, index);
+		ft_free(ms->input);
+		ms->input = temporary;
 		temporary = NULL;
-		return (ft_parser_spacer(str, ms));
+		ft_parser_spacer(ms);
 	}
-	if (ft_check_after(str, index, str[index]))
+	else if (ft_check_after(ms->input, index, ms->input[index]))
 	{
-		temporary = ft_create_space(str, index + 1);
-		ft_free(str);
-		str = temporary;
+		temporary = ft_create_space(ms->input, index + 1);
+		ft_free(ms->input);
+		ms->input = temporary;
 		temporary = NULL;
-		return (ft_parser_spacer(str, ms));
+		ft_parser_spacer(ms);
 	}
-	ms->inputnull = 1;
-	return (str);
 }
 
 //Creates a space between operators > < | if needed
-char	*ft_parser_spacer(char *str, t_data *ms)
+void ft_parser_spacer(t_data *ms)
 {
-	int		index;
-	int		singular;
-	int		twins;
+	int index;
+	int singular;
+	int twins;
 
 	index = 0;
 	singular = 0;
 	twins = 0;
-	while (str[index])
+	while (ms->input[index])
 	{
-		if (str[index] == '\'')
+		if (ms->input[index] == '\'')
 			singular++;
-		if (str[index] == '\"')
+		if (ms->input[index] == '\"')
 			twins++;
 		if ((twins % 2) || (singular % 2))
 		{
 			index++;
-			continue ;
+			continue;
 		}
-		if (str[index] == '<' || str[index] == '>' || str[index] == '|')
-			str = ft_need_space(str, index, ms);
+		if (ms->input[index] == '<' || ms->input[index] == '>' || ms->input[index] == '|')
+			ft_need_space(index, ms);
 		index++;
 	}
-	ms->inputnull = 1;
-	return (str);
 }
