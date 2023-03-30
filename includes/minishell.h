@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 11:29:17 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:05:28 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ typedef struct s_data
 	int					inputnull;
 	char				*prompt;
 	char				*input;
-	char				*spaced;
 	char				**split;
 	struct s_tokens		*tokens;
 	struct s_env_vars	*env_vars;
 }	t_data;
 
 int		ft_envvars_init(t_data *ms, char **envp);
-void	ft_global_init(void);
 int		ft_minishell_init(t_data *ms, char **envp);
 int		ft_signals_init(void);
 
@@ -76,7 +74,7 @@ int		ft_parser_onlyspc(char *str);
 int		ft_parser_quotes(t_data *ms);
 void	ft_parser_split(t_data *ms);
 void	ft_parser_tokenize(t_data *ms);
-char	*ft_parser_spacer(char *buffer, t_data *ms);
+void	ft_parser_spacer(t_data *ms);
 int		ft_minishell_parser(t_data *ms);
 
 void	ft_minishell_executioner(t_data *ms);

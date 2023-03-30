@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:56:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 11:29:55 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:05:20 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	ft_minishell_cleaner(t_data *ms)
 {
-	if (ms->input != ms->spaced && ms->spaced)
-		ft_free(ms->spaced);
 	ft_free(ms->input);
 	ft_free_matrix(ms->split);
 	ft_free_tokens(ms->tokens);
