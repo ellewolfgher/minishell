@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 15:31:21 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:41:54 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ int			ft_minishell_exit(t_data *ms);
 void		ft_print_split(char **tokens);
 void		ft_print_tokens(t_tokens *tokens);
 void		ft_free_split(char **array);
+int			ft_minishell_exit(t_data *ms);
+void		ft_print_split(char **tokens);
+void		ft_print_tokens(t_tokens *tokens);
 
 int			ft_is_whitespace(char c);
 int			ft_count_words(char *string);
