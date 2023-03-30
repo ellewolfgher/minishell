@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_executioner.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:23:21 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/28 19:45:57 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:51:46 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	ft_minishell_executioner(t_data *ms)
 		ft_command_env(&(ms->tokens->value));
 	else if (strcmp(ms->tokens->value, "echo") == 0)
 		ft_command_echo(&(ms->tokens->value));
-	ms->state = PROMPTSTATE;
+	ms->state = CLEANSTATE;
 	return ;
 }

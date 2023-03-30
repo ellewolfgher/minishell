@@ -58,7 +58,6 @@ typedef struct s_data
 	int					inputnull;
 	char				*prompt;
 	char				*input;
-	char				*spaced;
 	char				**split;
 	struct s_tokens		*tokens;
 	struct s_env_vars	*env_vars;

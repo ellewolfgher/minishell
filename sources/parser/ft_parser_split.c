@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 18:12:57 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:48:55 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_parser_split(t_data *ms)
 	int		index;
 	int		size;
 
-	string = ms->spaced;
+	string = ms->input;
 	index = 0;
 	size = 0;
 	words = ft_count_words(string);
@@ -93,5 +93,4 @@ void	ft_parser_split(t_data *ms)
 		string += size;
 		index++;
 	}
-	ft_free(ms->spaced);
 }
