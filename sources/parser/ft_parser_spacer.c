@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:04:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 11:42:34 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:04:09 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ static char	*ft_create_space(char *buffer, int num)
 }
 
 //Checks if there is a need for a space before or after the operator
-static void ft_need_space(int index, t_data *ms)
+static void	ft_need_space(int index, t_data *ms)
 {
-	char *temporary;
+	char	*temporary;
 
 	if (ft_check_before(ms->input, index, ms->input[index]))
 	{
 		temporary = ft_create_space(ms->input, index);
-		ft_free(ms->input);
+		ft_free((void **)&(ms->input));
 		ms->input = temporary;
 		temporary = NULL;
 		ft_parser_spacer(ms);
@@ -108,7 +108,7 @@ static void ft_need_space(int index, t_data *ms)
 	else if (ft_check_after(ms->input, index, ms->input[index]))
 	{
 		temporary = ft_create_space(ms->input, index + 1);
-		ft_free(ms->input);
+		ft_free((void **)&(ms->input));
 		ms->input = temporary;
 		temporary = NULL;
 		ft_parser_spacer(ms);
@@ -116,11 +116,11 @@ static void ft_need_space(int index, t_data *ms)
 }
 
 //Creates a space between operators > < | if needed
-void ft_parser_spacer(t_data *ms)
+void	ft_parser_spacer(t_data *ms)
 {
-	int index;
-	int singular;
-	int twins;
+	int	index;
+	int	singular;
+	int	twins;
 
 	index = 0;
 	singular = 0;
@@ -134,9 +134,10 @@ void ft_parser_spacer(t_data *ms)
 		if ((twins % 2) || (singular % 2))
 		{
 			index++;
-			continue;
+			continue ;
 		}
-		if (ms->input[index] == '<' || ms->input[index] == '>' || ms->input[index] == '|')
+		if (ms->input[index] == '<' || ms->input[index] == '>'
+			|| ms->input[index] == '|')
 			ft_need_space(index, ms);
 		index++;
 	}

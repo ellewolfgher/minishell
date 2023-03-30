@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:05:28 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:58:53 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@
 # define PARSESTATE		3
 # define EXECSTATE		4
 # define CLEANSTATE		5
-
-//tokentype definitions
-# define PIPE			1
-# define SEMICOLON		2
-# define REDIR_IN		3
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -87,9 +82,9 @@ void	ft_command_echo(char **tokens);
 
 int		ft_minishell_cleaner(t_data *ms);
 
-void	ft_free(void *pointer);
-void	ft_free_matrix(char **matrix);
-void	ft_free_tokens(t_tokens *tokens);
+void	ft_free(void **pointer);
+void	ft_free_matrix(void ***matrix);
+void	ft_free_tokens(t_tokens **tokens);
 int		ft_minishell_exit(t_data *ms);
 void	ft_print_split(char **tokens);
 void	ft_print_tokens(t_tokens *tokens);
