@@ -16,13 +16,14 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_EXEC),\
 		ft_minishell_executioner.c) \
 		$(addprefix $(PATH_BUIL),\
-		ft_cd.c \
-		ft_pwd.c \
-		ft_export.c \
-		ft_echo.c \
-		ft_env.c \
-		ft_unset.c) \
+		ft_command_cd.c \
+		ft_command_pwd.c \
+		ft_command_export.c \
+		ft_command_echo.c \
+		ft_command_env.c \
+		ft_command_unset.c) \
 		$(addprefix $(PATH_PARS),\
+		ft_parser_expand.c \
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
 		ft_parser_spacer.c \
@@ -41,6 +42,8 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
 		ft_count_words.c \
+		ft_isalnum.c \
+		ft_itoa.c \
 		ft_is_whitespace.c \
 		ft_minishell_exit.c \
 		ft_free.c \
@@ -48,7 +51,9 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_free_tokens.c \
 		ft_strchr.c \
 		ft_strdup.c \
+		ft_strjoin.c \
 		ft_strlen.c \
+		ft_strncmp.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_test_tools.c)
@@ -89,5 +94,9 @@ r: all
 n:
 	@clear
 	@norminette ./sources ./includes
+
+vg:
+	@clear
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
 
 PHONY: all clean fclean re n r

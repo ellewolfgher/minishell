@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:47:07 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/30 18:24:47 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/30 18:25:05 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
-int	ft_minishell_parser(t_data *ms)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (ft_parser_quotes(ms))
-		return (1);
-	if (ft_parser_onlyspc(ms->input))
+	size_t	i;
+
+	i = 0;
+	while (i < n && (s1[i] != 0 || s2[i] != 0))
 	{
-		ms->state = CLEANSTATE;
-		ms->split = NULL;
-		return (0);
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
 	}
-	ft_parser_spacer(ms);
-	ft_parser_split(ms);
-	ft_parser_tokenize(ms);
-	ft_parser_expand(ms);
-	ms->state = EXECSTATE;
 	return (0);
 }

@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:47:07 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/30 16:57:19 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/03/30 16:57:36 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
-int	ft_minishell_parser(t_data *ms)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	if (ft_parser_quotes(ms))
-		return (1);
-	if (ft_parser_onlyspc(ms->input))
+	char	*cat;
+	size_t	len;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	cat = (char *)ft_calloc(len, sizeof(char));
+	if (!cat)
+		return (NULL);
+	while (s1[i])
 	{
-		ms->state = CLEANSTATE;
-		ms->split = NULL;
-		return (0);
+		cat[i] = s1[i];
+		i++;
 	}
-	ft_parser_spacer(ms);
-	ft_parser_split(ms);
-	ft_parser_tokenize(ms);
-	ft_parser_expand(ms);
-	ms->state = EXECSTATE;
-	return (0);
+	while (s2[j])
+	{
+		cat[i] = s2[j];
+		j++;
+		i++;
+	}
+	cat[i] = 0;
+	return (cat);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 15:53:45 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:35:18 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ int			ft_signals_init(void);
 int			ft_minishell_prompt(t_data *ms);
 int			ft_prompt_to_input(t_data *ms);
 
+void		ft_parser_expand(t_data *ms);
 int			ft_parser_onlyspc(char *str);
 int			ft_parser_quotes(t_data *ms);
 void		ft_parser_split(t_data *ms);
 void		ft_parser_tokenize(t_data *ms);
-char		*ft_parser_spacer(char *buffer, t_data *ms);
+void		ft_parser_spacer(t_data *ms);
 int			ft_minishell_parser(t_data *ms);
 
 void		ft_minishell_executioner(t_data *ms);
@@ -95,12 +96,16 @@ void		ft_print_split(char **tokens);
 void		ft_print_tokens(t_tokens *tokens);
 
 int			ft_is_whitespace(char c);
+int			ft_isalnum(int c);
+char		*ft_itoa(int n);
 int			ft_count_words(char *string);
 int			ft_strlen(const char *str);
 int			ft_strcmp(const char *s1, const char *s2);
 void		*ft_calloc(size_t num_elements, size_t element_size);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *tobecopied);
+char		*ft_strjoin(char const *s1, char const *s2);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_split(char const *s, char c);

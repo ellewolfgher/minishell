@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:40:06 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:37:06 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ static int	ft_foward_until_quotes(char *string)
 }
 
 // Counts the size of the word regarding the quotes
-static int	ft_wordlen(char *string)
+static int	ft_wordlen(char *string, int index)
 {
 	char	*aux;
 	int		size;
 	int		ret;
 
-	aux = string;
-	size = 0;
+	aux = string + index;
 	ret = 0;
 	while (*aux && *aux == ' ')
 		aux++;
@@ -50,48 +49,48 @@ static int	ft_wordlen(char *string)
 		else
 		{
 			aux++;
-			ret ++;
+			ret++;
 		}
 	}
 	return (ret);
 }
 
 // Copy the string to the split
-static void	ft_string_to_split(t_data *ms, char *string, int size, int index)
+static int	ft_string_to_split(t_data *ms, int index, int size, int count)
 {
 	int	k;
 
 	k = 0;
 	while (k < size)
 	{
-		ms->split[index][k] = *string;
-		string++;
+		ms->split[count][k] = ms->input[index];
+		index++;
 		k++;
 	}
+	return (index);
 }
 
 //Tokenize input string by whitespaces
 void	ft_parser_split(t_data *ms)
 {
-	char	*string;
 	int		words;
 	int		index;
 	int		size;
+	int		count;
 
-	string = ms->input;
 	index = 0;
 	size = 0;
-	words = ft_count_words(string);
+	count = 0;
+	words = ft_count_words(ms->input);
 	ms->split = ft_calloc ((words + 1), sizeof(char *));
-	while (index < words)
+	while (count < words)
 	{
-		while (*string == ' ')
-			string++;
-		size = (ft_wordlen(string));
-		ms->split[index] = ft_calloc (size + 1, 1);
-		ft_string_to_split (ms, string, size, index);
-		string += size;
-		index++;
+		while (ms->input[index] == ' ')
+			index++;
+		size = (ft_wordlen(ms->input, index));
+		ms->split[count] = ft_calloc (size + 1, 1);
+		index += ft_string_to_split (ms, index, size, count);
+		count++;
 	}
-	ms->split[index] = NULL;
+	ms->split[count] = NULL;
 }
