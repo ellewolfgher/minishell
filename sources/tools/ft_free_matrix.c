@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_double.c                                   :+:      :+:    :+:   */
+/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:05:16 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 11:28:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:02:27 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_free_matrix(char **matrix)
+void	ft_free_matrix(void ***matrix)
 {
 	int	index;
 
 	index = 0;
-	if (!matrix)
+	if (!*matrix)
 		return ;
-	while (matrix[index])
+	while ((*matrix)[index])
 	{
-		free(matrix[index]);
-		matrix[index] = NULL;
+		ft_free((void **)&((*matrix)[index]));
+		(*matrix)[index] = NULL;
 		index++;
 	}
-	free(matrix);
-	matrix = NULL;
+	ft_free((void **)matrix);
+	*matrix = NULL;
 	return ;
 }
