@@ -21,6 +21,11 @@
 # define EXECSTATE		4
 # define CLEANSTATE		5
 
+//tokentype definitions
+# define PIPE			1
+# define SEMICOLON		2
+# define REDIR_IN		3
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -83,13 +88,13 @@ void		ft_command_echo(char **tokens);
 
 int			ft_minishell_cleaner(t_data *ms);
 
-void	  ft_free(void **pointer);
-void	  ft_free_matrix(void ***matrix);
-void	  ft_free_tokens(t_tokens **tokens);
-int		  ft_minishell_exit(t_data *ms);
-void	  ft_print_split(char **tokens);
-void	  ft_print_tokens(t_tokens *tokens);
+void		ft_free(void *pointer);
+void		ft_free_matrix(char **matrix);
+void		ft_free_tokens(t_tokens *tokens);
 void		ft_free_split(char **array);
+int			ft_minishell_exit(t_data *ms);
+void		ft_print_split(char **tokens);
+void		ft_print_tokens(t_tokens *tokens);
 
 int			ft_is_whitespace(char c);
 int			ft_count_words(char *string);
