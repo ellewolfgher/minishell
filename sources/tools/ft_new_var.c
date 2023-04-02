@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/01 15:15:07 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/01 15:54:24 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/01 15:55:14 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
-int	ft_minishell_parser(t_data *ms)
+t_env_vars	*ft_new_var(char *content)
 {
-	if (ft_parser_quotes(ms))
-		return (1);
-	if (ft_parser_onlyspc(ms->input))
-	{
-		ms->state = CLEANSTATE;
-		ms->split = NULL;
-		return (0);
-	}
-	ft_parser_spacer(ms);
-	ft_parser_split(ms);
-	ft_parser_tokenize(ms);
-	ft_parser_expand(ms);
-	ms->state = EXECSTATE;
-	return (0);
+	t_env_vars	*new;
+
+	new = (t_env_vars *)ft_calloc(1, sizeof(t_env_vars));
+	if (!new)
+		return (NULL);
+	new->content = ft_strdup(content);
+	new->next = NULL;
+	return (new);
 }

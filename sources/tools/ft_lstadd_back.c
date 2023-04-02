@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/01 15:15:07 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/01 15:50:28 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/01 15:56:59 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
-int	ft_minishell_parser(t_data *ms)
+static t_env_vars	*ft_lstlast(t_env_vars *element)
 {
-	if (ft_parser_quotes(ms))
-		return (1);
-	if (ft_parser_onlyspc(ms->input))
-	{
-		ms->state = CLEANSTATE;
-		ms->split = NULL;
-		return (0);
-	}
-	ft_parser_spacer(ms);
-	ft_parser_split(ms);
-	ft_parser_tokenize(ms);
-	ft_parser_expand(ms);
-	ms->state = EXECSTATE;
-	return (0);
+	if (element == NULL)
+		return (NULL);
+	while (element->next != NULL)
+		element = element->next;
+	return (element);
+}
+
+void	ft_lstadd_back(t_env_vars **stack, t_env_vars *new)
+{
+	t_env_vars	*last;
+
+	if (!stack || !new)
+		return ;
+	last = ft_lstlast(*stack);
+	if (last != NULL)
+		last->next = new;
+	else
+		*stack = new;
 }

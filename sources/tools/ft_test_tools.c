@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 18:15:52 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/27 16:52:14 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:47:18 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ void	ft_print_tokens(t_tokens *tokens)
 		aux = aux->next;
 		i++;
 	}
+}
+
+//Prints the environment variables
+void	ft_print_env_vars(t_env_vars *head)
+{
+	t_env_vars	*aux;
+
+	aux = head;
+	while (aux)
+	{
+		printf("%s\n", aux->content);
+		aux = aux->next;
+	}
+	return ;
 }
 
 //Prints the split

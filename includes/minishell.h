@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:35:18 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:35:51 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int			ft_signals_init(void);
 int			ft_minishell_prompt(t_data *ms);
 int			ft_prompt_to_input(t_data *ms);
 
+void		ft_expand_exit_code(t_data *ms);
+void		ft_expand_variables(t_data *ms);
 void		ft_parser_expand(t_data *ms);
 int			ft_parser_onlyspc(char *str);
 int			ft_parser_quotes(t_data *ms);
@@ -90,18 +92,24 @@ void		ft_free_tokens(t_tokens **tokens);
 int			ft_minishell_exit(t_data *ms);
 void		ft_print_split(char **tokens);
 void		ft_print_tokens(t_tokens *tokens);
+void		ft_print_env_vars(t_env_vars *head);
 void		ft_free_split(char **array);
 int			ft_minishell_exit(t_data *ms);
 void		ft_print_split(char **tokens);
 void		ft_print_tokens(t_tokens *tokens);
 
+char		*ft_find_variable(char	*str);
+int			ft_match_variables(char *env_var, char *var_name);
 int			ft_is_whitespace(char c);
 int			ft_isalnum(int c);
+int			ft_is_variable(char c);
 char		*ft_itoa(int n);
 int			ft_count_words(char *string);
 int			ft_strlen(const char *str);
 int			ft_strcmp(const char *s1, const char *s2);
 void		*ft_calloc(size_t num_elements, size_t element_size);
+t_env_vars	*ft_new_var(char *content);
+void		ft_lstadd_back(t_env_vars **stack, t_env_vars *new);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *tobecopied);
 char		*ft_strjoin(char const *s1, char const *s2);
