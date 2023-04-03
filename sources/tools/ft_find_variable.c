@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
+/*   ft_find_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/01 15:15:07 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/02 00:32:35 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/02 00:32:48 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
-int	ft_minishell_parser(t_data *ms)
+//Finds the first occurrence of a variable in a string
+//starting with a $ symbol and followed by a valid
+//variable name character.
+char	*ft_find_variable(char	*str)
 {
-	if (ft_parser_quotes(ms))
-		return (1);
-	if (ft_parser_onlyspc(ms->input))
+	while (*str)
 	{
-		ms->state = CLEANSTATE;
-		ms->split = NULL;
-		return (0);
+		if (*str == '$' && ft_is_variable(str[1]))
+			return (str);
+		str++;
 	}
-	ft_parser_spacer(ms);
-	ft_parser_split(ms);
-	ft_parser_tokenize(ms);
-	ft_parser_expand(ms);
-	ms->state = EXECSTATE;
-	return (0);
+	return (NULL);
 }

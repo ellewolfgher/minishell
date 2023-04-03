@@ -23,6 +23,8 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_command_env.c \
 		ft_command_unset.c) \
 		$(addprefix $(PATH_PARS),\
+		ft_expand_exit_code.c \
+		ft_expand_variables.c \
 		ft_parser_expand.c \
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
@@ -42,10 +44,15 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_TOOL),\
 		ft_calloc.c \
 		ft_count_words.c \
+		ft_find_variable.c \
+		ft_match_variables.c \
 		ft_isalnum.c \
 		ft_itoa.c \
+		ft_is_variable.c \
 		ft_is_whitespace.c \
 		ft_minishell_exit.c \
+		ft_new_var.c \
+		ft_lstadd_back.c \
 		ft_free.c \
 		ft_free_matrix.c \
 		ft_free_tokens.c \

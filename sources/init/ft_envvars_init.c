@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:23:04 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 12:28:47 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:58:26 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,13 @@
 int	ft_envvars_init(t_data *ms, char **envp)
 {
 	int			index;
-	t_env_vars	*temp;
 
 	index = 0;
-	ms->env_vars = ft_calloc(1, sizeof(*ms->env_vars));
-	temp = ms->env_vars;
+	ms->env_vars = ft_new_var(envp[index]);
+	index++;
 	while (envp[index])
 	{
-		temp->content = ft_strdup(envp[index]);
-		if (envp[index + 1])
-			temp->next = ft_calloc(1, sizeof(*ms->env_vars));
-		temp = temp->next;
+		ft_lstadd_back(&ms->env_vars, ft_new_var(envp[index]));
 		index++;
 	}
 	return (0);
