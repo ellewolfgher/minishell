@@ -6,11 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 00:27:24 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/02 00:47:06 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:48:54 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 //Extracts the variable name from a string that starts with a $ symbol.
 //Allocates memory for the variable name.

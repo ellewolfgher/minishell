@@ -6,13 +6,13 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:00:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:37:06 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:43:41 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// Foward until quotes
+// Foward the index until the end of the quotes
 static int	ft_foward_until_quotes(char *string)
 {
 	char	quote;
@@ -89,7 +89,7 @@ void	ft_parser_split(t_data *ms)
 			index++;
 		size = (ft_wordlen(ms->input, index));
 		ms->split[count] = ft_calloc (size + 1, 1);
-		index += ft_string_to_split (ms, index, size, count);
+		index = ft_string_to_split(ms, index, size, count);
 		count++;
 	}
 	ms->split[count] = NULL;
