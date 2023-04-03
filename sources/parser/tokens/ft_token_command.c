@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_parser.c                              :+:      :+:    :+:   */
+/*   ft_token_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/03 18:42:12 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/03 18:23:32 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/03 18:24:19 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
-int	ft_minishell_parser(t_data *ms)
+//Check if the token is a command
+int	ft_token_command(t_tokens *temp)
 {
-	if (ft_parser_quotes(ms))
+	if (!temp->prev && !temp->next)
 		return (1);
-	if (ft_parser_onlyspc(ms->input))
+	if (!temp->prev)
+		return (1);
+	if (temp->prev && temp->prev->type == OPTOKEN)
+		return (1);
+	if (temp->prev && temp->prev->type == FDTOKEN)
 	{
-		ms->state = CLEANSTATE;
-		ms->split = NULL;
-		return (0);
+		if (temp->prev->prev && temp->prev->prev->type == REDTOKEN)
+			return (1);
 	}
-	ft_parser_spacer(ms);
-	ft_parser_split(ms);
-	ft_parser_tokenize(ms);
-	ft_parser_expand(ms);
-	ft_parser_categorize(ms->tokens);
-	ms->state = EXECSTATE;
 	return (0);
 }

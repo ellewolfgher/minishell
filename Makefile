@@ -10,6 +10,8 @@ PATH_INIT = $(PATH_SRCS)init/
 PATH_PROM = $(PATH_SRCS)prompt/
 PATH_TOOL = $(PATH_SRCS)tools/
 PATH_CLEA = $(PATH_SRCS)clean/
+PATH_EXPN = $(PATH_PARS)expansion/
+PATH_TKNS = $(PATH_PARS)tokens/
 
 SRCS = $(addprefix $(PATH_SRCS),\
 		ft_main.c) \
@@ -23,8 +25,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_command_env.c \
 		ft_command_unset.c) \
 		$(addprefix $(PATH_PARS),\
-		ft_expand_exit_code.c \
-		ft_expand_variables.c \
+		ft_parser_categorize.c \
 		ft_parser_expand.c \
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
@@ -32,6 +33,18 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_parser_split.c \
 		ft_parser_onlyspc.c \
 		ft_minishell_parser.c) \
+		$(addprefix $(PATH_EXPN),\
+		ft_expand_exit_code.c \
+		ft_expand_variables.c) \
+		$(addprefix $(PATH_TKNS),\
+		ft_token_all.c \
+		ft_token_builtin.c \
+		ft_token_command.c \
+		ft_token_error.c \
+		ft_token_fd.c \
+		ft_token_operator.c \
+		ft_token_redirect.c \
+		ft_token_word.c) \
 		$(addprefix $(PATH_CLEA),\
 		ft_minishell_cleaner.c) \
 		$(addprefix $(PATH_INIT),\
@@ -48,6 +61,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_match_variables.c \
 		ft_isalnum.c \
 		ft_itoa.c \
+		ft_isprint.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
 		ft_minishell_exit.c \
@@ -56,6 +70,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_free.c \
 		ft_free_matrix.c \
 		ft_free_tokens.c \
+		ft_strcmp.c \
 		ft_strchr.c \
 		ft_strdup.c \
 		ft_strjoin.c \
@@ -85,6 +100,8 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)tools/
 	@mkdir -p $(PATH_OBJS)clean/
+	@mkdir -p $(PATH_OBJS)parser/expansion/
+	@mkdir -p $(PATH_OBJS)parser/tokens/
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean:

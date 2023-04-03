@@ -6,11 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 00:10:44 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/02 00:24:31 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:48:49 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 //Updates the current token value by replacing the exit code 
 //placeholder $? with the actual exit code.
@@ -38,8 +38,15 @@ static char	*ft_find_exit_code(char *str)
 	return (NULL);
 }
 
-//Expands the exit code placeholder in the token list.
-//Still needs to pass norminette.
+// Skips the token if it is a quoted string.
+static t_tokens	*ft_skipifquote(t_tokens *head)
+{
+	while (head && head->value[0] == '\'')
+		head = head->next;
+	return (head);
+}
+
+// Expands the exit code placeholder in the token list.
 void	ft_expand_exit_code(t_data *ms)
 {
 	char		*aux;
@@ -50,11 +57,9 @@ void	ft_expand_exit_code(t_data *ms)
 	head = ms->tokens;
 	while (head)
 	{
-		if (head->value[0] == '\'')
-		{
-			head = head->next;
-			continue ;
-		}
+		head = ft_skipifquote(head);
+		if (!head)
+			break ;
 		aux = ft_find_exit_code(head->value);
 		if (aux)
 		{
@@ -65,7 +70,6 @@ void	ft_expand_exit_code(t_data *ms)
 			ft_free((void **)&exit_str);
 			ft_free((void **)&temporary);
 		}
-		else
-			head = head->next;
+		head = head->next;
 	}
 }
