@@ -32,6 +32,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_CLEA),\
 		ft_minishell_cleaner.c) \
 		$(addprefix $(PATH_EXEC),\
+		ft_exec_one_command.c \
 		ft_minishell_executioner.c) \
 		$(addprefix $(PATH_EXIT),\
 		ft_minishell_exit.c) \

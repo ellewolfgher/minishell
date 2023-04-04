@@ -1,51 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_command_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/29 16:18:44 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/04 19:05:18 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_command_echo(char **tokens)
+void	ft_command_echo(t_data *ms)
 {
-	int	skip_newline;
-	int	i;
+	int			newline;
+	t_tokens	*tokens;
 
-	skip_newline = 0;
-	i = 1;
-	while (tokens[i] != NULL)
+	newline = 0;
+	tokens = ms->tokens->next;
+	if (tokens && tokens->type == WORDTOKEN && strcmp(tokens->value, "-n") == 0)
 	{
-		if (strcmp(tokens[i], "-n") == 0)
-		{
-			skip_newline = 1;
-			break ;
-		}
-		i++;
+		newline = 1;
+		tokens = tokens->next;
 	}
-	// Print the remaining arguments without a trailing newline if "-n" option is present
-	if (skip_newline)
-		i = 2;
-	else
-		i = 1;
-	while (tokens[i] != NULL)
+	while (tokens)
 	{
-		if (i == 1)
+		if (tokens->type == WORDTOKEN)
 		{
-			printf("%s", tokens[i++]);
-			printf("\n");
+			printf("%s", tokens->value);
+			if (tokens->next && tokens->next->type == WORDTOKEN)
+				printf(" ");
 		}
-		else
-			printf("%s", tokens[i++]);
-		if (tokens[i] != NULL)
-			printf(" ");
+		tokens = tokens->next;
 	}
+	if (!newline)
+		printf("\n");
 }
 
-//q:how do i make the echo command work with the -n option?
-//a:make a variable that is set to 0, if the -n option is present, set it to 1, then if it is 1, print the arguments without a trailing newline
+/* {
+    int n_flag = 0;
+
+    if (tokens->next && tokens->next->type == TOKEN_ARG 
+				&& strcmp(tokens->next->value, "-n") == 0)
+    {
+        n_flag = 1;
+        tokens = tokens->next;
+    }
+
+    while (tokens)
+    {
+        if (tokens->type == TOKEN_ARG)
+        {
+            printf("%s", tokens->value);
+            if (tokens->next && tokens->next->type == TOKEN_ARG)
+                printf(" ");
+        }
+        tokens = tokens->next;
+    }
+
+    if (!n_flag)
+        printf("\n");
+}
+ */

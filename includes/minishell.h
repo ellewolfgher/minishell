@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 18:26:33 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:55:34 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_data
 }	t_data;
 
 void		ft_command_cd(t_data *ms);
-void		ft_command_echo(char **tokens);
+void		ft_command_echo(t_data *ms);
 void		ft_command_env(char **tokens);
 void		ft_command_export(void);
 void		ft_command_pwd(void);
