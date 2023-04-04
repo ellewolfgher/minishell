@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:30:13 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 12:30:14 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:06:34 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-static void		ft_alloc_strs(char **res, char *s, char c, size_t strs);
-
-static size_t	ft_count_strs(char const *s, char c);
-
-char	**ft_split(char const *s, char c)
-{
-	char	**res;
-	size_t	strs;
-
-	strs = ft_count_strs(s, c);
-	res = (char **)malloc(sizeof(char *) * (strs + 1));
-	if ((!s && s[0] == '\0') || !res)
-		return (NULL);
-	ft_alloc_strs(res, (char *)s, c, strs);
-	res[strs] = NULL;
-	return (res);
-}
+#include "../../../includes/minishell.h"
 
 static size_t	ft_count_strs(char const *s, char c)
 {
@@ -76,4 +58,20 @@ static void	ft_alloc_strs(char **res, char *s, char c, size_t strs)
 		res[j] = ft_substr(&s[start], 0, (end - start + 1));
 		j++;
 	}
+}
+
+//Split a string into an array of strings using a delimiter
+//Allocates memory for the array and the strings
+char	**ft_split(char const *s, char c)
+{
+	char	**res;
+	size_t	strs;
+
+	strs = ft_count_strs(s, c);
+	res = (char **)malloc(sizeof(char *) * (strs + 1));
+	if ((!s && s[0] == '\0') || !res)
+		return (NULL);
+	ft_alloc_strs(res, (char *)s, c, strs);
+	res[strs] = NULL;
+	return (res);
 }

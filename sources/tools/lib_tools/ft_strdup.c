@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 15:54:24 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/01 15:55:14 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/16 17:02:56 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:04:36 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-t_env_vars	*ft_new_var(char *content)
+//Copies a string to a new string (allocates memory)
+char	*ft_strdup(const char *tobecopied)
 {
-	t_env_vars	*new;
+	char	*newstring;
+	int		i;
 
-	new = (t_env_vars *)ft_calloc(1, sizeof(t_env_vars));
-	if (!new)
+	if (!tobecopied)
 		return (NULL);
-	new->content = ft_strdup(content);
-	new->next = NULL;
-	return (new);
+	newstring = (char *) malloc(ft_strlen(tobecopied) + 1);
+	if (!newstring)
+		return (NULL);
+	i = 0;
+	while (tobecopied[i])
+	{
+		newstring[i] = tobecopied[i];
+		i++;
+	}
+	newstring[i] = 0;
+	return (newstring);
 }

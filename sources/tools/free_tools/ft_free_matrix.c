@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tokens.c                                   :+:      :+:    :+:   */
+/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 17:10:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:28:33 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/27 17:05:16 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:01:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	ft_free_tokens(t_tokens **tokens)
+void	ft_free_matrix(void ***matrix)
 {
-	t_tokens	*this;
+	int	index;
 
-	if (!*tokens)
+	index = 0;
+	if (!*matrix)
 		return ;
-	while (*tokens)
+	while ((*matrix)[index])
 	{
-		this = *tokens;
-		ft_free((void **)&(this->value));
-		this->value = NULL;
-		*tokens = (*tokens)->next;
-		ft_free((void **)&this);
-		this = NULL;
+		ft_free((void **)&((*matrix)[index]));
+		(*matrix)[index] = NULL;
+		index++;
 	}
+	ft_free((void **)matrix);
+	*matrix = NULL;
 	return ;
 }

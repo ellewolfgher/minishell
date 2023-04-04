@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_split.c                                    :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 12:40:41 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 12:41:44 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/03/30 18:22:25 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:02:35 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-void	ft_free_split(char **array)
+//Checks if a character is alphanumeric, which can be a digit or a letter.
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	if ((c > 47 && c < 58) || (c > 64 && c < 91)
+		|| (c > 96 && c < 123))
+		return (8);
+	return (0);
 }

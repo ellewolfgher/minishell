@@ -3,20 +3,25 @@ NAME = minishell
 PATH_INCS = ./includes/
 PATH_OBJS = ./objects/
 PATH_SRCS = ./sources/
-PATH_EXEC = $(PATH_SRCS)exec/
 PATH_BUIL = $(PATH_SRCS)builtins/
-PATH_PARS = $(PATH_SRCS)parser/
-PATH_INIT = $(PATH_SRCS)init/
-PATH_PROM = $(PATH_SRCS)prompt/
-PATH_TOOL = $(PATH_SRCS)tools/
 PATH_CLEA = $(PATH_SRCS)clean/
+PATH_EXEC = $(PATH_SRCS)exec/
+PATH_EXIT = $(PATH_SRCS)exit/
+PATH_INIT = $(PATH_SRCS)init/
+
+PATH_PARS = $(PATH_SRCS)parser/
 PATH_EXPN = $(PATH_PARS)expansion/
 PATH_TKNS = $(PATH_PARS)tokens/
 
+PATH_PROM = $(PATH_SRCS)prompt/
+
+PATH_TOOL = $(PATH_SRCS)tools/
+PATH_FRTL = $(PATH_TOOL)free_tools/
+PATH_LBTL = $(PATH_TOOL)lib_tools/
+PATH_MSTL = $(PATH_TOOL)minishell_tools/
+
 SRCS = $(addprefix $(PATH_SRCS),\
 		ft_main.c) \
-		$(addprefix $(PATH_EXEC),\
-		ft_minishell_executioner.c) \
 		$(addprefix $(PATH_BUIL),\
 		ft_command_cd.c \
 		ft_command_pwd.c \
@@ -24,6 +29,16 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_command_echo.c \
 		ft_command_env.c \
 		ft_command_unset.c) \
+		$(addprefix $(PATH_CLEA),\
+		ft_minishell_cleaner.c) \
+		$(addprefix $(PATH_EXEC),\
+		ft_minishell_executioner.c) \
+		$(addprefix $(PATH_EXIT),\
+		ft_minishell_exit.c) \
+		$(addprefix $(PATH_INIT),\
+		ft_envvars_init.c \
+		ft_minishell_init.c \
+		ft_signals_init.c) \
 		$(addprefix $(PATH_PARS),\
 		ft_parser_categorize.c \
 		ft_parser_expand.c \
@@ -45,39 +60,39 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_token_operator.c \
 		ft_token_redirect.c \
 		ft_token_word.c) \
-		$(addprefix $(PATH_CLEA),\
-		ft_minishell_cleaner.c) \
-		$(addprefix $(PATH_INIT),\
-		ft_envvars_init.c \
-		ft_minishell_init.c \
-		ft_signals_init.c) \
 		$(addprefix $(PATH_PROM),\
 		ft_minishell_prompt.c \
 		ft_prompt_to_input.c) \
-		$(addprefix $(PATH_TOOL),\
-		ft_calloc.c \
-		ft_count_words.c \
-		ft_find_variable.c \
-		ft_match_variables.c \
-		ft_isalnum.c \
-		ft_itoa.c \
-		ft_isprint.c \
-		ft_is_variable.c \
-		ft_is_whitespace.c \
-		ft_minishell_exit.c \
-		ft_new_var.c \
-		ft_lstadd_back.c \
-		ft_free.c \
+		$(addprefix $(PATH_FRTL),\
 		ft_free_matrix.c \
+		ft_free_split.c \
 		ft_free_tokens.c \
-		ft_strcmp.c \
+		ft_free.c) \
+		$(addprefix $(PATH_LBTL),\
+		ft_calloc.c \
+		ft_isalnum.c \
+		ft_isprint.c \
+		ft_itoa.c \
+		ft_split.c \
 		ft_strchr.c \
+		ft_strcmp.c \
 		ft_strdup.c \
 		ft_strjoin.c \
 		ft_strlen.c \
 		ft_strncmp.c \
 		ft_strtrim.c \
-		ft_substr.c \
+		ft_substr.c) \
+		$(addprefix $(PATH_MSTL),\
+		ft_count_words.c \
+		ft_env_add_var.c \
+		ft_env_back_add.c \
+		ft_env_var_new.c \
+		ft_find_variable.c \
+		ft_is_variable.c \
+		ft_is_whitespace.c \
+		ft_lstadd_back.c \
+		ft_match_variables.c \
+		ft_new_var.c \
 		ft_test_tools.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
@@ -93,15 +108,19 @@ $(NAME): $(OBJS)
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
-	@mkdir -p $(PATH_OBJS)exec/
 	@mkdir -p $(PATH_OBJS)builtins/
-	@mkdir -p $(PATH_OBJS)parser/
-	@mkdir -p $(PATH_OBJS)prompt/
-	@mkdir -p $(PATH_OBJS)init/
-	@mkdir -p $(PATH_OBJS)tools/
 	@mkdir -p $(PATH_OBJS)clean/
+	@mkdir -p $(PATH_OBJS)exec/
+	@mkdir -p $(PATH_OBJS)exit/
+	@mkdir -p $(PATH_OBJS)init/
+	@mkdir -p $(PATH_OBJS)parser/
 	@mkdir -p $(PATH_OBJS)parser/expansion/
 	@mkdir -p $(PATH_OBJS)parser/tokens/
+	@mkdir -p $(PATH_OBJS)prompt/
+	@mkdir -p $(PATH_OBJS)tools/
+	@mkdir -p $(PATH_OBJS)tools/free_tools/
+	@mkdir -p $(PATH_OBJS)tools/lib_tools/
+	@mkdir -p $(PATH_OBJS)tools/minishell_tools/
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean:

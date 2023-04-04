@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_match_variables.c                               :+:      :+:    :+:   */
+/*   ft_is_whitespace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 00:35:24 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/02 00:35:31 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/23 18:13:22 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:02:52 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-//Checks if a given environment variable env_var
-//matches the given variable name var_name.
-int	ft_match_variables(char *env_var, char *var_name)
+//Checks if a character is a space, a tab or a new line.
+int	ft_is_whitespace(char c)
 {
-	size_t		var_size;
-
-	var_size = ft_strlen(var_name);
-	if (!ft_strncmp(env_var, var_name, var_size)
-		&& *(env_var + var_size) == '=')
+	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
 	return (0);
 }

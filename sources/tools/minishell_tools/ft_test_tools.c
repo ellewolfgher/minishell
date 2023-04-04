@@ -6,11 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 18:15:52 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/03 16:53:31 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:08:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 //Prints the tokens
 void	ft_print_tokens(t_tokens *tokens)

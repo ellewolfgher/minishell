@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_env_back_add.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 18:24:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:25:05 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/30 11:58:34 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/04/04 09:01:35 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_env_back_add(t_env_vars **env_vars, t_env_vars *new)
 {
-	size_t	i;
+	t_env_vars	*last;
 
-	i = 0;
-	while (i < n && (s1[i] != 0 || s2[i] != 0))
+	if (!*env_vars)
 	{
-		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-		i++;
+		*env_vars = new;
+		return ;
 	}
-	return (0);
+	last = *env_vars;
+	while (last->next)
+		last = last->next;
+	last->next = new;
 }

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_match_variables.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 18:22:25 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:22:43 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/02 00:35:24 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:03:54 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+#include "../../../includes/minishell.h"
+
+//Checks if a given environment variable env_var
+//matches the given variable name var_name.
+int	ft_match_variables(char *env_var, char *var_name)
 {
-	if ((c > 47 && c < 58) || (c > 64 && c < 91)
-		|| (c > 96 && c < 123))
-		return (8);
+	size_t		var_size;
+
+	var_size = ft_strlen(var_name);
+	if (!ft_strncmp(env_var, var_name, var_size)
+		&& *(env_var + var_size) == '=')
+		return (1);
 	return (0);
 }

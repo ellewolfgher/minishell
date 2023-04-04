@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_whitespace.c                                 :+:      :+:    :+:   */
+/*   ft_find_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 18:13:22 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/23 18:13:24 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/02 00:32:35 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:01:45 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_whitespace(char c)
+#include "../../../includes/minishell.h"
+
+//Finds the first occurrence of a variable in a string
+//starting with a $ symbol and followed by a valid
+//variable name character.
+char	*ft_find_variable(char	*str)
 {
-	if (c == ' ' || c == '\t' || c == '\n')
-		return (1);
-	return (0);
+	while (*str)
+	{
+		if (*str == '$' && ft_is_variable(str[1]))
+			return (str);
+		str++;
+	}
+	return (NULL);
 }

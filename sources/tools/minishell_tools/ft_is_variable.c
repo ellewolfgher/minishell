@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_is_variable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 16:58:57 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:07:24 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/02 00:29:16 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:02:18 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-//Frees the memory cleanly
-void	ft_free(void **pointer)
+//Checks if a character is a valid variable name character, 
+//which can be an alphanumeric character or an underscore.
+int	ft_is_variable(char c)
 {
-	if (!*pointer)
-		return ;
-	free(*pointer);
-	*pointer = NULL;
-	return ;
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 17:24:10 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 17:33:53 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:08:32 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 //Allocates (with malloc(3)) and returns a substring from the string ’s’.
 //The substring begins at index ’start’ and is of maximum size ’len’.

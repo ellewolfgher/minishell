@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_variable.c                                 :+:      :+:    :+:   */
+/*   ft_new_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 00:32:35 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/02 00:32:48 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/01 15:54:24 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:05:34 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-//Finds the first occurrence of a variable in a string
-//starting with a $ symbol and followed by a valid
-//variable name character.
-char	*ft_find_variable(char	*str)
+//Creates a new variable node t_env_vars.
+t_env_vars	*ft_new_var(char *content)
 {
-	while (*str)
-	{
-		if (*str == '$' && ft_is_variable(str[1]))
-			return (str);
-		str++;
-	}
-	return (NULL);
+	t_env_vars	*new;
+
+	new = (t_env_vars *)ft_calloc(1, sizeof(t_env_vars));
+	if (!new)
+		return (NULL);
+	new->content = ft_strdup(content);
+	new->next = NULL;
+	return (new);
 }
