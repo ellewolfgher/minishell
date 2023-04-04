@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_varlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:36:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 16:37:17 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 19:17:06 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //Frees a list of environment variables
 void	ft_free_varlist(t_env_vars **head)
 {
-	t_env_vars *temp;
+	t_env_vars	*temp;
 
 	while (*head)
 	{
