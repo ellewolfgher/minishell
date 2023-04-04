@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_split.c                                    :+:      :+:    :+:   */
+/*   ft_free_varlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 12:40:41 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/04 09:01:54 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/04 16:36:40 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 16:37:17 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	ft_free_split(char **array)
+//Frees a list of environment variables
+void	ft_free_varlist(t_env_vars **head)
 {
-	int	i;
+	t_env_vars *temp;
 
-	i = 0;
-	while (array[i])
+	while (*head)
 	{
-		free(array[i]);
-		i++;
+		temp = *head;
+		*head = (*head)->next;
+		ft_free_var(&temp);
 	}
-	free(array);
 }

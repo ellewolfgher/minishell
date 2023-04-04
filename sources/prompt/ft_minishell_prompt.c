@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:53:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/20 12:51:29 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:56:15 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_minishell_prompt(t_data *ms)
 	}
 	if (control)
 	{
-		ms->state = ERRSTATE;
+		ms->state = EXITSTATE;
 		ms->exit_code = 0;
 	}
 	return (0);
