@@ -65,8 +65,9 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_prompt_to_input.c) \
 		$(addprefix $(PATH_FRTL),\
 		ft_free_matrix.c \
-		ft_free_split.c \
 		ft_free_tokens.c \
+		ft_free_var.c \
+		ft_free_varlist.c \
 		ft_free.c) \
 		$(addprefix $(PATH_LBTL),\
 		ft_calloc.c \
@@ -84,15 +85,13 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_substr.c) \
 		$(addprefix $(PATH_MSTL),\
 		ft_count_words.c \
-		ft_env_add_var.c \
-		ft_env_back_add.c \
-		ft_env_var_new.c \
+		ft_envvar_add.c \
+		ft_envvar_back.c \
+		ft_envvar_new.c \
 		ft_find_variable.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
-		ft_lstadd_back.c \
 		ft_match_variables.c \
-		ft_new_var.c \
 		ft_test_tools.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))

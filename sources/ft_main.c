@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/01 15:25:06 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:55:37 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char *argv[], char **envp)
 	ms->state = INITSTATE;
 	while (1)
 	{
-		if (ms->state <= ERRSTATE)
+		if (ms->state <= EXITSTATE)
 			ft_minishell_exit(ms);
 		if (ms->state == INITSTATE)
 			ft_minishell_init(ms, envp);

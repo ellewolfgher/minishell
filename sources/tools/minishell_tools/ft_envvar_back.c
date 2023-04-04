@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_var_new.c                                   :+:      :+:    :+:   */
+/*   ft_envvar_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 11:58:24 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/04 09:01:40 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/01 15:50:28 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 16:54:06 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-t_env_vars	*ft_env_var_new(char *content)
+static t_env_vars	*ft_envvar_last(t_env_vars *element)
 {
-	t_env_vars	*new;
-
-	new = (t_env_vars *)malloc(sizeof(t_env_vars));
-	if (!new)
+	if (element == NULL)
 		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	while (element->next != NULL)
+		element = element->next;
+	return (element);
+}
+
+//Adds the element ’new’ at the end of the list.
+void	ft_envvar_back(t_env_vars **stack, t_env_vars *new)
+{
+	t_env_vars	*last;
+
+	if (!stack || !new)
+		return ;
+	last = ft_envvar_last(*stack);
+	if (last != NULL)
+		last->next = new;
+	else
+		*stack = new;
 }

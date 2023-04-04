@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_add_var.c                                   :+:      :+:    :+:   */
+/*   ft_envvar_add.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:58:31 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/04 09:26:51 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:56:30 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	ft_env_add_var(t_env_vars **env_vars, char *env_var)
+void	ft_envvar_add(t_env_vars **env_vars, char *env_var)
 {
 	char		**split;
 	char		*key;
@@ -29,12 +29,11 @@ void	ft_env_add_var(t_env_vars **env_vars, char *env_var)
 		{
 			free(temp->content);
 			temp->content = value;
-			ft_free_split(split);
+			ft_free_matrix((void ***)&split);
 			return ;
 		}
 		temp = temp->next;
 	}
-	temp = ft_env_var_new(value);
-	ft_env_back_add(env_vars, temp);
-	ft_free_split(split);
+	ft_envvar_back(env_vars, ft_envvar_new(value));
+	ft_free_matrix((void ***)&split);
 }

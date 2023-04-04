@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:56:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:53:07 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:55:52 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_minishell_cleaner(t_data *ms)
 	if (ms->tracking < 0)
 	{
 		ms->tracking = 0;
-		ms->state = ERRSTATE;
+		ms->state = EXITSTATE;
 		return (0);
 	}
 	if (ms->tracking > 0)
 	{
-		ms->state = ERRSTATE;
+		ms->state = EXITSTATE;
 		return (0);
 	}
 	else
