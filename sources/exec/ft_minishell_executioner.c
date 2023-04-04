@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_executioner.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:23:21 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 11:51:46 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:26:54 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	ft_pipe_check(t_tokens *tokens)
+{
+	t_tokens	*head;
+
+	head = tokens;
+	while (head)
+	{
+		if (head->type == OPTOKEN && !ft_strcmp(head->value, "|"))
+			return (1);
+		head = head->next;
+	}
+	return (0);
+}
+
 void	ft_minishell_executioner(t_data *ms)
 {
-	ft_print_tokens(ms->tokens);
-	if (strcmp(ms->tokens->value, "cd") == 0)
-		ft_command_cd(ms);
-	else if (strcmp(ms->tokens->value, "pwd") == 0)
-		ft_command_pwd();
-	else if (strcmp(ms->tokens->value, "exit") == 0)
-		exit(0);
-	else if (strcmp(ms->tokens->value, "export") == 0)
-		ft_command_export();
-	else if (strcmp(ms->tokens->value, "unset") == 0)
-		ft_command_unset(&(ms->tokens->value));
-	else if (strcmp(ms->tokens->value, "env") == 0)
-		ft_command_env(&(ms->tokens->value));
-	else if (strcmp(ms->tokens->value, "echo") == 0)
-		ft_command_echo(&(ms->tokens->value));
-	ms->state = CLEANSTATE;
-	return ;
+	if (ft_pipe_check(ms->tokens))
+		ft_one_command(ms);
 }
