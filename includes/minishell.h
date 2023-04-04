@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 16:57:17 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:26:33 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		ft_command_unset(char **tokens);
 
 int			ft_minishell_cleaner(t_data *ms);
 
+void		ft_exec_one_command(t_data *ms);
 void		ft_minishell_executioner(t_data *ms);
 
 int			ft_minishell_exit(t_data *ms);
@@ -156,7 +157,5 @@ void		ft_print_tokens(t_tokens *tokens);
 void		ft_print_env_vars(t_env_vars *head);
 void		ft_print_split(char **tokens);
 void		ft_print_tokens(t_tokens *tokens);
-
-
 
 #endif
