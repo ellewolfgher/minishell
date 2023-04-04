@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_exit.c                                :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:27:00 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:44:45 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/02/20 18:46:53 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:01:23 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-//Stablishes the exit state and frees the memory
-int	ft_minishell_exit(t_data *ms)
+void	*ft_calloc(size_t num_elements, size_t element_size)
 {
-	int	code;
+	void	*block;
+	size_t	i;
 
-	code = ms->exit_code;
-	ft_free((void **)&(ms->prompt));
-	ft_free((void **)&(ms));
-	exit (code);
+	block = malloc(num_elements * element_size);
+	if (block == NULL)
+		return (NULL);
+	i = 0;
+	while (i < num_elements * element_size)
+	{
+		((char *)block)[i] = 0;
+		i++;
+	}
+	return (block);
 }

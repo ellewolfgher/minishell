@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 12:34:43 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 12:35:02 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/03/30 12:40:41 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/04/04 09:01:54 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	ft_free_split(char **array)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s1[i] && s2[i])
+	while (array[i])
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		free(array[i]);
 		i++;
 	}
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+	free(array);
 }

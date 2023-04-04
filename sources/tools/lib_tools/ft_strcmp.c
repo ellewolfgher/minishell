@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 18:46:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/16 16:39:05 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/30 12:34:43 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/04/04 09:07:20 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	*ft_calloc(size_t num_elements, size_t element_size)
+//Compare two strings, returning an integer less than, equal to,
+//or greater than zero if s1 is found, respectively, to be less than,
+//to match, or be greater than s2.
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	void	*block;
 	size_t	i;
 
-	block = malloc(num_elements * element_size);
-	if (block == NULL)
-		return (NULL);
 	i = 0;
-	while (i < num_elements * element_size)
+	while (s1[i] && s2[i])
 	{
-		((char *)block)[i] = 0;
+		if (s1[i] != s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 		i++;
 	}
-	return (block);
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }

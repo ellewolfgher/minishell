@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_var_new.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:58:24 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 15:34:32 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:01:40 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 t_env_vars	*ft_env_var_new(char *content)
 {

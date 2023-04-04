@@ -6,11 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:04:23 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 18:37:30 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:01:27 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 // Skips quotes
 int	ft_foward_quotes(char *string)

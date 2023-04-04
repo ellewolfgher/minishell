@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_back_add.c                                  :+:      :+:    :+:   */
+/*   ft_minishell_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 11:58:34 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/30 15:34:19 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/03/16 16:27:00 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:13:15 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_env_back_add(t_env_vars **env_vars, t_env_vars *new)
+//Stablishes the exit state and frees the memory
+int	ft_minishell_exit(t_data *ms)
 {
-	t_env_vars	*last;
+	int	code;
 
-	if (!*env_vars)
-	{
-		*env_vars = new;
-		return ;
-	}
-	last = *env_vars;
-	while (last->next)
-		last = last->next;
-	last->next = new;
+	code = ms->exit_code;
+	ft_free((void **)&(ms->prompt));
+	ft_free((void **)&(ms));
+	exit (code);
 }

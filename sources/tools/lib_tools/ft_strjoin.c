@@ -6,12 +6,13 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:57:19 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 16:57:36 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:05:03 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
+//Concatenates two strings, allocating memory for the new string
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*cat;

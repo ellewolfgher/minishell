@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 17:26:15 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/17 17:33:13 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/17 17:27:03 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/04 09:04:28 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-//Trims the string s1 from the beginning and the end,
-//removing the characters in set.
-char	*ft_strtrim(char const *s1, char const *set)
+//Returns a pointer to the first occurence of c in s.
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	end;
+	char	*aux;
 
-	if (s1 == 0 || set == 0)
-		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	end = ft_strlen(s1);
-	while (end && ft_strchr(set, s1[end]))
-		end--;
-	return (ft_substr(s1, 0, (end + 1)));
+	if (c > 255)
+		return ((void *)s);
+	aux = (char *)s;
+	while (*aux)
+	{
+		if (*aux == c)
+			return (aux);
+		aux++;
+	}
+	if (*aux == c)
+		return (aux);
+	return (NULL);
 }

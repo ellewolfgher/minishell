@@ -6,11 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:54:04 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 16:55:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:04:02 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 static int	ft_get_len(int n)
 {
