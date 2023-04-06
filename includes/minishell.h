@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 18:55:34 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/06 11:15:46 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void		ft_parser_categorize(t_tokens *tokens);
 void		ft_parser_expand(t_data *ms);
 int			ft_parser_onlyspc(char *str);
 int			ft_parser_quotes(t_data *ms);
+void		ft_parser_rmquotes(t_tokens *tokens);
 void		ft_parser_spacer(t_data *ms);
 void		ft_parser_split(t_data *ms);
 void		ft_parser_tokenize(t_data *ms);

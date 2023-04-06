@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/03 18:42:12 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/06 11:16:27 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_minishell_parser(t_data *ms)
 	ft_parser_tokenize(ms);
 	ft_parser_expand(ms);
 	ft_parser_categorize(ms->tokens);
+	ft_parser_rmquotes(ms->tokens);
 	ms->state = EXECSTATE;
 	return (0);
 }

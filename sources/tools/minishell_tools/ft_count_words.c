@@ -6,14 +6,14 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:04:23 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 09:01:27 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/06 11:38:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 // Skips quotes
-int	ft_foward_quotes(char *string)
+static int	ft_foward_quotes(char *string)
 {
 	char	first;
 	int		index;
@@ -22,8 +22,7 @@ int	ft_foward_quotes(char *string)
 	first = string[index];
 	if (first == '\'' || first == '\"')
 	{
-		if (string[1])
-			index++;
+		index++;
 		while (string[index] && (string[index] != first))
 			index++;
 		if (string[index] == first)
@@ -48,7 +47,7 @@ int	ft_count_words(char *string)
 		while (string[index] && (string[index] != ' '))
 		{
 			if (string[index] == '\'' || string[index] == '\"')
-				index += ft_foward_quotes(string);
+				index += ft_foward_quotes(&string[index]);
 			else
 				index++;
 		}
