@@ -45,6 +45,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_parser_expand.c \
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
+		ft_parser_rmquotes.c \
 		ft_parser_spacer.c \
 		ft_parser_split.c \
 		ft_parser_onlyspc.c \
@@ -138,7 +139,7 @@ n:
 	@clear
 	@norminette ./sources ./includes
 
-vg:
+vg: all
 	@clear
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
 
