@@ -6,12 +6,13 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:51 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 18:25:26 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:45:20 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//Remove the variable from the environment
 void	ft_command_unset(t_tokens *tokens, t_env_vars **envp)
 {
 	t_tokens	*curr_token;

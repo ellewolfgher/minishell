@@ -6,12 +6,13 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 17:58:07 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:46:17 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//Create a new environment variable or update an existing one
 void	ft_command_export(t_tokens *tokens, t_env_vars **envp)
 {
 	t_tokens	*curr_token;

@@ -6,12 +6,13 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:25:54 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 18:37:00 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:47:45 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//Execute the command
 void	ft_exec_one_command(t_data *ms)
 {
 	if (strcmp(ms->tokens->value, "cd") == 0)

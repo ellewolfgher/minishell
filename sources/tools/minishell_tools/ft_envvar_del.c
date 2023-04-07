@@ -6,12 +6,13 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 18:25:54 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 18:41:26 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:50:04 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+//Deletes the element whose name is var_name.
 void	ft_envvar_del(t_env_vars **stack, char *var_name)
 {
 	t_env_vars	*prev;
