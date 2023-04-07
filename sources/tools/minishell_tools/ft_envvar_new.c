@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_new_var.c                                       :+:      :+:    :+:   */
+/*   ft_envvar_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:54:24 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 16:52:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:51:04 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//Creates a new variable node t_env_vars.
+//Creates a new element inside the list.
 t_env_vars	*ft_envvar_new(char *content)
 {
 	t_env_vars	*new;

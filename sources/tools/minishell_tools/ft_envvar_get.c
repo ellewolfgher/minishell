@@ -6,12 +6,13 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:50:50 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 17:16:05 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:50:16 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+//Returns the value of the environment variable whose name is name.
 char	*ft_envvar_get(t_env_vars *env_vars, const char *name)
 {
 	char		**split;

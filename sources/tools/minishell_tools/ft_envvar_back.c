@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_envvar_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:50:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 16:54:06 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:49:50 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+//Returns the last element of the list.
 static t_env_vars	*ft_envvar_last(t_env_vars *element)
 {
 	if (element == NULL)

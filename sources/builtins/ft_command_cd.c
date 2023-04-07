@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_command_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:28:03 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/03/28 20:11:11 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:47:30 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//Count the number of tokens
 static size_t	count_tokens(t_tokens *head)
 {
 	size_t	count;
@@ -25,6 +26,7 @@ static size_t	count_tokens(t_tokens *head)
 	return (count);
 }
 
+//Change the current working directory
 void	ft_command_cd(t_data *ms)
 {
 	char	*home_dir;

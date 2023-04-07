@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_envvar_add.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:58:31 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/04 16:56:30 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:49:37 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+//Add an environment variable to the list
 void	ft_envvar_add(t_env_vars **env_vars, char *env_var)
 {
 	char		**split;
