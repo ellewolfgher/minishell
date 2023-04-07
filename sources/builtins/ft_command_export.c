@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/06 19:04:03 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:58:07 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_command_export(t_tokens *tokens, t_env_vars **envp)
 			if (env_value)
 				ft_free((void **)&(env_value));
 			else
-				ft_envvar_back(envp, ft_envvar_new(NULL));
+				ft_envvar_back(envp, ft_envvar_new(curr_token->value));
 			env_value = ft_envvar_get(*envp, var_name);
 			env_value = ft_strdup(curr_token->value);
 			ft_free((void **)&var_name);
