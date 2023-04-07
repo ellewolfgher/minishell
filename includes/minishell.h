@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/06 19:07:11 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:35:31 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		ft_command_echo(t_data *ms);
 void		ft_command_env(t_env_vars *env_vars);
 void		ft_command_export(t_tokens *tokens, t_env_vars **envp);
 void		ft_command_pwd(void);
-void		ft_command_unset(char **tokens);
+void		ft_command_unset(t_tokens *tokens, t_env_vars **envp);
 
 int			ft_minishell_cleaner(t_data *ms);
 
@@ -147,6 +147,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_count_words(char *string);
 void		ft_envvar_add(t_env_vars **env_vars, char *env_var);
 void		ft_envvar_back(t_env_vars **stack, t_env_vars *new);
+void		ft_envvar_del(t_env_vars **stack, char *var_name);
 char		*ft_envvar_get(t_env_vars *env_vars, const char *name);
 int			ft_envvar_lstsize(t_env_vars *env_vars);
 t_env_vars	*ft_envvar_new(char *content);
