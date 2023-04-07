@@ -89,6 +89,8 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_count_words.c \
 		ft_envvar_add.c \
 		ft_envvar_back.c \
+		ft_envvar_get.c \
+		ft_envvar_lstsize.c \
 		ft_envvar_new.c \
 		ft_find_variable.c \
 		ft_is_variable.c \
