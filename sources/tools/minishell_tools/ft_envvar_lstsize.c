@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_command_env.c                                   :+:      :+:    :+:   */
+/*   ft_envvar_lstsize.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 14:30:42 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/06 18:10:36 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/04/06 16:25:35 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/04/06 16:27:30 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	ft_command_env(t_env_vars *env_vars)
+int	ft_envvar_lstsize(t_env_vars *env_vars)
 {
+	int		size;
+
+	size = 0;
 	while (env_vars)
 	{
-		printf("%s\n", env_vars->content);
+		size++;
 		env_vars = env_vars->next;
 	}
+	return (size);
 }
