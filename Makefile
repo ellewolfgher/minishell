@@ -16,6 +16,7 @@ PATH_TKNS = $(PATH_PARS)tokens/
 PATH_PROM = $(PATH_SRCS)prompt/
 
 PATH_TOOL = $(PATH_SRCS)tools/
+PATH_EVTL = $(PATH_TOOL)envvar_tools/
 PATH_FRTL = $(PATH_TOOL)free_tools/
 PATH_LBTL = $(PATH_TOOL)lib_tools/
 PATH_MSTL = $(PATH_TOOL)minishell_tools/
@@ -65,6 +66,13 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_PROM),\
 		ft_minishell_prompt.c \
 		ft_prompt_to_input.c) \
+		$(addprefix $(PATH_EVTL),\
+		ft_envvar_add.c \
+		ft_envvar_back.c \
+		ft_envvar_del.c \
+		ft_envvar_get.c \
+		ft_envvar_lstsize.c \
+		ft_envvar_new.c) \
 		$(addprefix $(PATH_FRTL),\
 		ft_free_matrix.c \
 		ft_free_tokens.c \
@@ -87,12 +95,6 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_substr.c) \
 		$(addprefix $(PATH_MSTL),\
 		ft_count_words.c \
-		ft_envvar_add.c \
-		ft_envvar_back.c \
-		ft_envvar_del.c \
-		ft_envvar_get.c \
-		ft_envvar_lstsize.c \
-		ft_envvar_new.c \
 		ft_find_variable.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
@@ -122,6 +124,7 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)parser/tokens/
 	@mkdir -p $(PATH_OBJS)prompt/
 	@mkdir -p $(PATH_OBJS)tools/
+	@mkdir -p $(PATH_OBJS)tools/envvar_tools/
 	@mkdir -p $(PATH_OBJS)tools/free_tools/
 	@mkdir -p $(PATH_OBJS)tools/lib_tools/
 	@mkdir -p $(PATH_OBJS)tools/minishell_tools/
