@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_envvar_add.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:58:31 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 18:49:37 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:38:17 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+//REMOVE LATER
 //Add an environment variable to the list
 void	ft_envvar_add(t_env_vars **env_vars, char *env_var)
 {
@@ -28,7 +29,7 @@ void	ft_envvar_add(t_env_vars **env_vars, char *env_var)
 	{
 		if (ft_strcmp(temp->content, key) == 0)
 		{
-			free(temp->content);
+			ft_free((void **)&temp->content);
 			temp->content = value;
 			ft_free_matrix((void ***)&split);
 			return ;
