@@ -5,7 +5,10 @@ PATH_OBJS = ./objects/
 PATH_SRCS = ./sources/
 PATH_BUIL = $(PATH_SRCS)builtins/
 PATH_CLEA = $(PATH_SRCS)clean/
-PATH_EXEC = $(PATH_SRCS)exec/
+
+PATH_EXEC = $(PATH_SRCS)execute/
+PATH_SAST = $(PATH_EXEC)search_and_set/
+
 PATH_EXIT = $(PATH_SRCS)exit/
 PATH_INIT = $(PATH_SRCS)init/
 
@@ -34,7 +37,18 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_minishell_cleaner.c) \
 		$(addprefix $(PATH_EXEC),\
 		ft_exec_one_command.c \
-		ft_minishell_executioner.c) \
+		ft_execute_loop.c \
+		ft_execute_redir_create.c \
+		ft_execute_set_commands.c \
+		ft_minishell_execute.c) \
+		$(addprefix $(PATH_SAST),\
+		ft_searchset_arguments.c \
+		ft_searchset_command.c \
+		ft_searchset_envvars.c \
+		ft_searchset_input.c \
+		ft_searchset_output.c \
+		ft_searchset_pipe_in.c \
+		ft_searchset_pipe_out.c) \
 		$(addprefix $(PATH_EXIT),\
 		ft_minishell_exit.c) \
 		$(addprefix $(PATH_INIT),\
@@ -95,11 +109,15 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_substr.c) \
 		$(addprefix $(PATH_MSTL),\
 		ft_count_words.c \
+		ft_fds_restore.c \
 		ft_find_variable.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
 		ft_match_variables.c \
-		ft_test_tools.c)
+		ft_redirect_list.c \
+		ft_signals_ignore.c \
+		ft_test_tools.c \
+		ft_tokens_iterate.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
@@ -116,7 +134,8 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
 	@mkdir -p $(PATH_OBJS)builtins/
 	@mkdir -p $(PATH_OBJS)clean/
-	@mkdir -p $(PATH_OBJS)exec/
+	@mkdir -p $(PATH_OBJS)execute/
+	@mkdir -p $(PATH_OBJS)execute/search_and_set/
 	@mkdir -p $(PATH_OBJS)exit/
 	@mkdir -p $(PATH_OBJS)init/
 	@mkdir -p $(PATH_OBJS)parser/
