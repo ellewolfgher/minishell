@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 19:30:15 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:34:33 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@
 # include <unistd.h>
 # include <signal.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -185,8 +187,12 @@ void		ft_free(void **pointer);
 
 void		*ft_calloc(size_t num_elements, size_t element_size);
 int			ft_isalnum(int c);
+int			ft_isdigit(int c);
 int			ft_isprint(int c);
 char		*ft_itoa(int n);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putendl_fd(char *s, int fd);
+void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
@@ -202,9 +208,11 @@ int			ft_fds_restore(int original_fds[2]);
 char		*ft_find_variable(char	*str);
 int			ft_is_variable(char c);
 int			ft_is_whitespace(char c);
+int			ft_isdir(const char *path);
 int			ft_match_variables(char *env_var, char *var_name);
 t_redirect	*ft_redirect_list(int nodes);
 void		ft_signals_ignore(void);
+int			ft_token_lst_size(t_tokens *lst);
 t_tokens	*ft_tokens_iterate(t_data *ms);
 
 void		ft_print_split(char **tokens);
