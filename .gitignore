@@ -2,3 +2,4 @@
 minishell
 .vscode
 minishell_tester
+.nfs*

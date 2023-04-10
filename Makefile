@@ -96,8 +96,12 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		$(addprefix $(PATH_LBTL),\
 		ft_calloc.c \
 		ft_isalnum.c \
+		ft_isdigit.c \
 		ft_isprint.c \
 		ft_itoa.c \
+		ft_putchar_fd.c \
+		ft_putendl_fd.c \
+		ft_putstr_fd.c \
 		ft_split.c \
 		ft_strchr.c \
 		ft_strcmp.c \
@@ -113,10 +117,12 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_find_variable.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
+		ft_isdir.c \
 		ft_match_variables.c \
 		ft_redirect_list.c \
 		ft_signals_ignore.c \
 		ft_test_tools.c \
+		ft_token_lst_size.c \
 		ft_tokens_iterate.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
