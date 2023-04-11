@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 18:46:17 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/11 05:15:17 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ void	ft_command_export(t_tokens *tokens, t_env_vars **envp)
 	size_t		name_len;
 	char		*env_value;
 	char		*var_name;
-	char		*equals_ptr;
 
 	curr_token = tokens->next;
 	while (curr_token)
 	{
 		if (curr_token->type == WORDTOKEN && ft_strchr(curr_token->value, '='))
 		{
-			equals_ptr = ft_strchr(curr_token->value, '=');
-			name_len = equals_ptr - curr_token->value;
+			name_len = ft_strchr(curr_token->value, '=') - curr_token->value;
 			var_name = ft_substr(curr_token->value, 0, name_len);
 			env_value = ft_envvar_get(*envp, var_name);
 			if (env_value)

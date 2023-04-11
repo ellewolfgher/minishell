@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_exit.c                                :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:27:00 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 01:33:17 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/04/10 15:15:38 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/04/10 15:22:14 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-//Stablishes the exit state and frees all memory used by the shell
-int	ft_minishell_exit(t_data *ms)
+int	ft_atoi(const char *nptr)
 {
-	int	code;
+	int	neg;
+	int	res;
+	int	i;
 
-	code = ms->exit_code;
-	rl_clear_history();
-	ft_free((void **)&(ms->prompt));
-	ft_free((void **)&(ms->input));
-	ft_free_matrix((void ***)&(ms->split));
-	ft_free_tokens(&(ms->tokens));
-	ft_free_varlist(&(ms->env_vars));
-	ft_free((void **)&(ms));
-	exit(code);
+	neg = 1;
+	i = 0;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			neg = -1;
+		i++;
+	}
+	res = 0;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10;
+		res = res + (nptr[i] - 48);
+		i++;
+	}
+	return (res * neg);
 }
