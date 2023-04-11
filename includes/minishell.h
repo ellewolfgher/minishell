@@ -62,6 +62,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <errno.h>
+# include <limits.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
@@ -86,7 +87,7 @@ typedef struct s_data
 {
 	int					state;
 	int					need_to_exit;
-	int					exit_code;
+	long long			exit_code;
 	int					tok_index;
 	int					tracking;
 	int					inputnull;
@@ -121,6 +122,7 @@ typedef struct s_execute
 void		ft_command_cd(t_data *ms);
 void		ft_command_echo(t_data *ms);
 void		ft_command_env(t_env_vars *env_vars);
+void		ft_command_exit(t_data *ms);
 void		ft_command_export(t_tokens *tokens, t_env_vars **envp);
 void		ft_command_pwd(void);
 void		ft_command_unset(t_tokens *tokens, t_env_vars **envp);
@@ -187,9 +189,11 @@ void		ft_free_var(t_env_vars **node);
 void		ft_free_varlist(t_env_vars **head);
 void		ft_free(void **pointer);
 
+int			ft_atoi(const char *nptr);
+long long	ft_atoll(const char *str);
 void		*ft_calloc(size_t num_elements, size_t element_size);
 int			ft_isalnum(int c);
-int			ft_isdigit(int c);
+int			ft_isdigit(char c);
 int			ft_isprint(int c);
 char		*ft_itoa(int n);
 void		ft_putchar_fd(char c, int fd);

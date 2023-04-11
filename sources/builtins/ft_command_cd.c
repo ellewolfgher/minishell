@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:28:03 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/10 14:33:12 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/11 05:14:50 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	ft_cd_path(char *path)
 	if (chdir(path) == -1)
 	{
 		ft_putstr_fd("cd: ", 2);
-		if (errno == ENOENT)
+		if (access(path, F_OK) != 0)
 			ft_putstr_fd("no such file or directory: ", 2);
-		else if (errno == EACCES)
+		else if (access(path, R_OK | X_OK) != 0)
 			ft_putstr_fd("permission denied: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putchar_fd('\n', 2);

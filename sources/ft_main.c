@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 17:22:32 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/11 01:31:30 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	main(int argc, char *argv[], char **envp)
 	ms->state = INITSTATE;
 	while (1)
 	{
-		if (ms->state <= EXITSTATE)
-			ft_minishell_exit(ms);
 		if (ms->state == INITSTATE)
 			ft_minishell_init(ms, envp);
 		if (ms->state == PROMPTSTATE)
@@ -41,6 +39,8 @@ int	main(int argc, char *argv[], char **envp)
 			ft_minishell_parser(ms);
 		if (ms->state == EXECSTATE)
 			ft_minishell_execute(ms);
+		if (ms->state <= EXITSTATE)
+			ft_minishell_exit(ms);
 		if (ms->state == CLEANSTATE)
 			ft_minishell_cleaner(ms);
 	}

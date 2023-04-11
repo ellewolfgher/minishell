@@ -6,13 +6,14 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:46:11 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/10 13:54:55 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/11 05:20:57 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_isdigit(int c)
+//CHECK IF IN USE
+int	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);

@@ -28,10 +28,11 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_main.c) \
 		$(addprefix $(PATH_BUIL),\
 		ft_command_cd.c \
-		ft_command_pwd.c \
-		ft_command_export.c \
 		ft_command_echo.c \
 		ft_command_env.c \
+		ft_command_exit.c \
+		ft_command_export.c \
+		ft_command_pwd.c \
 		ft_command_unset.c) \
 		$(addprefix $(PATH_CLEA),\
 		ft_minishell_cleaner.c) \
@@ -96,6 +97,8 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_free_varlist.c \
 		ft_free.c) \
 		$(addprefix $(PATH_LBTL),\
+		ft_atoi.c \
+		ft_atoll.c \
 		ft_calloc.c \
 		ft_isalnum.c \
 		ft_isdigit.c \
