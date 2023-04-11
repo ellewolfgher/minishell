@@ -88,7 +88,9 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_envvar_lstsize.c \
 		ft_envvar_new.c) \
 		$(addprefix $(PATH_FRTL),\
+		ft_free_execute.c \
 		ft_free_matrix.c \
+		ft_free_redirects.c \
 		ft_free_tokens.c \
 		ft_free_var.c \
 		ft_free_varlist.c \

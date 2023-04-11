@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 16:39:37 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 19:27:18 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:49:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	ft_set_struct(t_data *ms, t_execute *command)
 {
 	command->receives_from_pipe = ft_searchset_pipe_in(ms);
-	// command->command = ft_searchset_command(ms, command);
+	command->command = ft_searchset_command(ms, command);
 	command->args = ft_searchset_arguments(ms);
 	command->red_in = ft_searchset_input(ms);
 	command->red_out = ft_searchset_output(ms);
