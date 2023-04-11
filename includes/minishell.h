@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 05:16:10 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:57:27 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void		ft_execute_redir_create(t_execute *command);
 t_execute	*ft_execute_set_commands(t_data *ms);
 void		ft_minishell_execute(t_data *ms);
 char		**ft_searchset_arguments(t_data *ms);
-char		*ft_searchset_command(t_data *ms);
+char		*ft_searchset_command(t_data *ms, t_execute *this);
 char		**ft_searchset_envvars(t_env_vars *head);
 t_redirect	*ft_searchset_input(t_data *ms);
 t_redirect	*ft_searchset_output(t_data *ms);
@@ -181,7 +181,9 @@ char		*ft_envvar_get(t_env_vars *env_vars, const char *name);
 int			ft_envvar_lstsize(t_env_vars *env_vars);
 t_env_vars	*ft_envvar_new(char *content);
 
+void		ft_free_execute(t_execute *command);
 void		ft_free_matrix(void ***matrix);
+void		ft_free_redirects(t_redirect *this);
 void		ft_free_tokens(t_tokens **tokens);
 void		ft_free_var(t_env_vars **node);
 void		ft_free_varlist(t_env_vars **head);
