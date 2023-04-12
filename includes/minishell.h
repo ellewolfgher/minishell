@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 15:57:27 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:42:09 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 # define OVERWRITE		3
 // APPEND: >>
 # define APPEND			4
+
+// MAX SIZE FOR PATH
+# define PATH_MAX		4096
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -180,6 +183,7 @@ void		ft_envvar_del(t_env_vars **stack, char *var_name);
 char		*ft_envvar_get(t_env_vars *env_vars, const char *name);
 int			ft_envvar_lstsize(t_env_vars *env_vars);
 t_env_vars	*ft_envvar_new(char *content);
+void		ft_envvar_update(char *name, char *value, t_env_vars **env_vars);
 
 void		ft_free_execute(t_execute *command);
 void		ft_free_matrix(void ***matrix);
@@ -203,6 +207,7 @@ char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strdup(const char *tobecopied);
+char		*ft_strjoin_free(char *s1, char *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_strlen(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -220,6 +225,7 @@ t_redirect	*ft_redirect_list(int nodes);
 void		ft_signals_ignore(void);
 int			ft_token_lst_size(t_tokens *lst);
 t_tokens	*ft_tokens_iterate(t_data *ms);
+void		ft_update_path(t_data *ms, char *oldpwd);
 
 void		ft_print_split(char **tokens);
 void		ft_print_tokens(t_tokens *tokens);

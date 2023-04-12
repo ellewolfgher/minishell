@@ -87,7 +87,8 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_envvar_del.c \
 		ft_envvar_get.c \
 		ft_envvar_lstsize.c \
-		ft_envvar_new.c) \
+		ft_envvar_new.c \
+		ft_envvar_update.c) \
 		$(addprefix $(PATH_FRTL),\
 		ft_free_execute.c \
 		ft_free_matrix.c \
@@ -111,6 +112,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_strchr.c \
 		ft_strcmp.c \
 		ft_strdup.c \
+		ft_strjoin_free.c \
 		ft_strjoin.c \
 		ft_strlen.c \
 		ft_strncmp.c \
@@ -128,7 +130,8 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_signals_ignore.c \
 		ft_test_tools.c \
 		ft_token_lst_size.c \
-		ft_tokens_iterate.c)
+		ft_tokens_iterate.c \
+		ft_update_path.c)
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 
