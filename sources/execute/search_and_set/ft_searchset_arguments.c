@@ -6,13 +6,20 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:51:21 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 19:02:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 17:49:25 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//Counts the number of consecutive WORDTOKENS in the command block
+/*
+Counts the number of arguments in the given token list.
+Returns the count of arguments.
+
+Example:
+If the token list represents the command "program arg1 arg2", the function
+returns 3 (1 for the command and 2 for the arguments).
+*/
 static int	ft_how_many_args(t_tokens *aux)
 {
 	t_tokens	*other;
@@ -33,7 +40,14 @@ static int	ft_how_many_args(t_tokens *aux)
 	return (count);
 }
 
-//Searches for the arguments in the command block and returns a vector with them
+/*
+Searches and sets the arguments for the command from the given token list.
+Returns a dynamically allocated string matrix containing the arguments.
+
+Example:
+If the token list represents the command "program arg1 arg2", the resulting
+string matrix will be ["program", "arg1", "arg2", NULL].
+*/
 char	**ft_searchset_arguments(t_data *ms)
 {
 	t_tokens	*aux;

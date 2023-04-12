@@ -6,13 +6,20 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:59:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 19:03:19 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:04:22 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//Counts the consecutive input redirections in the command block
+/*
+Counts the number of input redirections in the given token list.
+Returns the count of input redirections.
+
+Example:
+If the token list represents the command "cat < input.txt", the function
+returns 1.
+*/
 static int	ft_count_inputs(t_tokens *aux)
 {
 	t_tokens	*other;
@@ -36,33 +43,50 @@ static int	ft_count_inputs(t_tokens *aux)
 	return (count);
 }
 
-//Creates a list of input redirections
-static void	ft_fill_inlist(t_redirect *self, t_tokens *tokens)
+/*
+Fills the given redirection list with the input redirections from the token list.
+
+Example:
+If the token list represents the command "cat < input.txt", and this is a
+redirection list of size 1, the resulting list will contain a single
+redirection with type INFILE and target "input.txt".
+*/
+static void	ft_fill_inlist(t_redirect *this, t_tokens *tokens)
 {
 	if (tokens && tokens->type == OPTOKEN)
 		tokens = tokens->next;
-	while (tokens && self && tokens->type != OPTOKEN)
+	while (tokens && this && tokens->type != OPTOKEN)
 	{
 		if (tokens->type == REDTOKEN)
 		{
 			if (!ft_strcmp("<", tokens->value))
 			{
-				self->type = INFILE;
-				self->target = ft_strdup(tokens->next->value);
-				self = self->next;
+				this->type = INFILE;
+				this->target = ft_strdup(tokens->next->value);
+				this = this->next;
 			}
 			if (!ft_strcmp("<<", tokens->value))
 			{
-				self->type = HEREDOC;
-				self->target = ft_strdup(tokens->next->value);
-				self = self->next;
+				this->type = HEREDOC;
+				this->target = ft_strdup(tokens->next->value);
+				this = this->next;
 			}
 		}
 		tokens = tokens->next;
 	}
 }
 
-//Sets the input redirections list
+/*
+Searches and sets the input redirections for the command from the given token
+list.
+Returns a dynamically allocated redirection list containing the input
+redirections.
+
+Example:
+If the token list represents the command "cat < input.txt", the resulting
+redirection list will contain a single redirection with type INFILE and
+target "input.txt".
+*/
 t_redirect	*ft_searchset_input(t_data *ms)
 {
 	t_tokens		*aux;

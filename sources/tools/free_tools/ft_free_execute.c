@@ -6,13 +6,16 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:41:07 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 15:48:56 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:08:48 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//Frees the t_execute struct and all its members
+/*
+Free the memory allocated for the execute struct command, used to store the
+information about the command to be executed.
+*/
 void	ft_free_execute(t_execute *command)
 {
 	if (!command)

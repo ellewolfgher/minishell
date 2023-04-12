@@ -6,17 +6,24 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:26:11 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 17:08:01 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:11:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 /*
-** Concatenates the command from a token into all possible paths from the
-** environmental variable, returns the pointer to it.
+Takes a command argument and a list of directory paths and concatenates each
+path with the command argument, separated by a path separator character '/'.
+Returns a matrix of dynamically allocated strings containing the resulting
+concatenated strings.
+
+If command is set to "program", and paths is set to a matrix of two strings
+["/usr/bin", "/usr/local/bin"].
+The resulting concatenated strings will be:
+"/usr/bin/program" and "/usr/local/bin/program".
 */
-static char	**ft_concatenate_this(char *cmd_arg, char **all_paths)
+static char	**ft_cat_paths_to_command(char *command, char **paths)
 {
 	int		index[3];
 	char	*aux;
@@ -24,57 +31,46 @@ static char	**ft_concatenate_this(char *cmd_arg, char **all_paths)
 	index[0] = 0;
 	index[1] = 0;
 	index[2] = 0;
-	while (all_paths[index[0]])
+	while (paths[index[0]])
 	{
-		aux = malloc (sizeof (char) * (ft_strlen(cmd_arg)
-					+ 2 + ft_strlen(all_paths[index[0]])));
-		while (all_paths[index[0]][index[1]])
+		aux = ft_calloc(1, sizeof (char) * (ft_strlen(command)
+					+ 2 + ft_strlen(paths[index[0]])));
+		while (paths[index[0]][index[1]])
 		{
-			aux[index[1]] = all_paths[index[0]][index[1]];
+			aux[index[1]] = paths[index[0]][index[1]];
 			index[1]++;
 		}
 		aux[index[1]++] = '/';
-		while (cmd_arg[index[2]])
-			aux[index[1]++] = cmd_arg[index[2]++];
+		while (command[index[2]])
+			aux[index[1]++] = command[index[2]++];
 		aux[index[1]] = '\0';
 		index[1] = 0;
 		index[2] = 0;
-		free(all_paths[index[0]]);
-		all_paths[index[0]++] = aux;
+		free(paths[index[0]]);
+		paths[index[0]++] = aux;
 	}
-	return (all_paths);
+	return (paths);
 }
 
 /*
-** Tests all paths to check wether the command is accessible
-*/
-static char	*ft_find_paths(char **eachpath)
-{
-	int	index;
+Checks in the environmental variables for the PATH variable and returns the
+path to the command. If the value is a relative path, returns the value.
+Uses the ft_cat_paths_to_command function to concatenate the command with
+all possible paths from the PATH variable and the ft_find_paths function to
+check whether the command is accessible.
+Returns the path to the command or NULL if it doesn't exist
 
-	index = 0;
-	while (eachpath[index])
-	{
-		if (!access(eachpath[index], F_OK))
-		{
-			if (!access(eachpath[index], X_OK))
-				return (ft_strdup(eachpath[index]));
-		}
-		index++;
-	}
-	return (NULL);
-}
-
-/*
-** returns the path of the sent command
+Example:
+If value is "program", and the PATH variable contains "/usr/bin:/usr/local/bin",
+the function returns "/usr/local/bin/program" if the program is accessible there.
 */
-static char	*ft_path_from_token(char *value, t_env_vars *env_head)
+static char	*ft_path_from_token(char *value, t_env_vars *environvars)
 {
 	t_env_vars	*aux;
-	char		**eachpath;
+	char		**allpaths;
 	char		*path;
 
-	aux = env_head;
+	aux = environvars;
 	if (!ft_strncmp(value, ".", 1))
 		return (ft_strdup(value));
 	if (value[0] == '\0')
@@ -83,17 +79,24 @@ static char	*ft_path_from_token(char *value, t_env_vars *env_head)
 		aux = aux->next;
 	if (!aux)
 		return (NULL);
-	eachpath = ft_split(aux->content + 5, ':');
-	eachpath = ft_concatenate_this(value, eachpath);
-	path = ft_find_paths(eachpath);
-	ft_free_matrix((void ***)&eachpath);
+	allpaths = ft_split(aux->content + 5, ':');
+	allpaths = ft_cat_paths_to_command(value, allpaths);
+	path = ft_test_access(allpaths);
+	ft_free_matrix((void ***)&allpaths);
 	return (path);
 }
 
 /*
-** Checks if there's a command from index onwards.
-** Creates a heap allocated string of given command or builtin, ready to be
-** sent to execution.
+Checks if the command is a builtin. If it does, returns the name of the
+builtin. If it doesn't, returns the path of the command to be executed.
+It also sets flags in the t_execute struct to indicate whether the command
+is a builtin or not.
+
+Example:
+If the command is "cd", a builtin command, the function returns "cd".
+If the command is "program", and the PATH variable contains
+"/usr/bin:/usr/local/bin", the function returns "/usr/local/bin/program"
+if the program is accessible there.
 */
 char	*ft_searchset_command(t_data *ms, t_execute *this)
 {
