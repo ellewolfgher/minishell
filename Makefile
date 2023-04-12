@@ -38,6 +38,7 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_minishell_cleaner.c) \
 		$(addprefix $(PATH_EXEC),\
 		ft_exec_one_command.c \
+		ft_execute_builtin.c \
 		ft_execute_loop.c \
 		ft_execute_redir_create.c \
 		ft_execute_set_commands.c \
@@ -127,7 +128,9 @@ SRCS = $(addprefix $(PATH_SRCS),\
 		ft_isdir.c \
 		ft_match_variables.c \
 		ft_redirect_list.c \
+		ft_signals_default.c \
 		ft_signals_ignore.c \
+		ft_test_access.c \
 		ft_test_tools.c \
 		ft_token_lst_size.c \
 		ft_tokens_iterate.c \
