@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:50:50 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/07 18:50:16 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:33:47 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 char	*ft_envvar_get(t_env_vars *env_vars, const char *name)
 {
 	char		**split;
-	char		*key;
 	char		*value;
 	t_env_vars	*temp;
 
@@ -25,13 +24,10 @@ char	*ft_envvar_get(t_env_vars *env_vars, const char *name)
 	temp = env_vars;
 	while (temp)
 	{
-		if (temp->content == NULL)
-			return (NULL);
 		split = ft_split(temp->content, '=');
-		key = split[0];
-		if (ft_strcmp(key, name) == 0)
+		if (split && split[0] && ft_strcmp(split[0], name) == 0)
 		{
-			value = split[1];
+			value = ft_strdup(split[1]);
 			ft_free_matrix((void ***)&split);
 			return (value);
 		}

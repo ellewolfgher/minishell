@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_execute.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:23:21 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/11 17:08:37 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/11 19:12:28 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_print_commands(t_execute *command)
+/* void	ft_print_commands(t_execute *command)
 {
 	int	index;
 
@@ -60,7 +60,7 @@ int	ft_minishell_exec_beta(t_data *ms)
 	ms->state = CLEANSTATE;
 	return (0);
 }
-
+ */
 //Check if there is a pipe in the command
 static int	ft_pipe_check(t_data *ms)
 {
@@ -80,7 +80,7 @@ static int	ft_pipe_check(t_data *ms)
 //Old version of the function, to keep up with BI tests, will be removed
 void	ft_minishell_execute(t_data *ms)
 {
-	ft_minishell_exec_beta(ms);
 	if (!ft_pipe_check(ms))
 		ft_exec_one_command(ms);
 }
+//ft_minishell_exec_beta(ms);
