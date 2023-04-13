@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:25:54 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/11 05:17:05 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:22:09 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_exec_one_command(t_data *ms)
 	else if (strcmp(ms->tokens->value, "exit") == 0)
 		ft_command_exit(ms);
 	else if (strcmp(ms->tokens->value, "export") == 0)
-		ft_command_export(ms->tokens, &(ms->env_vars));
+		ft_command_export(ms);
 	else if (strcmp(ms->tokens->value, "unset") == 0)
 		ft_command_unset(ms->tokens, &(ms->env_vars));
 	else if (strcmp(ms->tokens->value, "env") == 0)
