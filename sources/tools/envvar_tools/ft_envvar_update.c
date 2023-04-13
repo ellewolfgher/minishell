@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:39:35 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/12 13:39:51 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:43:31 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,12 @@ void	ft_envvar_update(char *name, char *value, t_env_vars **env_vars)
 	char		*var_str;
 	t_env_vars	*var;
 
-	var_str = ft_strjoin(name, "=");
+	if (!name || !value)
+		return ;
+	if (ft_strcmp(value, "") != 0)
+		var_str = ft_strjoin(name, "=");
+	else
+		var_str = ft_strdup(name);
 	if (!var_str)
 		return ;
 	var = ft_envvar_find(name, *env_vars);

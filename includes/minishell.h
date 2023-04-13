@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/13 10:51:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:36:42 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		ft_command_cd(t_data *ms);
 void		ft_command_echo(t_data *ms);
 void		ft_command_env(t_env_vars *env_vars);
 void		ft_command_exit(t_data *ms);
-void		ft_command_export(t_tokens *tokens, t_env_vars **envp);
+void		ft_command_export(t_data *ms);
 void		ft_command_pwd(void);
 void		ft_command_unset(t_tokens *tokens, t_env_vars **envp);
 
