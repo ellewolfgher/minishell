@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_builtin.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:48:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 20:09:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:37:56 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2])
 	if (!ft_strcmp(command->command, "pwd"))
 		ft_command_pwd();
 	if (!ft_strcmp(command->command, "export"))
-		ft_command_export(ms->tokens, &ms->env_vars);
+		ft_command_export(ms);
 	if (!ft_strcmp(command->command, "unset"))
-		ft_command_unset(ms->tokens, &ms->env_vars);
+		ft_command_unset(ms);
 	if (!ft_strcmp(command->command, "env"))
-		ft_command_env(ms->env_vars);
+		ft_command_env(ms);
 	if (!ft_strcmp(command->command, "exit"))
 		ft_command_exit(ms);
 	return (0);
