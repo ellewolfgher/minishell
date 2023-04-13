@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:23:21 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/12 20:18:28 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:33:58 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Handle exit codes.
 Reinitialize signals and restore file descriptors.
 Set the state to CLEANSTATE.
 */
-int	ft_minishell_exec_beta(t_data *ms)
+int	ft_minishell_execute(t_data *ms)
 {
 	t_execute	*command;
 	int			control;
@@ -50,27 +50,4 @@ int	ft_minishell_exec_beta(t_data *ms)
 	ft_fds_restore(og_fds);
 	ms->state = CLEANSTATE;
 	return (0);
-}
-
-//Check if there is a pipe in the command
-static int	ft_pipe_check(t_data *ms)
-{
-	t_tokens	*tokens;
-
-	tokens = ms->tokens;
-	while (tokens)
-	{
-		if (tokens->type == OPTOKEN && ft_strcmp(tokens->value, "|") == 0)
-			return (1);
-		tokens = tokens->next;
-	}
-	return (0);
-}
-
-//Call the right executioner accordind to the existence of a pipe
-//Old version of the function, to keep up with BI tests, will be removed
-void	ft_minishell_execute(t_data *ms)
-{
-	if (!ft_pipe_check(ms))
-		ft_exec_one_command(ms);
 }

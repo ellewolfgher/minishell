@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 19:00:23 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 20:13:20 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:46:02 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	exec_fork_builtin(t_execute *command, t_data *ms, int og_fds[2])
 	{
 		ft_signals_default();
 		pipe_handle(ms, command);
-		// if (ft_execute_redir_handler(command, og_fds, ms))
+		// if (ft_execute_redirects(command, og_fds, ms))
 		// {
 		// 	ms->need_to_exit = -1;
 		// 	return (ft_fds_restore(og_fds));
@@ -112,7 +112,7 @@ int	exec_com(t_execute *command, t_data *ms, int og_fds[2])
 		if (!get_exec_error(command->command, ms))
 		{
 			ft_signals_default();
-			// if (ft_execute_redir_handler(command, og_fds, ms))
+			// if (ft_execute_redirects(command, og_fds, ms))
 			// {
 			// 	ms->need_to_exit = -1;
 			// 	return (ft_fds_restore(og_fds));
@@ -143,7 +143,7 @@ int	exec_com_multi(t_execute *command, t_data *ms, int og_fds[2])
 		{
 			ft_signals_default();
 			pipe_handle(ms, command);
-			// if (ft_execute_redir_handler(command, og_fds, ms))
+			// if (ft_execute_redirects(command, og_fds, ms))
 			// {
 			// 	ms->need_to_exit = -1;
 			// 	return (ft_fds_restore(og_fds));
@@ -238,7 +238,7 @@ int	ft_execute_loop(t_execute *command, t_data *ms, int ogfds[2])
 		write (2, command->error_to_print, ft_strlen(command->error_to_print));
 		return (0);
 	}
-	ft_execute_redir_create(command);
+	ft_execute_output_create(command);
 	if (!command->receives_from_pipe && !command->sends_to_pipe)
 	{
 		ft_execute_only_one(command, ms, ogfds);

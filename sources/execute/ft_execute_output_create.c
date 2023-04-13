@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_cleaner.c                             :+:      :+:    :+:   */
+/*   ft_execute_output_create.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 16:56:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/04 15:55:52 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/09 18:54:53 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/13 10:42:39 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_minishell_cleaner(t_data *ms)
+/*
+Creates output redirection files if they do not exist.
+
+Example:
+If the command has an output redirection "command > output.txt", and the file
+"output.txt" does not exist, the function creates the file.
+*/
+void	ft_execute_output_create(t_execute *command)
 {
-	ft_free((void **)&(ms->input));
-	ft_free_matrix((void ***)&(ms->split));
-	ft_free_tokens(&(ms->tokens));
-	if (ms->tracking < 0)
+	t_redirect	*aux;
+
+	aux = command->red_out;
+	while (aux)
 	{
-		ms->tracking = 0;
-		ms->state = EXITSTATE;
-		return (0);
-	}
-	if (ms->tracking > 0)
-	{
-		ms->state = EXITSTATE;
-		return (0);
-	}
-	else
-	{
-		ms->state = PROMPTSTATE;
-		return (0);
+		open(aux->target, O_CREAT | O_RDONLY, 0777);
+		aux = aux->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:53:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 20:07:42 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:41:21 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	handle_output(t_redirect *red_out, int og_fds[2])
 	return (0);
 }
 
-int	ft_execute_redir_handler(t_execute *command, int og_fds[2], t_data *ms)
+int	ft_execute_redirects(t_execute *command, int og_fds[2], t_data *ms)
 {
 	if (handle_input(command->red_in, og_fds, ms))
 		return (1);

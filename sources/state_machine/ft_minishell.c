@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.c                                          :+:      :+:    :+:   */
+/*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 20:20:15 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:52:41 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	ft_check_args(int argc)
 {
@@ -39,10 +39,10 @@ int	main(int argc, char *argv[], char **envp)
 			ft_minishell_parser(ms);
 		if (ms->state == EXECSTATE)
 			ft_minishell_execute(ms);
-		if (ms->state <= EXITSTATE)
-			ft_minishell_exit(ms);
 		if (ms->state == CLEANSTATE)
 			ft_minishell_cleaner(ms);
+		if (ms->state <= EXITSTATE)
+			ft_minishell_exit(ms);
 	}
 	return (0);
 }
