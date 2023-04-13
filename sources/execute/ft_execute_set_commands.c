@@ -6,14 +6,22 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 16:39:37 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 15:49:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:01:53 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Call each function that checks for a specific token type and returns the
-//corresponding value to the command struct
+/*
+Fills the given t_execute structure with values from the token list and the
+environment variables list.
+
+Example:
+Given a t_execute structure and a token list representing the command
+"echo 'Hello' | cat", the function fills the structure with flags and values to
+handle the command, arguments, redirections, environment variables, and
+pipe information.
+*/
 static void	ft_set_struct(t_data *ms, t_execute *command)
 {
 	command->receives_from_pipe = ft_searchset_pipe_in(ms);
@@ -25,9 +33,16 @@ static void	ft_set_struct(t_data *ms, t_execute *command)
 	command->sends_to_pipe = ft_searchset_pipe_out(ms);
 }
 
-//Checks for ERRTOKEN type on any token, which means that the executioner should
-//stop, printing the error message and returning the command struct with the
-//block_exec flag set to not execute the command
+/*
+Checks if there is an error token in the token list.
+Sets the block_exec flag and error_to_print message in the t_execute structure
+if an error token is found.
+Returns 1 if an error token is found, otherwise 0.
+
+Example:
+If the token list contains an error token, the function sets the block_exec
+flag to 1 and the error_to_print message to "Invalid syntax\n".
+*/
 static int	ft_check_errtoken(t_data *ms, t_execute *command)
 {
 	t_tokens	*aux;
@@ -46,8 +61,14 @@ static int	ft_check_errtoken(t_data *ms, t_execute *command)
 	return (0);
 }
 
-//Checks if the last token has been reached, so that the executioner knows when
-//to stop
+/*
+Checks if the last token in the token list has been processed.
+Returns 1 if the last token has been processed, otherwise 0.
+
+Example:
+If the token list represents the command "echo 'Hello' | cat", the function
+returns 1 after processing the 'cat' token.
+*/
 static int	ft_check_last_token(t_data *ms)
 {
 	t_tokens	*aux;
@@ -60,7 +81,18 @@ static int	ft_check_last_token(t_data *ms)
 	return (0);
 }
 
-//Sets the command struct based on the tokens previously parsed
+/*
+Sets the commands to be executed based on the given token list and environment
+variables list.
+Returns a dynamically allocated t_execute structure containing the commands,
+arguments, redirections, environment variables, and pipe information.
+
+Example:
+Given a token list representing the command "echo 'Hello' | cat", the function
+returns a t_execute structure containing the flags and values needed to execute
+the commands, arguments, redirections, environment variables, and
+pipe information.
+*/
 t_execute	*ft_execute_set_commands(t_data *ms)
 {
 	t_execute	*command;

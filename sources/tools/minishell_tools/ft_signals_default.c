@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute_redirects.c                             :+:      :+:    :+:   */
+/*   ft_signals_default.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 18:54:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 18:55:24 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/12 18:23:22 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/12 18:23:35 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	ft_execute_redir_create(t_execute *command)
+void	ft_signals_default(void)
 {
-	t_redirect	*aux;
-
-	aux = command->red_out;
-	while (aux)
-	{
-		open(aux->target, O_CREAT | O_RDONLY, 0777);
-		aux = aux->next;
-	}
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
 }

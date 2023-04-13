@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 14:22:50 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:36:42 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,14 @@ typedef struct s_data
 	int					need_to_exit;
 	long long			exit_code;
 	int					tok_index;
-	int					tracking;
 	int					inputnull;
 	char				*prompt;
 	char				*input;
 	char				**split;
 	struct s_tokens		*tokens;
 	struct s_env_vars	*env_vars;
+	int					pipe_in[2];
+	int					pipe_out[2];
 }	t_data;
 
 typedef struct s_redirect
@@ -132,11 +133,6 @@ void		ft_command_unset(t_tokens *tokens, t_env_vars **envp);
 
 int			ft_minishell_cleaner(t_data *ms);
 
-void		ft_exec_one_command(t_data *ms);
-int			ft_execute_loop(t_execute *command, t_data *ms, int ogfds[2]);
-void		ft_execute_redir_create(t_execute *command);
-t_execute	*ft_execute_set_commands(t_data *ms);
-void		ft_minishell_execute(t_data *ms);
 char		**ft_searchset_arguments(t_data *ms);
 char		*ft_searchset_command(t_data *ms, t_execute *this);
 char		**ft_searchset_envvars(t_env_vars *head);
@@ -144,6 +140,13 @@ t_redirect	*ft_searchset_input(t_data *ms);
 t_redirect	*ft_searchset_output(t_data *ms);
 int			ft_searchset_pipe_in(t_data *ms);
 int			ft_searchset_pipe_out(t_data *ms);
+
+int			ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2]);
+int			ft_execute_loop(t_execute *command, t_data *ms, int ogfds[2]);
+void		ft_execute_output_create(t_execute *command);
+int			ft_execute_redirects(t_execute *command, int og_fds[2], t_data *ms);
+t_execute	*ft_execute_set_commands(t_data *ms);
+int			ft_minishell_execute(t_data *ms);
 
 int			ft_minishell_exit(t_data *ms);
 
@@ -175,7 +178,6 @@ void		ft_parser_split(t_data *ms);
 void		ft_parser_tokenize(t_data *ms);
 
 int			ft_minishell_prompt(t_data *ms);
-int			ft_prompt_to_input(t_data *ms);
 
 void		ft_envvar_add(t_env_vars **env_vars, char *env_var);
 void		ft_envvar_back(t_env_vars **stack, t_env_vars *new);
@@ -222,7 +224,9 @@ int			ft_is_whitespace(char c);
 int			ft_isdir(const char *path);
 int			ft_match_variables(char *env_var, char *var_name);
 t_redirect	*ft_redirect_list(int nodes);
+void		ft_signals_default(void);
 void		ft_signals_ignore(void);
+char		*ft_test_access(char **paths);
 int			ft_token_lst_size(t_tokens *lst);
 t_tokens	*ft_tokens_iterate(t_data *ms);
 void		ft_update_path(t_data *ms, char *oldpwd);

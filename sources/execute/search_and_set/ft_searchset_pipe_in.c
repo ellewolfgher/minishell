@@ -6,13 +6,20 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:30:00 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/09 19:03:26 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/12 17:53:45 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//Check if there is a pipe in the command block
+/*
+Checks if the current command receives input from a pipe.
+Returns 1 if the command receives input from a pipe, otherwise 0.
+
+Example:
+If the token list represents the command "echo 'Hello' | cat", the function
+returns 1 for the 'cat' command.
+*/
 int	ft_searchset_pipe_in(t_data *ms)
 {
 	t_tokens	*aux;

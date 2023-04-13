@@ -6,292 +6,231 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 19:00:23 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/11 16:58:04 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:46:02 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// static void	free_all_paths(char **all_paths)
-// {
-// 	int	i;
+/*
+Forks the process and returns the child process ID. Exits with an error message
+if forking fails.
+*/
+static pid_t	ft_pipex_is_easy(void)
+{
+	pid_t	pid;
 
-// 	i = 0;
-// 	while (all_paths[i])
-// 		free(all_paths[i++]);
-// 	free(all_paths);
-// }
+	pid = fork();
+	if (pid < 0)
+	{
+		write(2, "error: couldn't fork the process\n", 34);
+		exit(-1);
+	}
+	return (pid);
+}
 
-// static char	*access_all_paths(char **all_paths)
-// {
-// 	int		i;
+/*
+Checks if a given path is executable, a directory, or nonexistent, and sets the
+appropriate exit code in the t_data structure.
+*/
+int	get_exec_error(char *path, t_data *ms)
+{
+	struct stat	sb;
 
-// 	i = 0;
-// 	while (all_paths[i])
-// 	{
-// 		if (!access(all_paths[i], F_OK))
-// 		{
-// 			if (!access(all_paths[i], X_OK))
-// 				return (ft_strdup(all_paths[i]));
-// 		}
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
+	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
+	{
+		ms->exit_code = 126;
+		printf("Is a directory!\n");
+	}
+	if (!path)
+		ms->exit_code = 1;
+	else if (access(path, X_OK))
+	{
+		ms->exit_code = 127;
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": command not found!\n", STDERR_FILENO);
+	}
+	return (ms->exit_code);
+}
 
-// static int	get_path_index_from_envp(char **envp)
-// {
-// 	int	i;
+/*
+Handles the input and output of a command with pipes by updating the standard
+input and output file descriptors.
+*/
+int	pipe_handle(t_data *ms, t_execute *command)
+{
+	if (command->receives_from_pipe)
+	{
+		close(ms->pipe_in[1]);
+		dup2(ms->pipe_in[0], STDIN_FILENO);
+	}
+	if (command->sends_to_pipe)
+	{
+		close(ms->pipe_out[0]);
+		dup2(ms->pipe_out[1], STDOUT_FILENO);
+	}
+	return (0);
+}
 
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		if (envp[i][0] == 'P')
-// 			if (envp[i][1] == 'A')
-// 				if (envp[i][2] == 'T')
-// 					if (envp[i][3] == 'H')
-// 						if (envp[i][4] == '=')
-// 							break ;
-// 		i++;
-// 	}
-// 	if (envp[i])
-// 		return (i);
-// 	else
-// 		return (-1);
-// }
+/*
+Executes a built-in command in a forked child process, handling signals,
+redirections, and restoring file descriptors.
+*/
+int	exec_fork_builtin(t_execute *command, t_data *ms, int og_fds[2])
+{
+	int	pid;
 
-// static char	**cat_cmd_to_all_paths(char *cmd_arg, char **all_paths)
-// {
-// 	int		i[3];
-// 	char	*temp;
+	pid = ft_pipex_is_easy();
+	if (!pid)
+	{
+		ft_signals_default();
+		pipe_handle(ms, command);
+		// if (ft_execute_redirects(command, og_fds, ms))
+		// {
+		// 	ms->need_to_exit = -1;
+		// 	return (ft_fds_restore(og_fds));
+		// }
+		ms->need_to_exit = -1;
+		ft_execute_builtin(command, ms, og_fds);
+	}
+	return (ms->exit_code);
+}
 
-// 	i[0] = 0;
-// 	i[1] = 0;
-// 	i[2] = 0;
-// 	while (all_paths[i[0]])
-// 	{
-// 		temp = malloc (sizeof (char) * (ft_strlen(cmd_arg)
-// 					+ 2 + ft_strlen(all_paths[i[0]])));
-// 		while (all_paths[i[0]][i[1]])
-// 		{
-// 			temp[i[1]] = all_paths[i[0]][i[1]];
-// 			i[1]++;
-// 		}
-// 		temp[i[1]++] = '/';
-// 		while (cmd_arg[i[2]])
-// 			temp[i[1]++] = cmd_arg[i[2]++];
-// 		temp[i[1]] = '\0';
-// 		i[1] = 0;
-// 		i[2] = 0;
-// 		free(all_paths[i[0]]);
-// 		all_paths[i[0]++] = temp;
-// 	}
-// 	return (all_paths);
-// }
+/*
+Executes a single command in a forked child process, handling signals,
+redirections, and setting the exit code.
+*/
+int	exec_com(t_execute *command, t_data *ms, int og_fds[2])
+{
+	int	pid;
 
-// char	*get_path(char *cmd_arg, char **envp)
-// {
-// 	char	**all_paths;
-// 	int		i;
-// 	char	*path;
+	(void)og_fds;
+	pid = ft_pipex_is_easy();
+	if (!pid)
+	{
+		ms->exit_code = 0;
+		if (!get_exec_error(command->command, ms))
+		{
+			ft_signals_default();
+			// if (ft_execute_redirects(command, og_fds, ms))
+			// {
+			// 	ms->need_to_exit = -1;
+			// 	return (ft_fds_restore(og_fds));
+			// }
+			execve(command->command, command->args, command->envp);
+		}
+		else
+			ms->need_to_exit = -1;
+		return (ms->exit_code);
+	}
+	return (ms->exit_code);
+}
 
-// 	if (!ft_strncmp(cmd_arg, ".", 1))
-// 		return (ft_strdup(cmd_arg));
-// 	i = get_path_index_from_envp (envp);
-// 	if (1 < 0)
-// 		write(2, "Error getting path index from ENVP\n", 35);
-// 	all_paths = ft_split(envp[i] + 5, ':');
-// 	all_paths = cat_cmd_to_all_paths(cmd_arg, all_paths);
-// 	path = access_all_paths(all_paths);
-// 	if (path)
-// 	{
-// 		free_all_paths(all_paths);
-// 		return (path);
-// 	}
-// 	free_all_paths(all_paths);
-// 	free(path);
-// 	return (NULL);
-// }
+/*
+Executes a single command in a forked child process for a command that is part
+of a pipeline, handling signals, redirections, and setting the exit code.
+*/
+int	exec_com_multi(t_execute *command, t_data *ms, int og_fds[2])
+{
+	int	pid;
 
-// static pid_t	create_child(void)
-// {
-// 	pid_t	child_pid;
+	(void)og_fds;
+	pid = ft_pipex_is_easy();
+	if (!pid)
+	{
+		ms->exit_code = 0;
+		if (!get_exec_error(command->command, ms))
+		{
+			ft_signals_default();
+			pipe_handle(ms, command);
+			// if (ft_execute_redirects(command, og_fds, ms))
+			// {
+			// 	ms->need_to_exit = -1;
+			// 	return (ft_fds_restore(og_fds));
+			// }
+			execve(command->command, command->args, command->envp);
+		}
+		else
+			ms->need_to_exit = -1;
+		return (ms->exit_code);
+	}
+	close(ms->pipe_in[0]);
+	close(ms->pipe_in[1]);
+	return (ms->exit_code);
+}
 
-// 	child_pid = fork();
-// 	if (child_pid < 0)
-// 	{
-// 		write(2, "error: Can't spawn child\n", 25);
-// 		exit(-1);
-// 	}
-// 	return (child_pid);
-// }
+/*
+Checks if the given token list contains a pipe ("|") token.
+*/
+int	has_pipe(t_tokens *tokens)
+{
+	t_tokens	*head;
 
-// int	get_exec_error(char *path, t_ms_data *ms)
-// {
-// 	struct stat	sb;
+	head = tokens;
+	while (head)
+	{
+		if (head->type == OPTOKEN && !ft_strcmp(head->value, "|"))
+			return (1);
+		head = head->next;
+	}
+	return (0);
+}
 
-// 	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
-// 	{
-// 		ms->exit_code = 126;
-// 		printf("Is a directory!\n");
-// 	}
-// 	if (!path)
-// 		ms->exit_code = 1;
-// 	else if (access(path, X_OK))
-// 	{
-// 		ms->exit_code = 127;
-// 		ft_putstr_fd(path, STDERR_FILENO);
-// 		ft_putstr_fd(": command not found!\n", STDERR_FILENO);
-// 	}
-// 	return (ms->exit_code);
-// }
+/*
+Executes a single t_execute command that is not part of a pipeline, handling
+redirections, and setting the exit code.
+*/
+int	ft_execute_only_one(t_execute *command, t_data *ms, int og_fds[2])
+{
+	if (ms->need_to_exit)
+		return (ms->need_to_exit);
+	if (command->is_builtin)
+		ft_execute_builtin(command, ms, og_fds);
+	else
+		ms->exit_code = exec_com(command, ms, og_fds);
+	return (0);
+}
 
-// int	pipe_handle(t_ms_data *ms, t_com *cmd)
-// {
-// 	if (cmd->receives_from_pipe)
-// 	{
-// 		close(ms->pipe_in[1]);
-// 		dup2(ms->pipe_in[0], STDIN_FILENO);
-// 	}
-// 	if (cmd->sends_to_pipe)
-// 	{
-// 		close(ms->pipe_out[0]);
-// 		dup2(ms->pipe_out[1], STDOUT_FILENO);
-// 	}
-// 	return (0);
-// }
+int	swap_pipes(t_data *ms)
+{
+	static int	init;
 
-// int	exec_fork_builtin(t_com *cmd, t_ms_data *ms, int original_fds[2])
-// {
-// 	int	pid;
+	if (!init)
+	{
+		pipe(ms->pipe_out);
+		init++;
+	}
+	ms->pipe_in[0] = ms->pipe_out[0];
+	ms->pipe_in[1] = ms->pipe_out[1];
+	pipe(ms->pipe_out);
+	return (0);
+}
 
-// 	pid = create_child();
-// 	if (!pid)
-// 	{
-// 		sig_defaults();
-// 		pipe_handle(ms, cmd);
-// 		if (handle_redirects(cmd, original_fds, ms))
-// 		{
-// 			ms->issue_exit = -1;
-// 			return (restore_original_fds(original_fds));
-// 		}
-// 		ms->issue_exit = -1;
-// 		return (exec_builtin(cmd, ms, original_fds));
-// 	}
-// 	return (ms->exit_code);
-// }
+int	exec_multi(t_execute *command, t_data *ms, int original_fds[2])
+{
+	int	control;
 
-// /*
-// ** Executes a command.
-// */
-// int	exec_com(t_com *cmd, t_ms_data *ms, int original_fds[2])
-// {
-// 	int		pid;
+	if (original_fds[0] == NO_REDIRECT)
+		original_fds[0] = dup(STDIN_FILENO);
+	if (original_fds[1] == NO_REDIRECT)
+		original_fds[1] = dup(STDOUT_FILENO);
+	swap_pipes(ms);
+	control = command->sends_to_pipe;
+	if (ms->need_to_exit)
+		return (ms->need_to_exit);
+	if (command->is_builtin)
+		ms->exit_code = exec_fork_builtin(command, ms, original_fds);
+	else
+		ms->exit_code = exec_com_multi(command, ms, original_fds);
+	return (control);
+}
 
-// 	pid = create_child();
-// 	if (!pid)
-// 	{
-// 		ms->exit_code = 0;
-// 		if (!get_exec_error(cmd->command, ms))
-// 		{
-// 			sig_defaults();
-// 			if (handle_redirects(cmd, original_fds, ms))
-// 			{
-// 				ms->issue_exit = -1;
-// 				return (restore_original_fds(original_fds));
-// 			}
-// 			execve(cmd->command, cmd->args, cmd->envp);
-// 		}
-// 		else
-// 			ms->issue_exit = -1;
-// 		return (ms->exit_code);
-// 	}
-// 	return (ms->exit_code);
-// }
-
-// int	exec_com_multi(t_com *cmd, t_ms_data *ms, int original_fds[2])
-// {
-// 	int		pid;
-
-// 	pid = create_child();
-// 	if (!pid)
-// 	{
-// 		ms->exit_code = 0;
-// 		if (!get_exec_error(cmd->command, ms))
-// 		{
-// 			sig_defaults();
-// 			pipe_handle(ms, cmd);
-// 			if (handle_redirects(cmd, original_fds, ms))
-// 			{
-// 				ms->issue_exit = -1;
-// 				return (restore_original_fds(original_fds));
-// 			}
-// 			execve(cmd->command, cmd->args, cmd->envp);
-// 		}
-// 		else
-// 			ms->issue_exit = -1;
-// 		return (ms->exit_code);
-// 	}
-// 	close(ms->pipe_in[0]);
-// 	close(ms->pipe_in[1]);
-// 	return (ms->exit_code);
-// }
-
-// // Returns 1 if a pipe operator is found.
-// int	has_pipe(t_tokens *tokens)
-// {
-// 	t_tokens	*head;
-
-// 	head = tokens;
-// 	while (head)
-// 	{
-// 		if (head->type == OPTOKEN && !ft_strcmp(head->value, "|"))
-// 			return (1);
-// 		head = head->next;
-// 	}
-// 	return (0);
-// }
-
-// // Returns the function of the first builtin found.
-// int	exec_builtin(t_com *cmd, t_ms_data *ms, int original_fds[2])
-// {
-// 	if (!cmd->sends_to_pipe && !cmd->receives_from_pipe)
-// 	{
-// 		if (handle_redirects(cmd, original_fds, ms))
-// 			return (restore_original_fds(original_fds));
-// 	}
-// 	if (!ft_strcmp(cmd->command, "echo"))
-// 		return (builtin_echo(cmd->args));
-// 	if (!ft_strcmp(cmd->command, "cd"))
-// 		return (builtin_cd(cmd->args, cmd->envp, ms));
-// 	if (!ft_strcmp(cmd->command, "pwd"))
-// 		return (builtin_pwd(cmd->args, cmd->envp, ms));
-// 	if (!ft_strcmp(cmd->command, "export"))
-// 		return (builtin_export(cmd->args, ms));
-// 	if (!ft_strcmp(cmd->command, "unset"))
-// 		return (builtin_unset(cmd->args, ms));
-// 	if (!ft_strcmp(cmd->command, "env"))
-// 		return (builtin_env(cmd->args, cmd->envp, ms->env_head));
-// 	if (!ft_strcmp(cmd->command, "exit"))
-// 		return (builtin_exit(cmd, cmd->args, cmd->envp, ms));
-// 	return (0);
-// }
-
-// // Handles single-command input - either builtin or not.
-// int	ft_execute_only_one(t_execute *cmd, t_data *ms, int original_fds[2])
-// {
-// 	if (ms->issue_exit)
-// 		return (ms->issue_exit);
-// 	if (cmd->is_builtin)
-// 		ms->exit_code = exec_builtin(cmd, ms, original_fds);
-// 	else
-// 		ms->exit_code = exec_com(cmd, ms, original_fds);
-// 	return (0);
-// }
-
+/*
+Executes a single t_execute command within a loop, handling pipelines,
+redirections, and setting the exit code.
+*/
 int	ft_execute_loop(t_execute *command, t_data *ms, int ogfds[2])
 {
-	(void)ogfds;
 	if (!command)
 		return (0);
 	if (command->block_exec)
@@ -299,14 +238,13 @@ int	ft_execute_loop(t_execute *command, t_data *ms, int ogfds[2])
 		write (2, command->error_to_print, ft_strlen(command->error_to_print));
 		return (0);
 	}
-	ft_execute_redir_create(command);
+	ft_execute_output_create(command);
 	if (!command->receives_from_pipe && !command->sends_to_pipe)
 	{
-		// ft_execute_only_one(command, ms, ogfds);
+		ft_execute_only_one(command, ms, ogfds);
 		return (0);
 	}
 	else if (!ms->need_to_exit)
-		return (0);
-		// return (exec_multi(command, ms, ogfds));
+		return (exec_multi(command, ms, ogfds));
 	return (1);
 }

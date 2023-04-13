@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prompt_to_input.c                               :+:      :+:    :+:   */
+/*   ft_minishell_cleaner.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 17:32:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:10:02 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/03/27 16:56:47 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/13 10:22:25 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Stores the result from readline in ms->input
-//Returns 0 on sucess, 1 on error.
-int	ft_prompt_to_input(t_data *ms)
+int	ft_minishell_cleaner(t_data *ms)
 {
-	char	*temporary;
-
-	ms->input = readline(ms->prompt);
-	if (ms->input)
+	ft_free((void **)&(ms->input));
+	ft_free_matrix((void ***)&(ms->split));
+	ft_free_tokens(&(ms->tokens));
+	ms->tok_index = 0;
+	if (ms->need_to_exit < 0)
 	{
-		temporary = ms->input;
-		ms->input = ft_strtrim(temporary, " ");
-		ft_free((void **)&(temporary));
+		ms->need_to_exit = 0;
+		ms->state = EXITSTATE;
 		return (0);
 	}
-	else if (!(ms->input))
-		return (1);
-	return (0);
+	if (ms->need_to_exit > 0)
+	{
+		ms->state = EXITSTATE;
+		return (0);
+	}
+	else
+	{
+		ms->state = PROMPTSTATE;
+		return (0);
+	}
 }
