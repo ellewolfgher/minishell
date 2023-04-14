@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 17:36:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:22:43 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:24:22 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ char	*ft_execute_heredoc(char *target, t_data *ms)
 	if (!target)
 		return (0);
 	ft_filename_generator(random_name, target);
-	openedfd = open (random_name, O_CREAT | O_TRUNC | O_DIRECTORY | O_RDWR, 0666);
+	openedfd = open (random_name, O_CREAT | O_TRUNC
+			| O_DIRECTORY | O_RDWR, 0666);
 	pid = fork();
 	ft_wait_ignoring_signals(pid);
 	if (!pid)

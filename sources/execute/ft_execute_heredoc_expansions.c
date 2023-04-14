@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 17:51:04 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:13:14 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:23:49 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static char	*ft_get_exit_code(t_data *ms, char *str)
  Example: if str is "echo $USER", name is "USER", head is pointer_to_$USER,
  and ms has the USER variable set to "john", the function returns "echo john".
 */
-static char	*ft_heredoc_update_str(char *str, char *name, char *head, t_data *ms)
+static char	*ft_heredoc_update_str(char *str, char *name,
+				char *head, t_data *ms)
 {
 	char	*value;
 	char	*part1;
