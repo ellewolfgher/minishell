@@ -41,7 +41,11 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_searchset_pipe_out.c) \
 		$(addprefix $(PATH_EXEC),\
 		ft_execute_builtin.c \
+		ft_execute_command.c \
+		ft_execute_fork.c \
+		ft_execute_get_error.c \
 		ft_execute_loop.c \
+		ft_execute_multiple.c \
 		ft_execute_output_create.c \
 		ft_execute_set_commands.c) \
 		$(addprefix $(PATH_INIT),\
