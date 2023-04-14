@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:54:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 12:14:45 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:08:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	ft_execute_command(t_execute *command, t_data *ms, int og_fds[2])
 		if (!ft_execute_get_error(command->command, ms))
 		{
 			ft_signals_default();
-			// if (ft_execute_redirects(command, og_fds, ms))
-			// {
-			// 	ms->need_to_exit = -1;
-			// 	return (ft_fds_restore(og_fds));
-			// }
+			if (ft_execute_redirects(command, og_fds, ms))
+			{
+				ms->need_to_exit = -1;
+				return (ft_fds_restore(og_fds));
+			}
 			execve(command->command, command->args, command->envp);
 		}
 		else

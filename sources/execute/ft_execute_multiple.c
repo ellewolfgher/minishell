@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:36:14 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 14:00:01 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:04:55 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static int	ft_execute_piped_builtin(t_execute *command,
 	{
 		ft_signals_default();
 		ft_handle_pipes(ms, command);
-		// if (ft_execute_redirects(command, og_fds, ms))
-		// {
-		// 	ms->need_to_exit = -1;
-		// 	return (ft_fds_restore(og_fds));
-		// }
+		if (ft_execute_redirects(command, og_fds, ms))
+		{
+			ms->need_to_exit = -1;
+			return (ft_fds_restore(og_fds));
+		}
 		ms->need_to_exit = -1;
 		ft_execute_builtin(command, ms, og_fds);
 	}

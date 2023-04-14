@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 00:10:44 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/03 18:48:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:53:12 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ static char	*ft_update_exit_code(char *str, char *exit_code, char *var_head)
 	updated = ft_strjoin(start, var_head + 2);
 	free(start);
 	return (updated);
-}
-
-//Finds the first occurrence of the exit code placeholder $? in a string.
-static char	*ft_find_exit_code(char *str)
-{
-	while (*str)
-	{
-		if (*str == '$' && str[1] == '?')
-			return (str);
-		str++;
-	}
-	return (NULL);
 }
 
 // Skips the token if it is a quoted string.
