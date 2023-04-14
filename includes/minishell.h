@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/13 10:51:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:40:52 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,11 @@ int			ft_searchset_pipe_in(t_data *ms);
 int			ft_searchset_pipe_out(t_data *ms);
 
 int			ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2]);
-int			ft_execute_loop(t_execute *command, t_data *ms, int ogfds[2]);
+int			ft_execute_command(t_execute *command, t_data *ms, int og_fds[2]);
+pid_t		ft_execute_fork(void);
+int			ft_execute_get_error(char *path, t_data *ms);
+int			ft_execute_loop(t_execute *command, t_data *ms, int og_fds[2]);
+int			ft_execute_multiple(t_execute *command, t_data *ms, int og_fds[2]);
 void		ft_execute_output_create(t_execute *command);
 int			ft_execute_redirects(t_execute *command, int og_fds[2], t_data *ms);
 t_execute	*ft_execute_set_commands(t_data *ms);
