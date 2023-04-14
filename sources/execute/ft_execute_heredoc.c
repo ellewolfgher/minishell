@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 17:36:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:14:18 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:22:43 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ static int	ft_filename_generator(char *random_name, char *seed)
 	ptr = malloc (1);
 	if (!ptr)
 		return (-1);
-	free (ptr);
+	ft_free((void **)&ptr);
 	ptr = ft_itoa((size_t) ptr);
 	index += ft_strlcat(random_name, ptr, PATH_MAX - 1);
-	free (ptr);
+	ft_free((void **)&ptr);
 	if (index >= PATH_MAX)
 	{
 		write (2, "heredoc too big!\n", 17);
