@@ -44,9 +44,12 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_execute_command.c \
 		ft_execute_fork.c \
 		ft_execute_get_error.c \
+		ft_execute_heredoc_expansions.c \
+		ft_execute_heredoc.c \
 		ft_execute_loop.c \
 		ft_execute_multiple.c \
 		ft_execute_output_create.c \
+		ft_execute_redirects.c \
 		ft_execute_set_commands.c) \
 		$(addprefix $(PATH_INIT),\
 		ft_envvars_init.c \
@@ -113,6 +116,8 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_strdup.c \
 		ft_strjoin_free.c \
 		ft_strjoin.c \
+		ft_strlcat.c \
+		ft_strlcpy.c \
 		ft_strlen.c \
 		ft_strncmp.c \
 		ft_strtrim.c \
@@ -120,7 +125,10 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		$(addprefix $(PATH_MSTL),\
 		ft_count_words.c \
 		ft_fds_restore.c \
+		ft_find_exit_code.c \
 		ft_find_variable.c \
+		ft_get_name.c \
+		ft_get_value.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
 		ft_isdir.c \

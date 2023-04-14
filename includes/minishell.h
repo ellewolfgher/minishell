@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 11:40:52 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:16:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ int			ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2]);
 int			ft_execute_command(t_execute *command, t_data *ms, int og_fds[2]);
 pid_t		ft_execute_fork(void);
 int			ft_execute_get_error(char *path, t_data *ms);
+char		*ft_execute_heredoc_expansions(char *str, t_data *ms);
+char		*ft_execute_heredoc(char *target, t_data *ms);
 int			ft_execute_loop(t_execute *command, t_data *ms, int og_fds[2]);
 int			ft_execute_multiple(t_execute *command, t_data *ms, int og_fds[2]);
 void		ft_execute_output_create(t_execute *command);
@@ -217,13 +219,18 @@ char		*ft_strdup(const char *tobecopied);
 char		*ft_strjoin_free(char *s1, char *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_strlen(const char *str);
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
+size_t		ft_strlcpy(char *dest, const char *src, size_t size);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 int			ft_count_words(char *string);
-int			ft_fds_restore(int original_fds[2]);
+int			ft_fds_restore(int og_fds[2]);
+char		*ft_find_exit_code(char *str);
 char		*ft_find_variable(char	*str);
+char		*ft_get_name(char *head);
+char		*ft_get_value(char *name, t_env_vars *env);
 int			ft_is_variable(char c);
 int			ft_is_whitespace(char c);
 int			ft_isdir(const char *path);

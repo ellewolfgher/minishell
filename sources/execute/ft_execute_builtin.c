@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_builtin.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:48:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 14:00:47 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:10:05 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2])
 	(void)og_fds;
 	if (!command->sends_to_pipe && !command->receives_from_pipe)
 	{
-		// if (ft_execute_redir_handler(command, og_fds, ms))
-		// 	return (ft_fds_restore(og_fds));
+		if (ft_execute_redirects(command, og_fds, ms))
+			return (ft_fds_restore(og_fds));
 	}
 	if (!ft_strcmp(command->command, "echo"))
 		ft_command_echo(ms);
