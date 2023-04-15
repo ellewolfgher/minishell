@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:11:31 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/11 03:43:16 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:25:44 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_command_exit(t_data *ms)
 	}
 	else if (argc == 2)
 	{
-		ms->exit_code = ft_atoll(ms->tokens->next->value);
+		ms->exit_code = ft_atoi(ms->tokens->next->value);
 		ms->state = EXITSTATE;
 	}
 	else

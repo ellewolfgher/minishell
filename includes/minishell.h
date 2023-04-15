@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:16:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:25:38 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,6 @@ void		ft_free_varlist(t_env_vars **head);
 void		ft_free(void **pointer);
 
 int			ft_atoi(const char *nptr);
-long long	ft_atoll(const char *str);
 void		*ft_calloc(size_t num_elements, size_t element_size);
 int			ft_isalnum(int c);
 int			ft_isdigit(char c);
