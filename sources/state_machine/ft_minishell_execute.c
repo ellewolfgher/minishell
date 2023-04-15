@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:23:21 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/13 10:33:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:41:29 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_minishell_execute(t_data *ms)
 		if (ms->need_to_exit)
 			break ;
 	}
-	while (wait((int *)&ms->exit_code) > 0)
+	while (wait(&ms->exit_code) > 0)
 		continue ;
 	if (ms->exit_code >= 256)
 		ms->exit_code = ms->exit_code >> 8;

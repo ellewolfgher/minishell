@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/15 17:25:38 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:29:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,6 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 }	t_tokens;
 
-typedef struct s_data
-{
-	int					state;
-	int					need_to_exit;
-	long long			exit_code;
-	int					tok_index;
-	int					inputnull;
-	char				*prompt;
-	char				*input;
-	char				**split;
-	struct s_tokens		*tokens;
-	struct s_env_vars	*env_vars;
-	int					pipe_in[2];
-	int					pipe_out[2];
-}	t_data;
 
 typedef struct s_redirect
 {
@@ -113,16 +98,33 @@ typedef struct s_redirect
 typedef struct s_execute
 {
 	int					block_exec;
-	char				*command;
 	int					is_builtin;
+	int					receives_from_pipe;
+	int					sends_to_pipe;
+	char				*command;
+	char				*error_to_print;
 	char				**args;
 	char				**envp;
 	struct s_redirect	*red_in;
 	struct s_redirect	*red_out;
-	int					receives_from_pipe;
-	int					sends_to_pipe;
-	char				*error_to_print;
 }	t_execute;
+
+typedef struct s_data
+{
+	int					state;
+	int					need_to_exit;
+	int					exit_code;
+	int					tok_index;
+	int					inputnull;
+	char				*prompt;
+	char				*input;
+	char				**split;
+	struct s_tokens		*tokens;
+	struct s_env_vars	*env_vars;
+	struct s_execute 	*cmd;
+	int					pipe_in[2];
+	int					pipe_out[2];
+}	t_data;
 
 void		ft_command_cd(t_data *ms);
 void		ft_command_echo(t_data *ms);
