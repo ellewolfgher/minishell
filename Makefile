@@ -101,7 +101,6 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_free.c) \
 		$(addprefix $(PATH_LBTL),\
 		ft_atoi.c \
-		ft_atoll.c \
 		ft_calloc.c \
 		ft_isalnum.c \
 		ft_isdigit.c \
