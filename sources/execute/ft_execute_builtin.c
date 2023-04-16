@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:48:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/15 20:50:05 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 21:10:36 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ Assuming the built-in command "echo" is executed with the argument
 */
 int	ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2])
 {
-	(void)og_fds;
 	if (!command->sends_to_pipe && !command->receives_from_pipe)
 	{
 		if (ft_execute_redirects(command, og_fds, ms))
