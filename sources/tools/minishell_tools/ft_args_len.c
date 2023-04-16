@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokens_lst_size.c                               :+:      :+:    :+:   */
+/*   ft_args_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 14:33:33 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/10 14:34:07 by ewolfghe         ###   ########.fr       */
+/*   Created: 2023/04/15 19:32:25 by ewolfghe          #+#    #+#             */
+/*   Updated: 2023/04/15 19:33:15 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_token_lst_size(t_tokens *lst)
+// Return the number of arguments in the cmd->args array
+int	ft_args_len(char **args)
 {
-	int	size;
+	int	i;
 
-	size = 0;
-	while (lst != NULL)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
+	i = 0;
+	while (args[i])
+		i++;
+	return (i);
 }

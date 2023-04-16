@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:11:31 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/15 17:25:44 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 21:03:39 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,27 @@ static int	ft_long_or_digit(char *str)
 	return (1);
 }
 
-void	ft_command_exit(t_data *ms)
+void	ft_command_exit(t_data *ms, t_execute *cmd)
 {
 	int			argc;
 
-	argc = ft_token_lst_size(ms->tokens);
+	argc = ft_args_len(cmd->args);
 	if (argc > 2)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
 		ms->exit_code = 1;
-		ms->state = CLEANSTATE;
 	}
-	else if (argc == 2 && !ft_long_or_digit(ms->tokens->next->value))
+	else if (argc == 2 && !ft_long_or_digit(cmd->args[1]))
 	{
 		ft_putstr_fd("exit: numeric argument required\n", 2);
 		ms->exit_code = 2;
-		ms->state = EXITSTATE;
+		ms->need_to_exit = 1;
 	}
 	else if (argc == 2)
 	{
-		ms->exit_code = ft_atoi(ms->tokens->next->value);
-		ms->state = EXITSTATE;
+		ms->exit_code = (unsigned char)ft_atoi(cmd->args[1]);
+		ms->need_to_exit = 1;
 	}
 	else
-		ms->state = EXITSTATE;
+		ms->need_to_exit = 1;
 }

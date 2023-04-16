@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:28:03 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/12 13:41:03 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:46:05 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ static void	ft_cd_home(t_data *ms)
 	}
 }
 
-static void	ft_cd_prev(t_data *ms, t_env_vars *env_vars)
+static void	ft_cd_prev(t_data *ms)
 {
 	char	*prev_dir;
 	char	*oldpwd;
 
-	(void)env_vars;
-	oldpwd = ft_envvar_get(env_vars, "PWD");
-	prev_dir = ft_envvar_get(env_vars, "OLDPWD");
+	oldpwd = ft_envvar_get(ms->env_vars, "PWD");
+	prev_dir = ft_envvar_get(ms->env_vars, "OLDPWD");
 	if (prev_dir != NULL)
 	{
 		chdir(prev_dir);
@@ -73,13 +72,13 @@ static void	ft_cd_path(t_data *ms, char *path)
 	ms->exit_code = 0;
 }
 
-static void	handle_cd_arg(t_data *ms)
+static void	handle_cd_arg(t_data *ms, t_execute *cmd)
 {
 	char	*arg;
 
-	arg = ms->tokens->next->value;
+	arg = cmd->args[1];
 	if ((ft_strcmp(arg, "OLDPWD") == 0) || (ft_strcmp(arg, "-") == 0))
-		ft_cd_prev(ms, ms->env_vars);
+		ft_cd_prev(ms);
 	else
 	{
 		if (ft_isdir(arg))
@@ -94,12 +93,12 @@ static void	handle_cd_arg(t_data *ms)
 	}
 }
 
-void	ft_command_cd(t_data *ms)
+void	ft_command_cd(t_data *ms, t_execute *cmd)
 {
 	char	*path;
 
-	path = ms->tokens->next->value;
-	if ((path) && ft_token_lst_size(ms->tokens) > 2)
+	path = cmd->args[1];
+	if ((path) && ft_args_len(cmd->args) > 2)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		ms->exit_code = 1;
@@ -107,6 +106,6 @@ void	ft_command_cd(t_data *ms)
 	else if (!path || ft_strcmp(path, "~") == 0)
 		ft_cd_home(ms);
 	else if (path)
-		handle_cd_arg(ms);
-	ft_free_tokens(&ms->tokens);
+		handle_cd_arg(ms, cmd);
+	ft_free((void **)&cmd->args);
 }

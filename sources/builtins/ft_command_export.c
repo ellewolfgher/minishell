@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/13 19:31:01 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 20:51:26 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,24 @@ static void	ft_print_error(t_data *ms, char *key)
 	ms->exit_code = 1;
 }
 
-void	ft_command_export(t_data *ms)
+void	ft_command_export(t_data *ms, t_execute *cmd)
 {
-	t_tokens	*temp;
 	char		**split;
+	int			i;
 
-	temp = ms->tokens->next;
-	if (!ms->tokens->next)
+	i = 1;
+	if (!cmd->args[1])
 		return (ft_print_export(ms->env_vars));
-	while (temp)
+	while (cmd->args[i])
 	{	
-		if (ft_strcmp(&temp->value[0], "=") == 0)
-			return (ft_print_error(ms, temp->value));
-		split = ft_split(temp->value, '=');
+		if (ft_strcmp(&cmd->args[i][0], "=") == 0)
+			return (ft_print_error(ms, cmd->args[i]));
+		split = ft_split(cmd->args[i], '=');
 		if (!ft_is_valid_name(split[0]) || !split)
 		{
 			ft_print_error(ms, split[0]);
 			ft_free_matrix((void ***)&split);
-			temp = temp->next;
+			i++;
 			return ;
 		}
 		if (!split[1])
@@ -74,6 +74,6 @@ void	ft_command_export(t_data *ms)
 		else
 			ft_envvar_update(split[0], split[1], &ms->env_vars);
 		ft_free_matrix((void ***)&split);
-		temp = temp->next;
+		i++;
 	}
 }
