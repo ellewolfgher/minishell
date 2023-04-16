@@ -6,35 +6,35 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/11 05:15:04 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/15 20:22:14 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //Print the tokens
-void	ft_command_echo(t_data *ms)
+void	ft_command_echo(t_data *ms, t_execute *cmd)
 {
 	int			newline;
-	t_tokens	*tokens;
+	int			i;
+	char		**args;
 
-	newline = 0;
-	tokens = ms->tokens->next;
-	if (tokens && tokens->type == WORDTOKEN && strcmp(tokens->value, "-n") == 0)
+	(void)ms;
+	args = cmd->args;
+	newline = 1;
+	i = 1;
+	if (args[i] && ft_strcmp(args[i], "-n") == 0)
 	{
-		newline = 1;
-		tokens = tokens->next;
+		newline = 0;
+		i++;
 	}
-	while (tokens)
+	while (args[i])
 	{
-		if (tokens->type == WORDTOKEN)
-		{
-			printf("%s", tokens->value);
-			if (tokens->next && tokens->next->type == WORDTOKEN)
-				printf(" ");
-		}
-		tokens = tokens->next;
+		printf("%s", args[i]);
+		if (args[i + 1])
+			printf(" ");
+		i++;
 	}
-	if (!newline)
+	if (newline)
 		printf("\n");
 }

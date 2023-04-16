@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_builtin.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:48:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:10:05 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/15 20:50:05 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ int	ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2])
 		if (ft_execute_redirects(command, og_fds, ms))
 			return (ft_fds_restore(og_fds));
 	}
-	if (!ft_strcmp(command->command, "echo"))
-		ft_command_echo(ms);
 	if (!ft_strcmp(command->command, "cd"))
-		ft_command_cd(ms);
-	if (!ft_strcmp(command->command, "pwd"))
-		ft_command_pwd();
-	if (!ft_strcmp(command->command, "export"))
-		ft_command_export(ms);
-	if (!ft_strcmp(command->command, "unset"))
-		ft_command_unset(ms);
+		ft_command_cd(ms, command);
+	if (!ft_strcmp(command->command, "echo"))
+		ft_command_echo(ms, command);
 	if (!ft_strcmp(command->command, "env"))
 		ft_command_env(ms);
 	if (!ft_strcmp(command->command, "exit"))
-		ft_command_exit(ms);
+		ft_command_exit(ms, command);
+	if (!ft_strcmp(command->command, "export"))
+		ft_command_export(ms, command);
+	if (!ft_strcmp(command->command, "pwd"))
+		ft_command_pwd();
+	if (!ft_strcmp(command->command, "unset"))
+		ft_command_unset(ms, command);
 	return (0);
 }

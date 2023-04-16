@@ -122,6 +122,7 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_strtrim.c \
 		ft_substr.c) \
 		$(addprefix $(PATH_MSTL),\
+		ft_args_len.c \
 		ft_count_words.c \
 		ft_fds_restore.c \
 		ft_find_exit_code.c \
@@ -137,7 +138,6 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_signals_ignore.c \
 		ft_test_access.c \
 		ft_test_tools.c \
-		ft_token_lst_size.c \
 		ft_tokens_iterate.c \
 		ft_update_path.c)
 

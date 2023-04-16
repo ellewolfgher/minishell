@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/15 18:29:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/15 21:06:49 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 }	t_tokens;
 
-
 typedef struct s_redirect
 {
 	int					type;
@@ -121,18 +120,18 @@ typedef struct s_data
 	char				**split;
 	struct s_tokens		*tokens;
 	struct s_env_vars	*env_vars;
-	struct s_execute 	*cmd;
+	struct s_execute	*cmd;
 	int					pipe_in[2];
 	int					pipe_out[2];
 }	t_data;
 
-void		ft_command_cd(t_data *ms);
-void		ft_command_echo(t_data *ms);
+void		ft_command_cd(t_data *ms, t_execute *cmd);
+void		ft_command_echo(t_data *ms, t_execute *cmd);
 void		ft_command_env(t_data *ms);
-void		ft_command_exit(t_data *ms);
-void		ft_command_export(t_data *ms);
+void		ft_command_exit(t_data *ms, t_execute *cmd);
+void		ft_command_export(t_data *ms, t_execute *cmd);
 void		ft_command_pwd(void);
-void		ft_command_unset(t_data *ms);
+void		ft_command_unset(t_data *ms, t_execute *cmd);
 
 int			ft_minishell_cleaner(t_data *ms);
 
@@ -226,6 +225,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
+int			ft_args_len(char **args);
 int			ft_count_words(char *string);
 int			ft_fds_restore(int og_fds[2]);
 char		*ft_find_exit_code(char *str);
@@ -240,7 +240,6 @@ t_redirect	*ft_redirect_list(int nodes);
 void		ft_signals_default(void);
 void		ft_signals_ignore(void);
 char		*ft_test_access(char **paths);
-int			ft_token_lst_size(t_tokens *lst);
 t_tokens	*ft_tokens_iterate(t_data *ms);
 void		ft_update_path(t_data *ms, char *oldpwd);
 
