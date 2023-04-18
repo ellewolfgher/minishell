@@ -6,14 +6,21 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:53:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/13 10:51:10 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:45:34 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Stores the result from readline in ms->input
-//Returns 0 on sucess, 1 on error.
+/*
+Reads the user input and trims leading/trailing spaces.
+
+Function responsibilities:
+
+Reads user input using readline().
+Trims leading and trailing spaces from the input string.
+Returns 0 if input is successfully read, 1 otherwise.
+*/
 static int	ft_prompt_to_input(t_data *ms)
 {
 	char	*temporary;
@@ -21,18 +28,30 @@ static int	ft_prompt_to_input(t_data *ms)
 	ms->input = readline(ms->prompt);
 	if (ms->input)
 	{
+		if (ms->input[0] == '\0')
+		{
+			ft_free((void **)&(ms->input));
+			return (JUST_ENTER);
+		}
 		temporary = ms->input;
 		ms->input = ft_strtrim(temporary, " ");
 		ft_free((void **)&(temporary));
 		return (0);
 	}
 	else if (!(ms->input))
-		return (1);
+		return (CTRL_D);
 	return (0);
 }
 
-//Stablishes the prompt state and saves the input
-//If the user inputs something, saves to the history
+/*
+Handles the minishell prompt and input history.
+
+Function responsibilities:
+
+Calls ft_prompt_to_input() to read user input.
+Adds the input to the command history if it is non-empty.
+Sets the state to PARSESTATE if input is read, otherwise to EXITSTATE.
+*/
 int	ft_minishell_prompt(t_data *ms)
 {
 	int	control;
@@ -41,14 +60,14 @@ int	ft_minishell_prompt(t_data *ms)
 	if (ms->input && ms->input[0])
 		add_history (ms->input);
 	if (!control)
-	{
 		ms->state = PARSESTATE;
-		return (0);
-	}
-	if (control)
+	if (control == CTRL_D)
 	{
 		ms->state = EXITSTATE;
+		ms->need_to_exit = 1;
 		ms->exit_code = 0;
 	}
+	if (control == JUST_ENTER)
+		ms->state = PROMPTSTATE;
 	return (0);
 }
