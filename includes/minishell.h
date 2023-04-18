@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/15 21:06:49 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:12:53 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@
 
 // MAX SIZE FOR PATH
 # define PATH_MAX		4096
+
+// PARSING FLAGS
+# define CTRL_D			1
+# define JUST_ENTER		2
 
 # include <fcntl.h>
 # include <stdio.h>

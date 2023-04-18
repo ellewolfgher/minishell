@@ -6,18 +6,34 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/06 11:16:27 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:35:00 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//Parse the input and check for errors
-//If there are no errors, the input is split into tokens
+/*
+Main loop of the minishell parsing process.
+
+Function responsibilities:
+
+Check for unclosed quotes and set the state to PROMPTSTATE if true.
+Check for only spaces and set the state to CLEANSTATE if true.
+Insert extra spaces to the input string if needed.
+Split the input string into individual words.
+Set a token list of the splitted input string.
+Expand variables in the input string.
+Categorize tokens based on their type (command, argument, redirection, etc.).
+Remove quotes from the tokenized input string.
+Set the state to EXECSTATE, ready for execution.
+*/
 int	ft_minishell_parser(t_data *ms)
 {
 	if (ft_parser_quotes(ms))
+	{
+		ms->state = PROMPTSTATE;
 		return (1);
+	}
 	if (ft_parser_onlyspc(ms->input))
 	{
 		ms->state = CLEANSTATE;
