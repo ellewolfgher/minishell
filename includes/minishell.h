@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/17 17:12:53 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:48:34 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ typedef struct s_data
 }	t_data;
 
 void		ft_command_cd(t_data *ms, t_execute *cmd);
-void		ft_command_echo(t_data *ms, t_execute *cmd);
-void		ft_command_env(t_data *ms);
+void		ft_command_echo(t_data *ms);
+void		ft_command_env(t_env_vars *env_vars);
 void		ft_command_exit(t_data *ms, t_execute *cmd);
-void		ft_command_export(t_data *ms, t_execute *cmd);
+void		ft_command_export(t_data *ms);
 void		ft_command_pwd(void);
-void		ft_command_unset(t_data *ms, t_execute *cmd);
+void		ft_command_unset(t_data *ms);
 
 int			ft_minishell_cleaner(t_data *ms);
 
@@ -220,7 +220,6 @@ char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strdup(const char *tobecopied);
-char		*ft_strjoin_free(char *s1, char *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_strlen(const char *str);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
@@ -240,6 +239,7 @@ int			ft_is_variable(char c);
 int			ft_is_whitespace(char c);
 int			ft_isdir(const char *path);
 int			ft_match_variables(char *env_var, char *var_name);
+void		ft_print_export(t_env_vars *env_vars);
 t_redirect	*ft_redirect_list(int nodes);
 void		ft_signals_default(void);
 void		ft_signals_ignore(void);

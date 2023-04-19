@@ -113,7 +113,6 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_strchr.c \
 		ft_strcmp.c \
 		ft_strdup.c \
-		ft_strjoin_free.c \
 		ft_strjoin.c \
 		ft_strlcat.c \
 		ft_strlcpy.c \
@@ -133,6 +132,7 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_is_whitespace.c \
 		ft_isdir.c \
 		ft_match_variables.c \
+		ft_print_export.c \
 		ft_redirect_list.c \
 		ft_signals_default.c \
 		ft_signals_ignore.c \
