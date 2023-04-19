@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/18 23:48:34 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:28:06 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void		ft_command_cd(t_data *ms, t_execute *cmd);
 void		ft_command_echo(t_data *ms);
 void		ft_command_env(t_env_vars *env_vars);
 void		ft_command_exit(t_data *ms, t_execute *cmd);
-void		ft_command_export(t_data *ms);
+void		ft_command_export(t_data *ms, t_execute *cmd);
 void		ft_command_pwd(void);
 void		ft_command_unset(t_data *ms);
 
@@ -191,7 +191,6 @@ void		ft_parser_tokenize(t_data *ms);
 
 int			ft_minishell_prompt(t_data *ms);
 
-void		ft_envvar_add(t_env_vars **env_vars, char *env_var);
 void		ft_envvar_back(t_env_vars **stack, t_env_vars *new);
 void		ft_envvar_del(t_env_vars **stack, char *var_name);
 char		*ft_envvar_get(t_env_vars *env_vars, const char *name);

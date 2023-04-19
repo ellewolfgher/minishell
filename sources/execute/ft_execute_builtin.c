@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:48:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/17 20:10:59 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:34:12 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2])
 	if (!ft_strcmp(command->command, "exit"))
 		ft_command_exit(ms, command);
 	if (!ft_strcmp(command->command, "export"))
-		ft_command_export(ms);
+		ft_command_export(ms, command);
 	if (!ft_strcmp(command->command, "pwd"))
 		ft_command_pwd();
 	if (!ft_strcmp(command->command, "unset"))
