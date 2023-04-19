@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/18 22:42:02 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:56:57 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,39 @@ static void	ft_print_error(t_data *ms, char *key)
 	ms->exit_code = 1;
 }
 
-void	ft_error_and_update(char *split0, char *split1, char *value, t_data *ms)
+static void	ft_err_update(char *split0, char *split1, char *arg, t_data *ms)
 {
-	if (!split1 && ft_strcmp(value, "=") != 0)
-		ft_envvar_update(value, "", &ms->env_vars);
+	if (!split1 && !ft_strchr(arg, '='))
+		ft_envvar_update(arg, "", &ms->env_vars);
 	else if (!split1)
-		ft_envvar_update(value, "", &ms->env_vars);
+		ft_envvar_update(arg, "", &ms->env_vars);
 	else
 		ft_envvar_update(split0, split1, &ms->env_vars);
 }
 
-void	ft_command_export(t_data *ms)
+void	ft_command_export(t_data *ms, t_execute *cmd)
 {
-	t_tokens	*temp;
 	char		**split;
+	char		*arg;
+	int			i;
 
-	temp = ms->tokens->next;
-	if (!ms->tokens->next)
+	i = 1;
+	if (!cmd->args[1])
 		return (ft_print_export(ms->env_vars));
-	while (temp)
-	{
-		split = ft_split(temp->value, '=');
-		if (!ft_val(split[0]) || !split || ft_strcmp(&temp->value[0], "=") == 0)
+	while (cmd->args[i])
+	{	
+		arg = cmd->args[i];
+		split = ft_split(cmd->args[i], '=');
+		if (!ft_val(split[0]) || !split || ft_strcmp(&arg[0], "=") == 0)
 		{
-			ft_print_error(ms, temp->value);
+			ft_print_error(ms, arg);
 			ft_free_matrix((void ***)&split);
-			temp = temp->next;
+			i++;
 			return ;
 		}
-		ft_error_and_update(split[0], split[1], temp->value, ms);
+		ft_err_update(split[0], split[1], arg, ms);
 		if (split)
 			ft_free_matrix((void ***)&split);
-		temp = temp->next;
+		i++;
 	}
 }

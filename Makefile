@@ -84,7 +84,6 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_minishell_prompt.c \
 		ft_minishell.c) \
 		$(addprefix $(PATH_EVTL),\
-		ft_envvar_add.c \
 		ft_envvar_back.c \
 		ft_envvar_del.c \
 		ft_envvar_get.c \

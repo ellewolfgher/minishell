@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:39:35 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/18 19:41:52 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:55:39 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static void	ft_envvar_replace(char *name, char *value, t_env_vars **env_vars)
 	char		*new_content;
 
 	node = ft_envvar_find(name, *env_vars);
-	new_content = ft_strjoin(name, "=");
-	new_content = ft_strjoin(new_content, value);
+	if (ft_strcmp(value, "") == 0 || !value)
+		new_content = ft_strdup(name);
+	else
+		new_content = ft_strjoin(name, ft_strjoin("=", value));
 	if (node)
 	{
 		ft_free((void **)&node->content);
