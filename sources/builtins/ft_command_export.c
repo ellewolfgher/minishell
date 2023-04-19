@@ -6,20 +6,11 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/15 20:51:26 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/18 22:42:02 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_print_export(t_env_vars *env_vars)
-{
-	while (env_vars)
-	{
-		printf("declare -x %s\n", env_vars->content);
-		env_vars = env_vars->next;
-	}
-}
 
 static int	ft_isalpha(int c)
 {
@@ -28,7 +19,8 @@ static int	ft_isalpha(int c)
 	return (0);
 }
 
-static int	ft_is_valid_name(const char *str)
+//Check if variable name is valid and function's name's size is due to norme
+static int	ft_val(const char *str)
 {
 	if (!str || !*str || !ft_isalpha(*str))
 		return (0);
@@ -49,31 +41,37 @@ static void	ft_print_error(t_data *ms, char *key)
 	ms->exit_code = 1;
 }
 
-void	ft_command_export(t_data *ms, t_execute *cmd)
+void	ft_error_and_update(char *split0, char *split1, char *value, t_data *ms)
 {
-	char		**split;
-	int			i;
+	if (!split1 && ft_strcmp(value, "=") != 0)
+		ft_envvar_update(value, "", &ms->env_vars);
+	else if (!split1)
+		ft_envvar_update(value, "", &ms->env_vars);
+	else
+		ft_envvar_update(split0, split1, &ms->env_vars);
+}
 
-	i = 1;
-	if (!cmd->args[1])
+void	ft_command_export(t_data *ms)
+{
+	t_tokens	*temp;
+	char		**split;
+
+	temp = ms->tokens->next;
+	if (!ms->tokens->next)
 		return (ft_print_export(ms->env_vars));
-	while (cmd->args[i])
-	{	
-		if (ft_strcmp(&cmd->args[i][0], "=") == 0)
-			return (ft_print_error(ms, cmd->args[i]));
-		split = ft_split(cmd->args[i], '=');
-		if (!ft_is_valid_name(split[0]) || !split)
+	while (temp)
+	{
+		split = ft_split(temp->value, '=');
+		if (!ft_val(split[0]) || !split || ft_strcmp(&temp->value[0], "=") == 0)
 		{
-			ft_print_error(ms, split[0]);
+			ft_print_error(ms, temp->value);
 			ft_free_matrix((void ***)&split);
-			i++;
+			temp = temp->next;
 			return ;
 		}
-		if (!split[1])
-			ft_envvar_update(split[0], "", &ms->env_vars);
-		else
-			ft_envvar_update(split[0], split[1], &ms->env_vars);
-		ft_free_matrix((void ***)&split);
-		i++;
+		ft_error_and_update(split[0], split[1], temp->value, ms);
+		if (split)
+			ft_free_matrix((void ***)&split);
+		temp = temp->next;
 	}
 }

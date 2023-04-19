@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:11:31 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/15 21:03:39 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:39:21 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	ft_command_exit(t_data *ms, t_execute *cmd)
 	}
 	else if (argc == 2 && !ft_long_or_digit(cmd->args[1]))
 	{
-		ft_putstr_fd("exit: numeric argument required\n", 2);
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(cmd->args[1], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
 		ms->exit_code = 2;
 		ms->need_to_exit = 1;
 	}
