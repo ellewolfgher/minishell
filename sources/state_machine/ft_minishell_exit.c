@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:27:00 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/17 17:15:34 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/19 10:46:39 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_minishell_exit(t_data *ms)
 
 	code = ms->exit_code;
 	if (ms->need_to_exit > 0)
-		write (1, "exit\n", 6);
+		printf("exit\n");
 	rl_clear_history();
 	ft_free((void **)&(ms->prompt));
 	ft_free((void **)&(ms->input));

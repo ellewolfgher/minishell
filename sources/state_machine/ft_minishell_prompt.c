@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:53:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/18 17:45:34 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/19 10:37:24 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Returns 0 if input is successfully read, 1 otherwise.
 */
 static int	ft_prompt_to_input(t_data *ms)
 {
-	char	*temporary;
+	char	*aux;
 
 	ms->input = readline(ms->prompt);
 	if (ms->input)
@@ -33,9 +33,9 @@ static int	ft_prompt_to_input(t_data *ms)
 			ft_free((void **)&(ms->input));
 			return (JUST_ENTER);
 		}
-		temporary = ms->input;
-		ms->input = ft_strtrim(temporary, " ");
-		ft_free((void **)&(temporary));
+		aux = ms->input;
+		ms->input = ft_strtrim(aux, " ");
+		ft_free((void **)&(aux));
 		return (0);
 	}
 	else if (!(ms->input))
