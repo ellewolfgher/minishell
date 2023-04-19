@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:22:42 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 07:53:02 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:24:48 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,17 @@ static int	ft_pretty_prompt(t_data *ms)
 	return (0);
 }
 
-//Changes to be made to ft_initiate_interactive_signals, stopped here
+/*
+Initialization function for the minishell.
+
+Function responsibilities:
+
+Set the state to PROMPTSTATE.
+Initialize the prompt to the standard output.
+Initialize signals behavior.
+Initialize the environment variables list
+If the any function returns positive, set the state to EXITSTATE.
+*/
 int	ft_minishell_init(t_data *ms, char **envp)
 {
 	int	control;

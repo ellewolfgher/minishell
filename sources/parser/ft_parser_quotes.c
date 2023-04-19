@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:09:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/03/30 12:08:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:33:05 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_parser_quotes(t_data *ms)
 	{
 		ft_free((void **)&(ms->input));
 		ms->exit_code = 2;
-		ms->state = PROMPTSTATE;
 		printf ("Please close any open quotes\n");
 		return (1);
 	}

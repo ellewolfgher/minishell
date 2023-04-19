@@ -6,12 +6,20 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:36:56 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/13 10:52:41 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:15:52 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/*
+Checks the number of command-line arguments and exits if greater than 1.
+
+Function responsibilities:
+
+Exits with an error message if argc > 1, informing the user to run with
+./minishell.
+*/
 static void	ft_check_args(int argc)
 {
 	if (argc > 1)
@@ -21,6 +29,15 @@ static void	ft_check_args(int argc)
 	}
 }
 
+/*
+Main function of the minishell program.
+
+Function responsibilities:
+
+Checks the number of command-line arguments.
+Initializes a t_data structure.
+Iterates through the state machine until the EXITSTATE is reached.
+*/
 int	main(int argc, char *argv[], char **envp)
 {
 	t_data	*ms;

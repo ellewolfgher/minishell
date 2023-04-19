@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/18 23:37:59 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:48:34 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@
 
 // MAX SIZE FOR PATH
 # define PATH_MAX		4096
+
+// PARSING FLAGS
+# define CTRL_D			1
+# define JUST_ENTER		2
 
 # include <fcntl.h>
 # include <stdio.h>
