@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_get_error.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:59:37 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 10:53:03 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:04:20 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_execute_get_error(char *path, t_data *ms)
 	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
 	{
 		ms->exit_code = 126;
-		printf("Is a directory\n");
 	}
 	if (!path)
 		ms->exit_code = 1;

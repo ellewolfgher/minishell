@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:35:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 12:43:03 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:31:02 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	ft_print_error(t_data *ms, t_tokens *temp, int acs)
 //Checks if the previous token is a redirect, if it is, it is a file descriptor
 int	ft_token_fd(t_data *ms, t_tokens *temp)
 {
-	static int	fd_error = 0;
 	int			acs;
 	char		*val;
 
@@ -36,14 +35,14 @@ int	ft_token_fd(t_data *ms, t_tokens *temp)
 	{
 		if (access(val, F_OK) != 0 || access(val, R_OK | X_OK | W_OK) != 0)
 		{
-			if (!fd_error)
+			if (!ms->fd_error)
 			{
 				if (access(val, F_OK) != 0)
 					acs = 2;
 				else if (access(val, R_OK | X_OK | W_OK) != 0)
 					acs = 3;
-				fd_error = 1;
 				ft_print_error(ms, temp, acs);
+				ms->fd_error = 1;
 			}
 		}
 		return (1);
