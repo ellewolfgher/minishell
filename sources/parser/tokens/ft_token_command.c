@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:23:32 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/03 18:24:19 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:09:29 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_token_command(t_tokens *temp)
 	if (temp->prev && temp->prev->type == FDTOKEN)
 	{
 		if (temp->prev->prev && temp->prev->prev->type == REDTOKEN)
-			return (1);
+			return (0);
 	}
 	return (0);
 }

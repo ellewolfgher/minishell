@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 23:27:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:01:20 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,18 +169,18 @@ int			ft_signals_init(void);
 void		ft_expand_exit_code(t_data *ms);
 void		ft_expand_variables(t_data *ms);
 
-int			ft_token_all(t_tokens *temp);
+int			ft_token_all(t_data *ms, t_tokens *temp);
 int			ft_token_builtin(char *value);
 int			ft_token_command(t_tokens *temp);
 int			ft_token_error(t_tokens *temp);
-int			ft_token_fd(t_tokens *temp);
+int			ft_token_fd(t_data *ms, t_tokens *temp);
 int			ft_token_operator(char *value);
 int			ft_token_redirect(char *value);
 int			ft_token_word(t_tokens *temp);
 
 int			ft_minishell_parser(t_data *ms);
 
-void		ft_parser_categorize(t_tokens *tokens);
+void		ft_parser_categorize(t_data *ms, t_tokens *tokens);
 void		ft_parser_expand(t_data *ms);
 int			ft_parser_onlyspc(char *str);
 int			ft_parser_quotes(t_data *ms);
