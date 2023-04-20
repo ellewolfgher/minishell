@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:39 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/12 01:34:35 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:32:08 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	ft_command_pwd(void)
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		printf("%s\n", cwd);
 	else
-		printf("pwd: error getting current working directory\n");
+		printf("minishell: pwd: error getting current working directory\n");
 }

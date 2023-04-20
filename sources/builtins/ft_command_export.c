@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:39:55 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/19 16:56:57 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:31:50 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_val(const char *str)
 
 static void	ft_print_error(t_data *ms, char *key)
 {
-	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd("minishell: export: ", 2);
 	ft_putstr_fd(key, 2);
 	ft_putendl_fd(": not a valid identifier", 2);
 	ms->exit_code = 1;
