@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:48:40 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 15:34:12 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:22:23 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_execute_builtin(t_execute *command, t_data *ms, int og_fds[2])
 	if (!ft_strcmp(command->command, "cd"))
 		ft_command_cd(ms, command);
 	if (!ft_strcmp(command->command, "echo"))
-		ft_command_echo(ms);
+		ft_command_echo(ms, command);
 	if (!ft_strcmp(command->command, "env"))
 		ft_command_env(ms->env_vars);
 	if (!ft_strcmp(command->command, "exit"))

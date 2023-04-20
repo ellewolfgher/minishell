@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 15:38:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:22:11 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_data
 }	t_data;
 
 void		ft_command_cd(t_data *ms, t_execute *cmd);
-void		ft_command_echo(t_data *ms);
+void		ft_command_echo(t_data *ms, t_execute *cmd);
 void		ft_command_env(t_env_vars *env_vars);
 void		ft_command_exit(t_data *ms, t_execute *cmd);
 void		ft_command_export(t_data *ms, t_execute *cmd);
