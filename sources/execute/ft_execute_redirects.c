@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_redirects.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:53:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 00:07:41 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:25:12 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_redir_input(t_redirect *in)
 {
 	int	fd;
 
-	if (in->target && access(in->target, F_OK))
+	if (in->target && access(in->target, F_OK) != 0)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(in->target, STDERR_FILENO);
@@ -144,7 +144,6 @@ static int	ft_is_output(t_redirect *red_out, int og_fds[2])
 	}
 	return (0);
 }
-
 
 /*
 Handles input and output redirection for a command. Takes a pointer to a

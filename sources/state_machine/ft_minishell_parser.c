@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_parser.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 10:36:04 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:59:12 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_minishell_parser(t_data *ms)
 	ft_parser_split(ms);
 	ft_parser_tokenize(ms);
 	ft_parser_expand(ms);
-	ft_parser_categorize(ms->tokens);
+	ft_parser_categorize(ms, ms->tokens);
 	ft_parser_rmquotes(ms->tokens);
 	ms->state = EXECSTATE;
 	return (0);

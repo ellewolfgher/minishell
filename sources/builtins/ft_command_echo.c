@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/19 23:10:27 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:11:10 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_command_echo(t_data *ms)
 		if (tokens->type == WORDTOKEN)
 		{
 			printf("%s", tokens->value);
-			if (tokens->next && tokens->next->type == WORDTOKEN)
+			if (tokens->next)
 				printf(" ");
 		}
 		tokens = tokens->next;
