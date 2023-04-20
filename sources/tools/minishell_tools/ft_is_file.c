@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdir.c                                         :+:      :+:    :+:   */
+/*   ft_is_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 14:31:34 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/19 23:16:51 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/04/19 23:24:15 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/04/19 23:27:57 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_isdir(const char *path)
+int	ft_is_file(const char *path)
 {
-	struct stat	st;
+	struct stat	buffer;
 
-	if (stat(path, &st) == -1)
-		return (0);
-	return (S_ISDIR(st.st_mode));
+	return (stat(path, &buffer) == 0);
 }

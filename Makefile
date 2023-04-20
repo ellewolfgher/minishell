@@ -127,6 +127,7 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_find_variable.c \
 		ft_get_name.c \
 		ft_get_value.c \
+		ft_is_file.c \
 		ft_is_variable.c \
 		ft_is_whitespace.c \
 		ft_isdir.c \

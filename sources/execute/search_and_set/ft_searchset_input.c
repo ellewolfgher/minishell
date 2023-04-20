@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:59:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 23:08:30 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:27:16 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ and target "input.txt".
 */
 static t_tokens	*ft_last_path(t_tokens *tokens)
 {
-	t_tokens	*last;
-	t_tokens	*current;
+	t_tokens *last;
+	t_tokens *current;
 
 	last = tokens;
 	current = tokens;
 	while (current)
 	{
-		if (current->type != OPTOKEN)
-			last = current;
+		if (current->next && ft_is_file(current->next->value))
+			last = current->next;
 		current = current->next;
 	}
-	return (last);
+	return last;
 }
 
 /*

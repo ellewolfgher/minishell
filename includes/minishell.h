@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 16:28:06 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:27:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,7 @@ char		*ft_get_name(char *head);
 char		*ft_get_value(char *name, t_env_vars *env);
 int			ft_is_variable(char c);
 int			ft_is_whitespace(char c);
+int			ft_is_file(const char *path);
 int			ft_isdir(const char *path);
 int			ft_match_variables(char *env_var, char *var_name);
 void		ft_print_export(t_env_vars *env_vars);
