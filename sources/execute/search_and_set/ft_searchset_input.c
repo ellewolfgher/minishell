@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:59:01 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/12 18:04:22 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:08:30 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,33 @@ static int	ft_count_inputs(t_tokens *aux)
 }
 
 /*
+Searches and sets the input redirections for the command from the given token
+list.
+Returns a dynamically allocated redirection list containing the input
+redirections.
+
+Example:
+If the token list represents the command "cat < input.txt", the function
+returns a redirection list of size 1, with a single redirection of type INFILE
+and target "input.txt".
+*/
+static t_tokens	*ft_last_path(t_tokens *tokens)
+{
+	t_tokens	*last;
+	t_tokens	*current;
+
+	last = tokens;
+	current = tokens;
+	while (current)
+	{
+		if (current->type != OPTOKEN)
+			last = current;
+		current = current->next;
+	}
+	return (last);
+}
+
+/*
 Fills the given redirection list with the input redirections from the token list.
 
 Example:
@@ -53,6 +80,8 @@ redirection with type INFILE and target "input.txt".
 */
 static void	ft_fill_inlist(t_redirect *this, t_tokens *tokens)
 {
+	t_tokens	*last;
+
 	if (tokens && tokens->type == OPTOKEN)
 		tokens = tokens->next;
 	while (tokens && this && tokens->type != OPTOKEN)
@@ -61,8 +90,9 @@ static void	ft_fill_inlist(t_redirect *this, t_tokens *tokens)
 		{
 			if (!ft_strcmp("<", tokens->value))
 			{
+				last = ft_last_path(tokens->next);
 				this->type = INFILE;
-				this->target = ft_strdup(tokens->next->value);
+				this->target = ft_strdup(last->value);
 				this = this->next;
 			}
 			if (!ft_strcmp("<<", tokens->value))
