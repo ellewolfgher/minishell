@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:25:44 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/03 18:28:32 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:37:25 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static int	ft_check_nonprintable(char *value)
 }
 
 //Check if the token is a word
-int	ft_token_word(t_tokens *temp)
+int	ft_token_word(t_tokens *aux)
 {
-	if (temp->value[0] == '\'' || temp->value[0] == '\"')
+	if (aux->value[0] == '\'' || aux->value[0] == '\"')
 		return (1);
-	if (ft_check_nonprintable(temp->value))
+	if (ft_check_nonprintable(aux->value))
 		return (1);
 	return (0);
 }
