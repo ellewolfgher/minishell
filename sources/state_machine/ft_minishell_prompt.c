@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:53:28 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 10:37:24 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/19 21:25:46 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static int	ft_prompt_to_input(t_data *ms)
 		}
 		aux = ms->input;
 		ms->input = ft_strtrim(aux, " ");
+		if (!ms->input)
+		{
+			ft_free((void **)&(ms->input));
+			return (JUST_ENTER);
+		}
 		ft_free((void **)&(aux));
 		return (0);
 	}
