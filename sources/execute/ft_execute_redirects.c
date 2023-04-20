@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_redirects.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:53:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 17:40:23 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:37:55 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	ft_redir_input(t_redirect *in)
 
 	if (in->target && access(in->target, F_OK))
 	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(in->target, STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		return (1);
