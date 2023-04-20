@@ -4,3 +4,4 @@ minishell
 minishell_tester
 .nfs*
 tester
+ignore.c
