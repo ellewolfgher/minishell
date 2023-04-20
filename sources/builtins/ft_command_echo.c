@@ -6,14 +6,14 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/20 11:11:10 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:33:50 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //Print the tokens
-void	ft_command_echo(t_data *ms)
+/* void	ft_command_echo(t_data *ms)
 {
 	int			newline;
 	t_tokens	*tokens;
@@ -37,9 +37,9 @@ void	ft_command_echo(t_data *ms)
 	}
 	if (!newline)
 		printf("\n");
-}
+} */
 
-/* void	ft_command_echo(t_data *ms, t_execute *cmd)
+void	ft_command_echo(t_data *ms, t_execute *cmd)
 {
 	int			newline;
 	int			i;
@@ -63,4 +63,5 @@ void	ft_command_echo(t_data *ms)
 	}
 	if (newline)
 		printf("\n");
-} */
+	ms->exit_code = 0;
+}
