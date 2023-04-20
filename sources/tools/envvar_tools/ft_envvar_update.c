@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:39:35 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/19 16:55:39 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:09:43 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	ft_envvar_replace(char *name, char *value, t_env_vars **env_vars)
 void	ft_envvar_update(char *name, char *value, t_env_vars **env_vars)
 {
 	char		*var_str;
+	char		*join_new;
 	t_env_vars	*var;
 
 	if (!name || !value)
@@ -65,6 +66,10 @@ void	ft_envvar_update(char *name, char *value, t_env_vars **env_vars)
 	if (var)
 		ft_envvar_replace(name, value, env_vars);
 	else
-		ft_envvar_back(env_vars, ft_envvar_new(ft_strjoin(var_str, value)));
+	{
+		join_new = ft_strjoin(var_str, value);
+		ft_envvar_back(env_vars, ft_envvar_new(join_new));
+	}
+	ft_free((void **)&join_new);
 	ft_free((void **)&var_str);
 }
