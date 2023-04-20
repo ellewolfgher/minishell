@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:28:03 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/15 19:46:05 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:30:56 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_cd_home(t_data *ms)
 		chdir(home_dir);
 	else
 	{
-		ft_putendl_fd("cd: HOME not set", 2);
+		ft_putendl_fd("minishell: cd: HOME not set", 2);
 		ms->exit_code = 1;
 	}
 }
@@ -40,7 +40,7 @@ static void	ft_cd_prev(t_data *ms)
 	}
 	else
 	{
-		ft_putstr_fd("cd: OLDPWD not set\n", 2);
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
 		ms->exit_code = 1;
 	}
 	ft_envvar_update("OLDPWD", oldpwd, &ms->env_vars);
@@ -55,7 +55,7 @@ static void	ft_cd_path(t_data *ms, char *path)
 	if (chdir(path) == -1)
 	{
 		ft_free((void **)&oldpwd);
-		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd("minishell: cd: ", 2);
 		ft_putstr_fd(path, 2);
 		if (access(path, F_OK) != 0)
 		{
@@ -85,7 +85,7 @@ static void	handle_cd_arg(t_data *ms, t_execute *cmd)
 			ft_cd_path(ms, arg);
 		else
 		{
-			ft_putstr_fd("cd: ", 2);
+			ft_putstr_fd("minishell: cd: ", 2);
 			ft_putstr_fd(arg, 2);
 			ft_putstr_fd(": No such file or directory\n", 2);
 			ms->exit_code = 1;
@@ -100,7 +100,7 @@ void	ft_command_cd(t_data *ms, t_execute *cmd)
 	path = cmd->args[1];
 	if ((path) && ft_args_len(cmd->args) > 2)
 	{
-		ft_putstr_fd("cd: too many arguments\n", 2);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		ms->exit_code = 1;
 	}
 	else if (!path || ft_strcmp(path, "~") == 0)
