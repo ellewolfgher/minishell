@@ -6,7 +6,7 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 12:01:20 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:06:58 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_data
 	int					exit_code;
 	int					tok_index;
 	int					inputnull;
+	int					fd_error;
 	char				*prompt;
 	char				*input;
 	char				**split;

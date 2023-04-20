@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_cleaner.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:56:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/17 16:10:56 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:21:45 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_minishell_cleaner(t_data *ms)
 	ft_free_matrix((void ***)&(ms->split));
 	ft_free_tokens(&(ms->tokens));
 	ms->tok_index = 0;
+	ms->fd_error = 0;
 	if (ms->need_to_exit)
 	{
 		ms->state = EXITSTATE;
