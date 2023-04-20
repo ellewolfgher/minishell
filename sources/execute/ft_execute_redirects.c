@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_redirects.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:53:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/19 22:37:55 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:07:41 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,20 @@ static int	ft_is_output(t_redirect *red_out, int og_fds[2])
 		og_fds[1] = dup(STDOUT_FILENO);
 	while (out)
 	{
+		if (access(out->target, F_OK) != 0)
+		{
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			ft_putstr_fd(out->target, STDERR_FILENO);
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			return (1);
+		}
+		else if (access(out->target, W_OK) == -1)
+		{
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			ft_putstr_fd(out->target, STDERR_FILENO);
+			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+			return (1);
+		}
 		if (out->type == OVERWRITE)
 			fd = open(out->target, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		else if (out->type == APPEND)
@@ -130,6 +144,7 @@ static int	ft_is_output(t_redirect *red_out, int og_fds[2])
 	}
 	return (0);
 }
+
 
 /*
 Handles input and output redirection for a command. Takes a pointer to a
@@ -145,6 +160,10 @@ int	ft_execute_redirects(t_execute *command, int og_fds[2], t_data *ms)
 {
 	if (ft_is_input(command->red_in, og_fds, ms))
 		return (1);
-	ft_is_output(command->red_out, og_fds);
+	if (ft_is_output(command->red_out, og_fds))
+	{
+		ms->exit_code = 1;
+		return (1);
+	}
 	return (0);
 }
