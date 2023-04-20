@@ -6,19 +6,18 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 14:30:45 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/19 23:03:40 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:10:27 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //Print the tokens
-void	ft_command_echo(t_data *ms, t_execute *cmd)
+void	ft_command_echo(t_data *ms)
 {
 	int			newline;
 	t_tokens	*tokens;
 
-	(void)cmd;
 	newline = 0;
 	tokens = ms->tokens->next;
 	if (tokens && tokens->type == WORDTOKEN && strcmp(tokens->value, "-n") == 0)
