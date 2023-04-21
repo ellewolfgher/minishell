@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:54:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 22:03:42 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 03:45:40 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 static int	heredoconly(t_execute *command, t_data *ms, int og_fds[2])
 {
+	char	*heredoc;
+
 	if (!command->command && command->red_in->type == HEREDOC)
 	{
 		ft_signals_default();
-		ft_execute_heredoc(command->red_in->target, ms);
+		heredoc = ft_execute_heredoc(command->red_in->target, ms);
+		ft_free((void **)&heredoc);
 		return (ft_fds_restore(og_fds));
 	}
 	return (ms->exit_code);
