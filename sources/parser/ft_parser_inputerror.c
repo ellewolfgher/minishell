@@ -6,13 +6,13 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 21:43:19 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 21:55:53 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 22:07:45 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void checkwrite(t_data *ms, t_tokens *aux)
+static void	checkwrite(t_data *ms, t_tokens *aux)
 {
 	if (access(aux->value, W_OK))
 	{
@@ -21,7 +21,7 @@ static void checkwrite(t_data *ms, t_tokens *aux)
 			if (!ft_strcmp(aux->prev->value, "<"))
 			{
 				ft_putstr_fd("minishell: ", STDERR_FILENO);
-				ft_putstr_fd(ms->tokens->value, STDERR_FILENO);
+				ft_putstr_fd(aux->value, STDERR_FILENO);
 				ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 				ms->exit_code = 1;
 				ms->fd_error = 1;
@@ -30,7 +30,7 @@ static void checkwrite(t_data *ms, t_tokens *aux)
 	}
 }
 
-static void checkfile(t_data *ms, t_tokens *aux)
+static void	checkfile(t_data *ms, t_tokens *aux)
 {
 	if (access(aux->value, F_OK))
 	{
@@ -39,7 +39,7 @@ static void checkfile(t_data *ms, t_tokens *aux)
 			if (!ft_strcmp(aux->prev->value, "<"))
 			{
 				ft_putstr_fd("minishell: ", STDERR_FILENO);
-				ft_putstr_fd(ms->tokens->value, STDERR_FILENO);
+				ft_putstr_fd(aux->value, STDERR_FILENO);
 				ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 				ms->exit_code = 1;
 				ms->fd_error = 1;
