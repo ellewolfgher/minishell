@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_redirects.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:53:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 21:22:23 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 04:17:06 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ static int	ft_redir_heredoc(int og_fds[2], t_redirect *in, t_data *ms)
 		return (1);
 	fd = open(heredoc_file, O_RDONLY, FD_CLOEXEC);
 	dup2(fd, STDIN_FILENO);
-	close(fd);
+	if (fd != -1)
+		close(fd);
 	unlink(heredoc_file);
-	free(heredoc_file);
+	ft_free((void **)&heredoc_file);
 	dup2(pipe_out, STDOUT_FILENO);
 	return (0);
 }

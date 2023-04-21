@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_heredoc_expansions.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 17:51:04 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:23:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 04:31:49 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ char	*ft_execute_heredoc_expansions(char *str, t_data *ms)
 		else
 			break ;
 	}
+	ft_free((void **)&head);
 	str = ft_get_exit_code(ms, str);
 	return (str);
 }

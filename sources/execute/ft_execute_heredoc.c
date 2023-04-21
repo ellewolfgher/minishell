@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 17:36:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:24:22 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 04:23:40 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	ft_heredoc_error(char *target, int line, int openedfd)
 	write(2, target, ft_strlen(target));
 	write(2, "')\n", 3);
 	ft_free((void **)&str);
-	close (openedfd);
+	if (openedfd != -1)
+		close(openedfd);
 }
 
 /*
@@ -63,7 +64,7 @@ static int	ft_write_into(int openedfd, char *target, t_data *ms)
 		buffer = ft_execute_heredoc_expansions(buffer, ms);
 		if (!ft_strcmp(buffer, target))
 		{
-			free(buffer);
+			ft_free((void **)&buffer);
 			return (1);
 		}
 		write(openedfd, buffer, ft_strlen(buffer));
@@ -146,10 +147,12 @@ char	*ft_execute_heredoc(char *target, t_data *ms)
 	{
 		signal(SIGINT, SIG_DFL);
 		ft_write_into(openedfd, target, ms);
-		close(openedfd);
+		if (openedfd != -1)
+			close(openedfd);
 		ms->need_to_exit = -1;
 		return (0);
 	}
-	close(openedfd);
+	if (openedfd != -1)
+		close(openedfd);
 	return (ft_strdup(random_name));
 }
