@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:36:14 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 22:06:00 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:35:40 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ static int	ft_multiple_executions(t_execute *command,
 	t_data *ms, int og_fds[2])
 {
 	int	pid;
+	int	temp_fd;
 
+	temp_fd = -1;
 	pid = ft_execute_fork();
 	if (!pid)
 	{
@@ -87,17 +89,26 @@ static int	ft_multiple_executions(t_execute *command,
 		if (!ft_execute_get_error(command->command, ms))
 		{
 			ft_signals_default();
-			if (!command->receives_from_pipe && command->red_in
-				&& ft_execute_redirects(command, og_fds, ms))
+			if (command->red_in && ft_execute_redirects(command, og_fds, ms))
 			{
 				ms->need_to_exit = -1;
 				return (ft_fds_restore(og_fds));
 			}
 			ft_handle_pipes(ms, command);
+			if (command->sends_to_pipe && command->red_out)
+			{
+				temp_fd = dup(STDOUT_FILENO);
+				ft_execute_redirects(command, og_fds, ms);
+			}
 			execve(command->command, command->args, command->envp);
 		}
 		else
 			ms->need_to_exit = -1;
+		if (temp_fd != -1)
+		{
+			dup2(temp_fd, STDOUT_FILENO);
+			close(temp_fd);
+		}
 		return (ms->exit_code);
 	}
 	close(ms->pipe_in[0]);

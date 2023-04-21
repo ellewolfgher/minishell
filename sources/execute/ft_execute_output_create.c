@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:54:53 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/13 10:42:39 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:31:23 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_execute_output_create(t_execute *command)
 	aux = command->red_out;
 	while (aux)
 	{
-		open(aux->target, O_CREAT | O_RDONLY, 0777);
+		open(aux->target, O_CREAT | O_WRONLY, 0777);
 		aux = aux->next;
 	}
 }
