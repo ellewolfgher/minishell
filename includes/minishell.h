@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 18:22:11 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:53:38 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ typedef struct s_data
 	char				**split;
 	struct s_tokens		*tokens;
 	struct s_env_vars	*env_vars;
-	struct s_execute	*cmd;
 	int					pipe_in[2];
 	int					pipe_out[2];
 }	t_data;
@@ -183,6 +182,7 @@ int			ft_minishell_parser(t_data *ms);
 
 void		ft_parser_categorize(t_tokens *tokens);
 void		ft_parser_expand(t_data *ms);
+void		ft_parser_inputerror(t_data *ms);
 int			ft_parser_onlyspc(char *str);
 int			ft_parser_quotes(t_data *ms);
 void		ft_parser_rmquotes(t_tokens *tokens);

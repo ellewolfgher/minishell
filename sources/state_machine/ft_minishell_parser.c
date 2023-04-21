@@ -6,52 +6,12 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:49 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 16:46:17 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:53:55 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ft_get_tkerrors(t_data *ms)
-{
-	t_tokens	*aux;
-	int			acs;
-
-	aux = ms->tokens;
-	while (aux)
-	{
-		if (aux->type == FDTOKEN)
-		{
-			acs = access(aux->value, F_OK);
-			// printf("%s is file: %d\n", aux->value, acs);
-			if (acs)
-			{
-				if (!ms->fd_error)
-				{
-					ft_putstr_fd("minishell: ", STDERR_FILENO);
-					ft_putstr_fd(aux->value, STDERR_FILENO);
-					ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-					ms->exit_code = 1;
-					ms->fd_error = 1;
-				}
-			}
-			acs = access(aux->value, W_OK);
-			// printf("%s is writable: %d\n", aux->value, acs);
-			if (acs)
-			{
-				if (!ms->fd_error)
-				{
-					ft_putstr_fd("minishell: ", STDERR_FILENO);
-					ft_putstr_fd(aux->value, STDERR_FILENO);
-					ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
-					ms->exit_code = 1;
-					ms->fd_error = 1;
-				}
-			}
-		}
-		aux = aux->next;
-	}
-}
 /*
 Main loop of the minishell parsing process.
 
@@ -86,7 +46,7 @@ int	ft_minishell_parser(t_data *ms)
 	ft_parser_expand(ms);
 	ft_parser_categorize(ms->tokens);
 	ft_parser_rmquotes(ms->tokens);
-	ft_get_tkerrors(ms);
+	ft_parser_inputerror(ms);
 	ms->state = EXECSTATE;
 	return (0);
 }

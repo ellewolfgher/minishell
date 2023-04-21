@@ -69,6 +69,7 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		$(addprefix $(PATH_PARS),\
 		ft_parser_categorize.c \
 		ft_parser_expand.c \
+		ft_parser_inputerror.c \
 		ft_parser_quotes.c \
 		ft_parser_tokenize.c \
 		ft_parser_rmquotes.c \

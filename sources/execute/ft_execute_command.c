@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:54:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:08:44 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:18:34 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int	ft_execute_command(t_execute *command, t_data *ms, int og_fds[2])
 {
 	int	pid;
 
-	(void)og_fds;
+	if (!command->command && command->red_in->type == HEREDOC)
+	{
+		ft_signals_default();
+		ft_execute_heredoc(command->red_in->target, ms);
+		return (ft_fds_restore(og_fds));
+	}
 	pid = ft_execute_fork();
 	if (!pid)
 	{
