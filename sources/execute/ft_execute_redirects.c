@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:53:47 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 17:00:53 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:22:23 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,7 @@ static int	ft_redir_input(t_redirect *in)
 	int	fd;
 
 	if (in->target && access(in->target, F_OK) != 0)
-	{
-		// ft_putstr_fd("minishell: ", STDERR_FILENO);
-		// ft_putstr_fd(in->target, STDERR_FILENO);
-		// ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		return (1);
-	}
 	else if (in->target)
 	{
 		fd = open(in->target, O_RDONLY, FD_CLOEXEC);
@@ -121,19 +116,9 @@ static int	ft_is_output(t_redirect *red_out, int og_fds[2])
 	while (out)
 	{
 		if (access(out->target, F_OK) != 0)
-		{
-			// ft_putstr_fd("minishell: ", STDERR_FILENO);
-			// ft_putstr_fd(out->target, STDERR_FILENO);
-			// ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 			return (1);
-		}
 		else if (access(out->target, W_OK) == -1)
-		{
-			// ft_putstr_fd("minishell: ", STDERR_FILENO);
-			// ft_putstr_fd(out->target, STDERR_FILENO);
-			// ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 			return (1);
-		}
 		if (out->type == OVERWRITE)
 			fd = open(out->target, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		else if (out->type == APPEND)

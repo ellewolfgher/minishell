@@ -6,11 +6,22 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:54:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/14 18:08:44 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/20 22:03:42 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	heredoconly(t_execute *command, t_data *ms, int og_fds[2])
+{
+	if (!command->command && command->red_in->type == HEREDOC)
+	{
+		ft_signals_default();
+		ft_execute_heredoc(command->red_in->target, ms);
+		return (ft_fds_restore(og_fds));
+	}
+	return (ms->exit_code);
+}
 
 /*
 Executes the given command in a new process, sets the exit code in the t_data
@@ -26,7 +37,7 @@ int	ft_execute_command(t_execute *command, t_data *ms, int og_fds[2])
 {
 	int	pid;
 
-	(void)og_fds;
+	ms->exit_code = heredoconly(command, ms, og_fds);
 	pid = ft_execute_fork();
 	if (!pid)
 	{
