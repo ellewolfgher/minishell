@@ -6,13 +6,13 @@
 /*   By: ewolfghe <ewolfghe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:30:35 by ewolfghe          #+#    #+#             */
-/*   Updated: 2023/04/18 23:19:03 by ewolfghe         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:07:12 by ewolfghe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static void	ft_lstclear_env_vars(t_env_vars **lst)
+/* static void	ft_lstclear_env_vars(t_env_vars **lst)
 {
 	t_env_vars	*tmp;
 
@@ -20,11 +20,10 @@ static void	ft_lstclear_env_vars(t_env_vars **lst)
 	{
 		tmp = (*lst)->next;
 		ft_free((void **)&((*lst)->content));
-		free(*lst);
 		*lst = tmp;
 	}
 	*lst = NULL;
-}
+} */
 
 static t_env_vars	*ft_lstnew_env_vars(char *content)
 {
@@ -36,9 +35,10 @@ static t_env_vars	*ft_lstnew_env_vars(char *content)
 	new->content = ft_strdup(content);
 	if (!new->content)
 	{
-		ft_free((void **)&new);
+		ft_free_varlist(&new);
 		return (NULL);
 	}
+	new->next = NULL;
 	return (new);
 }
 
@@ -49,20 +49,17 @@ static t_env_vars	*ft_lstcpy_env_vars(t_env_vars *lst)
 
 	if (!lst)
 		return (NULL);
-	new = ft_lstnew_env_vars(lst->content);
-	if (!new)
-		return (NULL);
-	tmp = new;
-	lst = lst->next;
+	new = NULL;
 	while (lst)
 	{
-		tmp->next = ft_lstnew_env_vars(lst->content);
-		if (!tmp->next)
+		tmp = ft_lstnew_env_vars(lst->content);
+		if (!tmp)
 		{
-			ft_lstclear_env_vars(&new);
+			ft_free_varlist(&new);
 			return (NULL);
 		}
-		tmp = tmp->next;
+		tmp->next = new;
+		new = tmp;
 		lst = lst->next;
 	}
 	return (new);
@@ -118,5 +115,5 @@ void	ft_print_export(t_env_vars *env_vars)
 		ft_free((void **)&env_str);
 		env_copy = env_copy->next;
 	}
-	ft_lstclear_env_vars(&env_copy);
+	ft_free_varlist(&env_copy);
 }
