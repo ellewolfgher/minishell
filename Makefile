@@ -50,6 +50,8 @@ SRCS = $(addprefix $(PATH_BUIL),\
 		ft_execute_multiple.c \
 		ft_execute_output_create.c \
 		ft_execute_redirects.c \
+		ft_multiple_executions.c \
+		ft_handle_pipes.c \
 		ft_execute_set_commands.c) \
 		$(addprefix $(PATH_INIT),\
 		ft_envvars_init.c \

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:39:08 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/20 21:53:38 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:29:59 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,9 @@ int			ft_execute_multiple(t_execute *command, t_data *ms, int og_fds[2]);
 void		ft_execute_output_create(t_execute *command);
 int			ft_execute_redirects(t_execute *command, int og_fds[2], t_data *ms);
 t_execute	*ft_execute_set_commands(t_data *ms);
+int			ft_multiple_executions(t_execute *command, t_data *ms,
+				int og_fds[2]);
+int			ft_handle_pipes(t_data *ms, t_execute *command);
 int			ft_minishell_execute(t_data *ms);
 
 int			ft_minishell_exit(t_data *ms);

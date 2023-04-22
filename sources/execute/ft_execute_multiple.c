@@ -6,37 +6,11 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 11:36:14 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/04/21 16:35:40 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:27:54 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/*
-Handles pipes for the current command. If the command receives input from a
-pipe, closes the writing end of the input pipe and duplicates the reading end
-to stdin.
-If the command sends output to a pipe, closes the reading end of the output
-pipe and duplicates the writing end to stdout.
-
-Example:
-Assuming the command "ls -l | grep foo" is executed, this function will handle
-the pipe between "ls -l" and "grep foo", allowing data to be passed between them.
-*/
-static int	ft_handle_pipes(t_data *ms, t_execute *command)
-{
-	if (command->receives_from_pipe)
-	{
-		close(ms->pipe_in[1]);
-		dup2(ms->pipe_in[0], STDIN_FILENO);
-	}
-	if (command->sends_to_pipe)
-	{
-		close(ms->pipe_out[0]);
-		dup2(ms->pipe_out[1], STDOUT_FILENO);
-	}
-	return (0);
-}
 
 /*
 Executes a piped built-in command in a new process. Handles pipes, sets signals,
@@ -64,55 +38,6 @@ static int	ft_execute_piped_builtin(t_execute *command,
 		ms->need_to_exit = -1;
 		ft_execute_builtin(command, ms, og_fds);
 	}
-	return (ms->exit_code);
-}
-
-/*
-Executes a command in a new process as part of a pipeline. Handles pipes, sets
-signals, and calls the command. The exit code is stored in the t_data structure.
-
-Example:
-Assuming the command "ls -l | grep foo" is executed, this function will handle
-the pipe between "ls -l" and "grep foo" and execute the command "grep foo".
-*/
-static int	ft_multiple_executions(t_execute *command,
-	t_data *ms, int og_fds[2])
-{
-	int	pid;
-	int	temp_fd;
-
-	temp_fd = -1;
-	pid = ft_execute_fork();
-	if (!pid)
-	{
-		ms->exit_code = 0;
-		if (!ft_execute_get_error(command->command, ms))
-		{
-			ft_signals_default();
-			if (command->red_in && ft_execute_redirects(command, og_fds, ms))
-			{
-				ms->need_to_exit = -1;
-				return (ft_fds_restore(og_fds));
-			}
-			ft_handle_pipes(ms, command);
-			if (command->sends_to_pipe && command->red_out)
-			{
-				temp_fd = dup(STDOUT_FILENO);
-				ft_execute_redirects(command, og_fds, ms);
-			}
-			execve(command->command, command->args, command->envp);
-		}
-		else
-			ms->need_to_exit = -1;
-		if (temp_fd != -1)
-		{
-			dup2(temp_fd, STDOUT_FILENO);
-			close(temp_fd);
-		}
-		return (ms->exit_code);
-	}
-	close(ms->pipe_in[0]);
-	close(ms->pipe_in[1]);
 	return (ms->exit_code);
 }
 
