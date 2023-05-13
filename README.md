@@ -24,6 +24,8 @@ The project
 The main idea behind minishell is the ability to decipher what is being written on the prompt by the user, translating it into a structure of data that will be easily understandable by the computer, and therefore appropriately executed.
 </p>
 
+<hr>
+
 > Your shell should: 
 > - Display a prompt when waiting for a new command. 
 > - Have a working history. 
